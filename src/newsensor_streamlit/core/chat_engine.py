@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from langchain.schema import Document
@@ -12,8 +13,6 @@ from newsensor_streamlit.services.qdrant_service import QdrantService
 from newsensor_streamlit.services.rag_service import RagService
 
 if TYPE_CHECKING:
-    from pathlib import Path
-
     from langchain.schema import BaseChatPromptTemplate
 
 
@@ -26,12 +25,12 @@ class ChatEngine:
         self.qdrant_service = QdrantService()
         self.rag_service = RagService()
         
-    def upload_document(self, file_path: Path) -> str:
+    def upload_document(self, file_path: str) -> str:
         """Process and upload a new document."""
         logger.info(f"Uploading document: {file_path}")
         
         # Process PDF
-        result = self.document_processor.process_pdf(file_path)
+        result = self.document_processor.process_pdf(Path(file_path))
         
         # Create chunks
         chunks = self._create_chunks(result["content"])

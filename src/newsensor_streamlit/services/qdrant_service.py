@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import hashlib
+import uuid
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from loguru import logger
@@ -48,15 +51,20 @@ class QdrantService:
         
         points = []
         for idx, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
+            # Create unique ID based on content hash + index
+            content_hash = hashlib.md5(chunk.page_content.encode()).hexdigest()[:8]
+            point_id = abs(int(content_hash, 16)) + idx
+            
             point = PointStruct(
-                id=idx + 1_000_000,  # Use sequential integers starting from 1M
+                id=point_id,
                 vector=embedding,
                 payload={
                     "content": chunk.page_content,
                     "metadata": chunk.metadata,
-                    "source_path": source_path,
+                    "source_path": str(source_path),
                     "chunk_index": idx,
-                    "doc_id": doc_id
+                    "doc_id": doc_id,
+                    "timestamp": str(Path(source_path).stat().st_mtime)
                 }
             )
             points.append(point)

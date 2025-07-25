@@ -3,48 +3,28 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-import PyPDF2
 from loguru import logger
+from newsensor_streamlit.config import settings
+from newsensor_streamlit.services.llama_parse_service import LlamaParseService
 
 
 class DocumentProcessor:
-    def __init__(self, output_dir: Path) -> None:
-        self.output_dir = output_dir
+    def __init__(self, output_dir) -> None:
+        self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Use LlamaParse if API key available, otherwise PyPDF fallback
+        if settings.llama_parse_api_key:
+            logger.info("Using LlamaParse for advanced PDF processing")
+            self.parser = LlamaParseService(settings.llama_parse_api_key)
+        else:
+            logger.warning("LlamaParse API key not found, using basic PDF processing")
+            self.parser = LlamaParseService("")  # Will use fallback
 
     def process_pdf(self, file_path: Path) -> dict[str, Any]:
-        """Process a PDF file using PyPDF2 for basic text extraction."""
+        """Process PDF using best available parser."""
         logger.info(f"Processing PDF: {file_path}")
-        
-        try:
-            text_content = ""
-            
-            with open(file_path, "rb") as file:
-                pdf_reader = PyPDF2.PdfReader(file)
-                
-                # Extract text from all pages
-                for page_num, page in enumerate(pdf_reader.pages):
-                    text_content += f"{page.extract_text()}\n\nPage {page_num + 1}:\n"
-
-            if not text_content.strip():
-                raise ValueError("No text could be extracted from the PDF")
-
-            return {
-                "content": text_content,
-                "source": str(file_path),
-                "processed_at": "",
-                "metadata": {"processing_backend": "PyPDF2", "language": "en"}
-            }
-            
-        except Exception as e:
-            logger.error(f"Error processing PDF: {e}")
-            # Return fallback content for testing
-            return {
-                "content": f"PDF processed (sample content from {file_path.name})",
-                "source": str(file_path),
-                "processed_at": "",
-                "metadata": {"processing_backend": "text_fallback", "language": "en"}
-            }
+        return self.parser.process_pdf(file_path)
             
     def process_batch(self, file_paths: list[Path]) -> list[dict[str, Any]]:
         """Process multiple PDFs."""

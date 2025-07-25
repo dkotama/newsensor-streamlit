@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     google_api_key: str = Field(description="Google API key")
     openai_api_key: str = Field(default="", description="OpenAI API key")
     openrouter_api_key: str = Field(default="", description="OpenRouter API key")
+    llama_parse_api_key: str = Field(default="", description="LlamaParse API key")
     qdrant_host: str = Field(default="localhost", description="Qdrant host")
     qdrant_port: int = Field(default=6333, description="Qdrant port")
     qdrant_collection: str = Field(default="newsensor_datasheets", description="Qdrant collection name")

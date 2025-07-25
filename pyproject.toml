@@ -1,0 +1,38 @@
+[project]
+name = "newsensor-streamlit"
+version = "0.1.0"
+description = "Datasheet Query Engine for IoT makers and electronics engineers"
+authors = [{name = "Arthur Clune", email = "arthur@clune.org"}]
+dependencies = [
+    "streamlit>=1.37.0",
+    "langchain>=0.2.0",
+    "langchain-community>=0.2.0",
+    "langchain-google-genai>=1.0.0",
+    "langchain-openai>=0.1.0",
+    "qdrant-client>=1.9.0",
+    "google-genai>=0.7.0",
+    "ragas>=0.1.0",
+    "pydantic>=2.7.0",
+    "python-dotenv>=1.0.0",
+    "loguru>=0.7.0",
+    "anyio>=4.0.0",
+    "openai>=1.0.0",
+    "pypdf2>=3.0.0",
+    "pydantic-settings>=2.0.0",
+]
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.5.0",
+    "pre-commit>=3.8.0",
+]
+
+[project.scripts]
+newsensor = "newsensor_streamlit.ui.app:start_streamlit_app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

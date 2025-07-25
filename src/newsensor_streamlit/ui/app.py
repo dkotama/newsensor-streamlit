@@ -51,6 +51,48 @@ def main_page() -> None:
         if uploaded_file is not None:
             if st.button("Process Document", type="primary"):
                 _handle_document_upload(uploaded_file, chat_engine)
+        
+        # Conversation Management
+        st.header("Conversation History")
+        if st.session_state.get("current_conversation_id"):
+            current_conv_id = st.session_state.current_conversation_id
+            st.success(f"Active conversation: {current_conv_id[:8]}...")
+            
+            if st.button("Export Conversation (JSON)"):
+                try:
+                    export_path = chat_engine.conversation_service.export_conversation(
+                        current_conv_id, "json"
+                    )
+                    st.success(f"Exported to: {export_path}")
+                except Exception as e:
+                    st.error(f"Export failed: {e}")
+                    
+            if st.button("Export Conversation (Markdown)"):
+                try:
+                    export_path = chat_engine.conversation_service.export_conversation(
+                        current_conv_id, "markdown"
+                    )
+                    st.success(f"Exported to: {export_path}")
+                except Exception as e:
+                    st.error(f"Export failed: {e}")
+        
+        # List recent conversations
+        conversations = chat_engine.conversation_service.list_conversations()
+        if conversations:
+            st.subheader("Recent Conversations")
+            for conv in conversations[:5]:  # Show last 5
+                with st.expander(f"{conv['document_name']} ({conv['message_count']} msgs)"):
+                    st.write(f"**Created:** {conv['created_at'][:16]}")
+                    st.write(f"**RAGAS Avg:** {conv['ragas_summary']['avg_faithfulness']:.2f}")
+                    
+                    if st.button(f"Export {conv['conversation_id'][:8]}...", key=f"export_{conv['conversation_id']}"):
+                        try:
+                            export_path = chat_engine.conversation_service.export_conversation(
+                                conv['conversation_id'], "markdown"
+                            )
+                            st.success(f"Exported to: {export_path}")
+                        except Exception as e:
+                            st.error(f"Export failed: {e}")
                 
     # Main chat interface
     if st.session_state.get("current_doc_id"):
@@ -73,11 +115,12 @@ def _handle_document_upload(uploaded_file, chat_engine: ChatEngine) -> None:
             
             logger.info(f"Processing document: {save_path}")
             # Process and store
-            doc_id = chat_engine.upload_document(save_path)
-            st.session_state.current_doc_id = doc_id
+            result = chat_engine.upload_document(save_path)
+            st.session_state.current_doc_id = result["doc_id"]
+            st.session_state.current_conversation_id = result["conversation_id"]
             st.session_state.messages = []
             st.success("Document processed successfully!")
-            logger.info(f"Document processed successfully: {doc_id}")
+            logger.info(f"Document processed successfully: {result['doc_id']}")
             
     except Exception as e:
         logger.error(f"Error processing document: {e}")
@@ -108,7 +151,9 @@ def _render_chat_interface(chat_engine: ChatEngine) -> None:
         st.session_state.messages.append({"role": "user", "content": user_input})
         
         try:
-            response = asyncio.run(_get_response_async(user_input, doc_id, chat_engine))
+            doc_id = st.session_state.current_doc_id
+            conversation_id = st.session_state.get("current_conversation_id")
+            response = asyncio.run(_get_response_async(user_input, doc_id, conversation_id, chat_engine))
             
             with st.chat_message("assistant"):
                 st.write(response["answer"])
@@ -128,9 +173,9 @@ def _render_chat_interface(chat_engine: ChatEngine) -> None:
             st.error(f"Error getting response: {e}")
 
 
-async def _get_response_async(question: str, doc_id: str, chat_engine: ChatEngine) -> dict:
+async def _get_response_async(question: str, doc_id: str, conversation_id: str, chat_engine: ChatEngine) -> dict:
     """Async wrapper for chat response."""
-    return chat_engine.ask_question(question, doc_id)
+    return chat_engine.ask_question(question, doc_id, conversation_id)
 
 
 def _render_metrics(metrics: dict[str, float]) -> None:

@@ -7,6 +7,7 @@ from langchain.schema import Document
 from loguru import logger
 
 from newsensor_streamlit.config import settings
+from newsensor_streamlit.services.conversation_service import ConversationService
 from newsensor_streamlit.services.document_processor import DocumentProcessor
 from newsensor_streamlit.services.embedding_service import EmbeddingService
 from newsensor_streamlit.services.qdrant_service import QdrantService
@@ -24,6 +25,7 @@ class ChatEngine:
         self.embedding_service = EmbeddingService()
         self.qdrant_service = QdrantService()
         self.rag_service = RagService()
+        self.conversation_service = ConversationService()
         
     def upload_document(self, file_path: str) -> str:
         """Process and upload a new document."""
@@ -33,7 +35,7 @@ class ChatEngine:
         result = self.document_processor.process_pdf(Path(file_path))
         
         # Create chunks
-        chunks = self._create_chunks(result["content"])
+        chunks = self._create_chunks(result["content"], result["source"])
         
         # Generate embeddings
         embeddings = self.embedding_service.generate_embeddings(
@@ -48,9 +50,13 @@ class ChatEngine:
             source_path=result["source"]
         )
         
-        return doc_id
+        # Create conversation for this document
+        document_name = Path(file_path).name
+        conversation_id = self.conversation_service.create_conversation(doc_id, document_name)
         
-    def ask_question(self, question: str, doc_id: str) -> dict[str, str]:
+        return {"doc_id": doc_id, "conversation_id": conversation_id}
+        
+    def ask_question(self, question: str, doc_id: str, conversation_id: str = None) -> dict[str, str]:
         """Ask a question about a specific document."""
         # Get relevant context
         context_chunks = self.qdrant_service.search_similar(
@@ -73,15 +79,28 @@ class ChatEngine:
             reference_answer=answer.get("reference")
         )
         
+        sources = [Path(c.metadata.get("source", "Unknown")).name for c in context_chunks]
+        
+        # Save to conversation if conversation_id provided
+        if conversation_id:
+            self.conversation_service.add_message(
+                conversation_id=conversation_id,
+                question=question,
+                answer=answer["answer"],
+                sources=sources,
+                metrics=metrics,
+                context=answer["context"]
+            )
+        
         return {
             "question": question,
             "answer": answer["answer"],
             "context": answer["context"],
             "metrics": metrics,
-            "sources": [c.metadata.get("source", "Unknown") for c in context_chunks]
+            "sources": sources
         }
         
-    def _create_chunks(self, text: str) -> list[Document]:
+    def _create_chunks(self, text: str, source: str) -> list[Document]:
         """Split text into chunks for embedding."""
         from langchain.text_splitter import RecursiveCharacterTextSplitter
         
@@ -91,7 +110,14 @@ class ChatEngine:
             separators=["\n\n", "\n", ". ", "! ", "? ", " ", ""]
         )
         
-        return text_splitter.create_documents([text])
+        # Create chunks with source metadata
+        chunks = text_splitter.create_documents([text])
+        
+        # Add source metadata to each chunk
+        for chunk in chunks:
+            chunk.metadata["source"] = source
+            
+        return chunks
         
     def list_documents(self) -> list[dict[str, str]]:
         """List all available documents."""
@@ -100,3 +126,11 @@ class ChatEngine:
     def get_conversation_history(self, doc_id: str, limit: int = 50) -> list[dict[str, str]]:
         """Get conversation history for a document."""
         return self.qdrant_service.get_conversation_history(doc_id, limit)
+    
+    def list_conversations(self, doc_id: str = None) -> list[dict]:
+        """List conversations, optionally filtered by document."""
+        return self.conversation_service.list_conversations(doc_id)
+        
+    def export_conversation(self, conversation_id: str, format: str = "json") -> str:
+        """Export a conversation."""
+        return self.conversation_service.export_conversation(conversation_id, format)

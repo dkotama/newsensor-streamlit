@@ -1,0 +1,9 @@
+question,grading_notes,category,difficulty
+"What is the operating voltage range for this sensor?","- Operating voltage is 3.3V to 5.0V - Specified in electrical characteristics section","electrical_specifications","easy"
+"What is the I2C address of the sensor?","- Default I2C address is 0x76 - Alternative address 0x77 available by connecting SDO to VCC","communication_interface","easy"
+"How do I configure the sensor for continuous measurement mode?","- Set MODE bits in CTRL_REG1 to 11 - Enable continuous mode in register 0x20","register_configuration","medium"
+"What are the pin connections needed for Arduino?","- VCC to 3.3V or 5V - GND to ground - SDA to A4 (Arduino Uno) - SCL to A5 (Arduino Uno)","integration_guidance","medium"
+"What is the measurement accuracy of this sensor?","- Temperature accuracy is ±0.5°C - Humidity accuracy is ±3% RH - Specified at 25°C room temperature","performance_characteristics","easy"
+"How do I read sensor data via I2C?","- Send start condition - Write device address - Write register address - Read data bytes - Send stop condition","communication_interface","medium"
+"What is the power consumption in sleep mode?","- Sleep mode current consumption is 0.1µA - Wake-up time from sleep is 2ms","electrical_specifications","easy"
+"How do I calibrate the sensor?","- Perform two-point calibration - Use known reference values - Store calibration coefficients in EEPROM","register_configuration","hard"

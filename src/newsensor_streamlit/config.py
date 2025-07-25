@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     docs_dir: Path = Field(default=Path("data/docs"), description="Storage for processed documents")
     uploads_dir: Path = Field(default=Path("data/uploads"), description="Temporary upload directory")
     cache_dir: Path = Field(default=Path("data/cache"), description="Cache directory")
+    conversations_dir: Path = Field(default=Path("data/conversations"), description="Conversation history storage")
     
     chunk_size: int = Field(default=1000, description="Text chunk size for embedding")
     chunk_overlap: int = Field(default=200, description="Overlap between chunks")

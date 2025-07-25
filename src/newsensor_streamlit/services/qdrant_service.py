@@ -103,10 +103,15 @@ class QdrantService:
             for hit in search_result:
                 if hit.payload:
                     from langchain.schema import Document
+                    # Merge the original metadata with the source information
+                    metadata = hit.payload.get("metadata", {}).copy()
+                    metadata["source"] = hit.payload.get("source_path", "Unknown")
+                    metadata["chunk_index"] = hit.payload.get("chunk_index", 0)
+                    
                     documents.append(
                         Document(
                             page_content=hit.payload.get("content", ""),
-                            metadata=hit.payload.get("metadata", {})
+                            metadata=metadata
                         )
                     )
             

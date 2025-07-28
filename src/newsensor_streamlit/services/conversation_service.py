@@ -49,9 +49,11 @@ class ConversationService:
         answer: str, 
         sources: List[str], 
         metrics: Dict[str, float],
-        context: str = ""
+        context: str = "",
+        ragas_metrics: Dict[str, float] = None,
+        retrieval_metadata: Dict[str, Any] = None
     ) -> None:
-        """Add a message to the conversation with RAGAS metrics."""
+        """Add a message to the conversation with enhanced metrics and metadata."""
         conversation = self._load_conversation(conversation_id)
         if not conversation:
             logger.error(f"Conversation {conversation_id} not found")
@@ -63,17 +65,28 @@ class ConversationService:
             "answer": answer,
             "context": context,
             "sources": sources,
-            "ragas_metrics": metrics
+            "ragas_metrics": ragas_metrics or {},
+            "legacy_metrics": metrics,  # Keep old metrics for backward compatibility
+            "retrieval_metadata": retrieval_metadata or {}
         }
         
         conversation["messages"].append(message)
         conversation["updated_at"] = datetime.now().isoformat()
         
-        # Update RAGAS summary
-        self._update_ragas_summary(conversation, metrics)
+        # Update RAGAS summary with new metrics if available
+        metrics_to_update = ragas_metrics if ragas_metrics else metrics
+        self._update_ragas_summary(conversation, metrics_to_update)
         
         self._save_conversation(conversation_id, conversation)
         logger.info(f"Added message to conversation {conversation_id}")
+        
+        # Log re-ranking usage
+        if retrieval_metadata and retrieval_metadata.get("reranking_enabled"):
+            logger.info(
+                f"Re-ranking used: {retrieval_metadata.get('initial_vector_search_count')} → "
+                f"{retrieval_metadata.get('final_chunk_count')} chunks, "
+                f"best score: {retrieval_metadata.get('best_relevance_score', 0):.3f}"
+            )
         
     def get_conversation(self, conversation_id: str) -> Dict[str, Any] | None:
         """Retrieve a conversation by ID."""

@@ -24,17 +24,28 @@ class Settings(BaseSettings):
     cache_dir: Path = Field(default=Path("data/cache"), description="Cache directory")
     conversations_dir: Path = Field(default=Path("data/conversations"), description="Conversation history storage")
     
-    chunk_size: int = Field(default=1000, description="Text chunk size for embedding")
-    chunk_overlap: int = Field(default=200, description="Overlap between chunks")
+    chunk_size: int = Field(default=512, description="Text chunk size for embedding (optimized for small document set)")
+    chunk_overlap: int = Field(default=64, description="Overlap between chunks")
     
-    max_context_chunks: int = Field(default=5, description="Maximum context chunks for LLM")
+    max_context_chunks: int = Field(default=4, description="Maximum context chunks for LLM (reduced for focused retrieval)")
     llm_model: str = Field(default="openai/gpt-4o", description="Default LLM model")
     embedding_model: str = Field(default="models/text-embedding-004", description="Google embedding model")
+    
+    # Re-ranking settings for enhanced retrieval
+    reranking_enabled_default: bool = Field(default=False, description="Default re-ranking state")
+    reranking_model: str = Field(default="cross-encoder/ms-marco-MiniLM-L-12-v2", description="Cross-encoder model")
+    reranking_initial_k: int = Field(default=12, description="Initial vector search results (optimized for small dataset)")
+    reranking_final_k: int = Field(default=4, description="Final re-ranked results")
     
     ragas_metrics: list[str] = Field(
         default=["faithfulness", "answer_relevancy", "context_precision", "context_recall"],
         description="RAGAS metrics to calculate"
     )
+    
+    # RAGAS evaluation settings
+    ragas_evaluator_model: str = Field(default="gpt-4o", description="Model for RAGAS evaluation")
+    ragas_test_dataset_path: str = Field(default="data/evaluation/test_dataset.csv", description="Path to test dataset")
+    ragas_fallback_silent: bool = Field(default=True, description="Silent fallback on RAGAS errors")
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)

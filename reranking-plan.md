@@ -48,8 +48,8 @@ Same as base system: IoT makers and electronics engineers who need highly accura
 
 **Settings Panel** (Sidebar):
 - Advanced re-ranking configuration options
-- Initial vector search limit slider (default: 20 chunks from Qdrant)
-- Final document count slider (default: 5 chunks after re-ranking) 
+- Initial vector search limit slider (default: 12 chunks from Qdrant, optimized for small dataset)
+- Final document count slider (default: 4 chunks after re-ranking) 
 - Cross-encoder model selection (advanced users)
 
 ### 3.2. Backend Logic
@@ -62,8 +62,8 @@ Same as base system: IoT makers and electronics engineers who need highly accura
 
 **Enhanced Retrieval Pipeline**:
 - Two-stage retrieval system:
-  1. **Stage 1**: Google Gemini embeddings vector search in Qdrant (top_k=20 vector records/chunks)
-  2. **Stage 2**: Cross-encoder scoring and re-ranking of those 20 chunks (return top 5 most relevant)
+  1. **Stage 1**: Google Gemini embeddings vector search in Qdrant (top_k=12 vector records/chunks, optimized for smaller document set)
+  2. **Stage 2**: Cross-encoder scoring and re-ranking of those 12 chunks (return top 4 most relevant)
 - Query-level toggle implementation
 - Performance metrics collection
 
@@ -96,8 +96,8 @@ Same as base system: IoT makers and electronics engineers who need highly accura
     "retrieval_metadata": {
       "reranking_enabled": "boolean",
       "reranking_model": "string|null",
-      "initial_vector_search_count": "int",  // Number of chunks from Qdrant (e.g., 20)
-      "final_chunk_count": "int",            // Number of chunks after re-ranking (e.g., 5)
+      "initial_vector_search_count": "int",  // Number of chunks from Qdrant (e.g., 12)
+      "final_chunk_count": "int",            // Number of chunks after re-ranking (e.g., 4)
       "processing_time": "float",
       "relevance_scores": ["float"],         // Cross-encoder scores for final chunks
       "best_relevance_score": "float"
@@ -145,9 +145,13 @@ class Settings:
     # Re-ranking settings
     reranking_enabled_default: bool = False
     reranking_model: str = "cross-encoder/ms-marco-MiniLM-L-12-v2"
-    reranking_initial_k: int = 20
-    reranking_final_k: int = 5
+    reranking_initial_k: int = 12  # Reduced for smaller document set
+    reranking_final_k: int = 4     # Reduced for smaller document set
     reranking_timeout: int = 30  # seconds
+    
+    # Document processing settings (optimized for small dataset)
+    chunk_size: int = 512          # Reduced chunk size for better granularity
+    chunk_overlap: int = 64        # Reduced overlap proportionally
     
     # RAGAS evaluation settings
     ragas_evaluator_model: str = "gpt-4o"
@@ -325,13 +329,4 @@ async def compare_retrieval_methods(row):
 - ✅ All conversation data includes re-ranking metadata
 - ✅ System performance meets targets
 
-### 9.2. Quality Success
-- 📈 Context Precision improved by >10%
-- 📈 Answer Relevancy improved by >5%
-- 📈 User satisfaction maintained or improved
-- ⏱️ 95% of re-ranked queries complete within 3 seconds
 
-### 9.3. Adoption Success
-- 📊 Feature usage tracking implemented
-- 📊 Comparative analytics available
-- 📊 User behavior patterns identified

@@ -1,0 +1,68 @@
+{
+  "conversation_id": "e52358ea-bdaa-440a-a74e-1ccfb36521ce",
+  "doc_id": "doc_-881108316479335384",
+  "document_name": "YAGEO_Nexensos_LS219_Datasheet.pdf",
+  "created_at": "2025-07-26T16:00:57.875524",
+  "updated_at": "2025-07-26T16:01:49.156767",
+  "messages": [
+    {
+      "timestamp": "2025-07-26T16:01:12.194260",
+      "question": "What is the model number of the temperature and humidity sensor?",
+      "answer": "The model number of the temperature sensor is LS219.",
+      "context": "Excerpt 1: The measuring point for the nominal resistance is 2 mm from the end of the sensor body.\n\n# Temperature Range of Tolerance Class\n\nValidity of Class F 0.3 (B) -50 °C to +150 °C\n\nThe specified tolerance classes refer to continuous operation.\n\nShort term temperature exposure for soldering: Max. 5 minutes up to 250 °C.\n\n# Dimensions and Tolerances in mm\n\n| L:  | 2.1 -0.2/+0.2  |\n| --- | -------------- |\n| W1: | 1.9 +0.2       |\n| H:  | 0.8 -0.2/+0.25 |\n| LL: | 7±1            |\n| Lø: | 0.22 ±0.02     |\n| W2: | 0.7 ±0.1       |\n\n# Response Time\n\nAir (v = 3 m/s): t0.5 = 1.5 s\n\nt0.9 = 5 s\n\n# Measuring Current\n\nPt100 Ω: 0.3 to 1 mA\n\nPt1000 Ω: 0.1 to 0.3 mA (self-heating has to be considered)\n\nImage for illustration purposes only\n\nColor, shape and forming of fixing drop may vary\n\nW2 only valid at outlet spot of wire\n\nYAGEO Nexensos GmbH, Germany Document: 10000002962 Part 001 Version 00 | Status: 03/2025\n\nWeb: www.yageo-nexensos.com\n\nContact: nexensos.america@yageo.com\n\nPage 1 of 2\n\n---\n\nExcerpt 2: YAGEO Nexensos\n\n# LS219, Pt Temperature Sensor according to DIN EN IEC 60751\n\nTemperature range -50 °C to +150 °C\n\nDesigned for low temperature applications\n\nOptimized for soldering connection\n\nHigh accuracy and interchangeability\n\nExcellent long term stability and low drift\n\nLS series Pt-RTDs are designed for high volume low temperature applications where long term stability, interchangeability and accuracy are vital. Typical applications include HVAC, Food and Beverage, Medical and Industrial equipment.\n\n| Nominal Resistance R₀ \\[Ω] | Tolerance Class | Order Number | Packaging       |\n| -------------------------- | --------------- | ------------ | --------------- |\n| Pt100                      | F 0.3 (B)       | 5205115      | VCI-Plastic bag |\n| Pt1000                     | F 0.3 (B)       | 5203377      | VCI-Plastic bag |\n\nThe measuring point for the nominal resistance is 2 mm from the end of the sensor body.\n\n# Temperature Range of Tolerance Class",
+      "sources": [
+        "YAGEO_Nexensos_LS219_Datasheet.pdf",
+        "YAGEO_Nexensos_LS219_Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 0.1,
+        "context_precision": 0.82,
+        "context_recall": 0.86
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 2,
+        "final_chunk_count": 2,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "processing_time": 2.671
+      }
+    },
+    {
+      "timestamp": "2025-07-26T16:01:49.156757",
+      "question": "What is the model number of the temperature and humidity sensor for S15S ?",
+      "answer": "The provided excerpts do not contain information about a temperature and humidity sensor for the S15S model. You may need to refer to the manufacturer's documentation or website for specific details regarding the S15S sensor model number.",
+      "context": "Excerpt 1: YAGEO Nexensos\n\n# LS219, Pt Temperature Sensor according to DIN EN IEC 60751\n\nTemperature range -50 °C to +150 °C\n\nDesigned for low temperature applications\n\nOptimized for soldering connection\n\nHigh accuracy and interchangeability\n\nExcellent long term stability and low drift\n\nLS series Pt-RTDs are designed for high volume low temperature applications where long term stability, interchangeability and accuracy are vital. Typical applications include HVAC, Food and Beverage, Medical and Industrial equipment.\n\n| Nominal Resistance R₀ \\[Ω] | Tolerance Class | Order Number | Packaging       |\n| -------------------------- | --------------- | ------------ | --------------- |\n| Pt100                      | F 0.3 (B)       | 5205115      | VCI-Plastic bag |\n| Pt1000                     | F 0.3 (B)       | 5203377      | VCI-Plastic bag |\n\nThe measuring point for the nominal resistance is 2 mm from the end of the sensor body.\n\n# Temperature Range of Tolerance Class\n\n---\n\nExcerpt 2: The measuring point for the nominal resistance is 2 mm from the end of the sensor body.\n\n# Temperature Range of Tolerance Class\n\nValidity of Class F 0.3 (B) -50 °C to +150 °C\n\nThe specified tolerance classes refer to continuous operation.\n\nShort term temperature exposure for soldering: Max. 5 minutes up to 250 °C.\n\n# Dimensions and Tolerances in mm\n\n| L:  | 2.1 -0.2/+0.2  |\n| --- | -------------- |\n| W1: | 1.9 +0.2       |\n| H:  | 0.8 -0.2/+0.25 |\n| LL: | 7±1            |\n| Lø: | 0.22 ±0.02     |\n| W2: | 0.7 ±0.1       |\n\n# Response Time\n\nAir (v = 3 m/s): t0.5 = 1.5 s\n\nt0.9 = 5 s\n\n# Measuring Current\n\nPt100 Ω: 0.3 to 1 mA\n\nPt1000 Ω: 0.1 to 0.3 mA (self-heating has to be considered)\n\nImage for illustration purposes only\n\nColor, shape and forming of fixing drop may vary\n\nW2 only valid at outlet spot of wire\n\nYAGEO Nexensos GmbH, Germany Document: 10000002962 Part 001 Version 00 | Status: 03/2025\n\nWeb: www.yageo-nexensos.com\n\nContact: nexensos.america@yageo.com\n\nPage 1 of 2",
+      "sources": [
+        "YAGEO_Nexensos_LS219_Datasheet.pdf",
+        "YAGEO_Nexensos_LS219_Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 0.48,
+        "context_precision": 0.82,
+        "context_recall": 0.86
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 2,
+        "final_chunk_count": 2,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "processing_time": 2.587
+      }
+    }
+  ],
+  "ragas_summary": {
+    "total_questions": 2,
+    "avg_faithfulness": 0.0,
+    "avg_answer_relevancy": 0.0,
+    "avg_context_precision": 0.0,
+    "avg_context_recall": 0.0
+  }
+}

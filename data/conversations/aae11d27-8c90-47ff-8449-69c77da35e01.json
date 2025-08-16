@@ -1,0 +1,52 @@
+{
+  "conversation_id": "aae11d27-8c90-47ff-8449-69c77da35e01",
+  "doc_id": null,
+  "document_name": "OULTX125R - Datasheet.pdf (OULTX125R - unknown)",
+  "created_at": "2025-08-16T03:47:34.985653",
+  "updated_at": "2025-08-16T03:53:29.790472",
+  "messages": [
+    {
+      "timestamp": "2025-08-16T03:53:29.790419",
+      "question": "specification of oultx125R",
+      "answer": "The OULTX125R is an advanced dual-light sensor system designed for precise measurement of ambient and directional light levels, particularly suited for IoT applications. Here are the key specifications and features:\n\n### Key Specifications:\n- **Type**: Dual-light sensor (ambient and directional)\n- **Output**: Standardized digital output for easy integration with external controllers (e.g., Raspberry Pi)\n- **LED Indicators**: Three LED indicators for real-time operational feedback\n- **Power Consumption**: Low power consumption, making it suitable for energy-efficient applications\n- **Design**: Compact design for easy integration into various projects\n- **Connectivity**: Versatile connectivity options to facilitate integration into different systems\n- **Applications**: Ideal for smart home automation, energy management, and security systems\n\n### System Architecture:\n- The sensor can be connected to various microcontrollers and development boards, such as the Raspberry Pi and ESP32, allowing for flexible deployment in environmental monitoring projects.\n\n### Pin Connections:\n- The sensor features multiple pin connections for power (GND, 3V37), data output (GPIO), and LED indicators (Red, Blue, Green).\n\nThis sensor is particularly useful for developers looking to enhance environmental monitoring capabilities in diverse IoT projects.",
+      "context": "Excerpt 1: \n\n---\n\nExcerpt 2: OULTX125R Datasheet\n\n# OULTX125R Integration Datasheet\n\n# Overview\n\nThe OULTX125R is an advanced dual-light sensor system designed for precise measurement of ambient and directional light levels in IoT applications. It delivers reliable data for smart home automation, energy management, and security systems. The sensor provides a standardized digital output for seamless integration with external controllers like Raspberry Pi, complemented by three LED indicators for real-time operational feedback. Its compact design, low power consumption, and versatile connectivity options make it an ideal choice for developers enhancing environmental monitoring in diverse projects.\n\n# System Architecture\n\n# Pin Connections (Mermaid Diagram)\n\n---\n\nExcerpt 3: |          | ESP32DevKitc | JULIXT2SR Sensor\\_System |         |          |              |             |        |        |        |\n| -------- | ------------ | ------------------------ | ------- | -------- | ------------ | ----------- | ------ | ------ | ------ |\n| BV3      | GND          | VP                       | ADc     | 3V37     | GND          | VNADC       | GPIO27 | GPI014 | GPI012 |\n| Sensor = | Sensor #2    |                          | GPIO13  | GND      |              |             |        |        |        |\n| Ambient  | Directional  | Red \\[LED                | BlueLED | GreenLED | Raspberry Pi | USBType-C   |        |        |        |\n|          |              | e.g., BCM 17             |         | SV USB-A |              | SerialDebug |        |        |        |\n|          | 2200         | 2200                     | 2202    |          |              |             |        |        |        |\n| GND      | GND          | GND                      |         |          |              |             |        |        |        |",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.88,
+        "context_recall": 0.89
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 3,
+        "final_chunk_count": 3,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "OULTX125R"
+        ],
+        "processing_time": 8.402,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    }
+  ],
+  "ragas_summary": {
+    "total_questions": 1,
+    "avg_faithfulness": 0.0,
+    "avg_answer_relevancy": 0.0,
+    "avg_context_precision": 0.0,
+    "avg_context_recall": 0.0
+  }
+}

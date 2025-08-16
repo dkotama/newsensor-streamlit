@@ -1,0 +1,15 @@
+{
+  "conversation_id": "184969e4-a2cb-4ee7-8e38-a5af97e16dbf",
+  "doc_id": "collection_wide",
+  "document_name": "Collection (1 sensors: OULTX125R)",
+  "created_at": "2025-08-16T14:44:12.424371",
+  "updated_at": "2025-08-16T14:44:12.424386",
+  "messages": [],
+  "ragas_summary": {
+    "total_questions": 0,
+    "avg_faithfulness": 0.0,
+    "avg_answer_relevancy": 0.0,
+    "avg_context_precision": 0.0,
+    "avg_context_recall": 0.0
+  }
+}

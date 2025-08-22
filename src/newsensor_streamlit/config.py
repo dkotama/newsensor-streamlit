@@ -16,7 +16,12 @@ class Settings(BaseSettings):
     llama_parse_api_key: str = Field(default="", description="LlamaParse API key")
     qdrant_host: str = Field(default="localhost", description="Qdrant host")
     qdrant_port: int = Field(default=6333, description="Qdrant port")
+    qdrant_api_key: str = Field(default="", description="Qdrant API key for authentication")
     qdrant_collection: str = Field(default="newsensor_datasheets", description="Qdrant collection name")
+    
+    # Application mode
+    mode: str = Field(default="insert", description="Application mode: 'evaluation' or 'insert'")
+    env: str = Field(default="development", description="Environment: 'development' or 'production'")
     
     data_dir: Path = Field(default=Path("data"), description="Base data directory")
     docs_dir: Path = Field(default=Path("data/docs"), description="Storage for processed documents")

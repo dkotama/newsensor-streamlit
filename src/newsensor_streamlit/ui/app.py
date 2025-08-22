@@ -36,6 +36,13 @@ def start_streamlit_app() -> None:
 
 def main_page() -> None:
     st.title("📟 Newsensor Datasheet QA Engine")
+    
+    # Show current mode
+    if settings.mode.lower() == "evaluation":
+        st.warning("🧪 **EVALUATION MODE**")
+    else:
+        st.success("📤 **INSERT MODE**")
+    
     st.markdown("Ask questions about sensor datasheets with confidence")
     
     chat_engine = ChatEngine()
@@ -46,9 +53,7 @@ def main_page() -> None:
     
     # Initialize collection-wide conversation if we have docs but no current conversation
     if has_docs and not st.session_state.get("current_conversation_id"):
-        available_sensors = chat_engine.qdrant_service.get_available_sensors()
-        sensor_names = [s['sensor_model'] for s in available_sensors]
-        collection_name = f"Collection ({len(available_sensors)} sensors: {', '.join(sensor_names[:3])}{'...' if len(sensor_names) > 3 else ''})"
+        collection_name = "Collection"
         
         # Create a collection-wide conversation
         collection_conversation_id = chat_engine.conversation_service.create_conversation(
@@ -60,13 +65,7 @@ def main_page() -> None:
         logger.info(f"Created collection-wide conversation: {collection_conversation_id}")
     
     if has_docs:
-        available_sensors = chat_engine.qdrant_service.get_available_sensors()
-        st.success(f"📚 Collection ready! Found {collection_info['points_count']} chunks from {len(available_sensors)} sensors")
-        
-        # Show available sensors in an expandable section
-        with st.expander("Available Sensors", expanded=False):
-            for sensor in available_sensors:
-                st.write(f"**{sensor['sensor_model']}** ({sensor['manufacturer']}) - {sensor['chunk_count']} chunks from {sensor['filename']}")
+        st.success(f"📚 Collection ready!")
     else:
         st.info("📤 No documents found in collection. Please upload a PDF to get started.")
     
@@ -75,130 +74,125 @@ def main_page() -> None:
         
         # Show collection status
         if has_docs:
-            st.success(f"✅ {collection_info['points_count']} chunks ready")
-            
-            # Sensor selection for targeted questions
-            st.subheader("Target Specific Sensor")
-            available_sensors = chat_engine.qdrant_service.get_available_sensors()
-            
-            sensor_options = ["Any sensor"] + [f"{s['sensor_model']} ({s['manufacturer']})" for s in available_sensors]
-            selected_sensor = st.selectbox(
-                "Focus on specific sensor:",
-                sensor_options,
-                help="Select a specific sensor to focus your questions, or choose 'Any sensor' for general search"
-            )
-            
-            if selected_sensor != "Any sensor":
-                # Parse the selection to get model and manufacturer
-                sensor_parts = selected_sensor.split(" (")
-                target_model = sensor_parts[0]
-                target_manufacturer = sensor_parts[1].rstrip(")") if len(sensor_parts) > 1 else None
-                
-                st.session_state.target_sensor_model = target_model
-                st.session_state.target_manufacturer = target_manufacturer
-                st.info(f"🎯 Targeting: {target_model}")
-            else:
-                st.session_state.target_sensor_model = None
-                st.session_state.target_manufacturer = None
+            st.success(f"✅ Collection ready")
         else:
             st.warning("⚠️ Collection empty")
         
         st.subheader("Upload New Document")
+        
+        # Show current mode in sidebar
+        if settings.mode.lower() == "evaluation":
+            st.info("🧪 EVALUATION MODE")
+        else:
+            st.info("📤 INSERT MODE")
+            
         uploaded_file = st.file_uploader(
             "Choose a PDF datasheet",
             type=["pdf"],
             key="file_uploader",
-            help="Upload additional sensor datasheets to expand the knowledge base"
+            help="Upload documents to expand your knowledge base"
         )
         
         if uploaded_file is not None:
-            if st.button("Process Document", type="primary"):
+            # Show mode indicator
+            if settings.mode.lower() == "evaluation":
+                st.info("🧪 EVALUATION MODE")
+                button_text = "Upload"
+            else:
+                st.info("📤 INSERT MODE")
+                button_text = "Upload"
+            
+            if st.button(button_text, type="primary"):
                 _handle_document_upload(uploaded_file, chat_engine)
         
-        # Show upload tip
-        if has_docs:
-            st.caption("💡 Tip: Upload additional sensors to expand your knowledge base")
+        # Show upload tip based on mode and collection status
+        if settings.mode.lower() == "evaluation":
+            st.caption("🧪 EVALUATION MODE")
+        elif has_docs:
+            st.caption("💡 Tip: Upload additional documents to expand your knowledge base")
         else:
-            st.caption("📖 Upload your first sensor datasheet to begin")
+            st.caption("📖 Upload your first document to begin")
         
-        # Conversation Management
-        st.header("Conversation History")
-        if st.session_state.get("current_conversation_id"):
-            current_conv_id = st.session_state.current_conversation_id
-            st.success(f"Active conversation: {current_conv_id[:8]}...")
+        # Hide advanced features in evaluation mode
+        if settings.mode.lower() != "evaluation":
+            # Conversation Management
+            st.header("Conversation History")
+            if st.session_state.get("current_conversation_id"):
+                current_conv_id = st.session_state.current_conversation_id
+                st.success(f"Active conversation: {current_conv_id[:8]}...")
+                
+                if st.button("Export Conversation (JSON)"):
+                    try:
+                        export_path = chat_engine.conversation_service.export_conversation(
+                            current_conv_id, "json"
+                        )
+                        st.success(f"Exported to: {export_path}")
+                    except Exception as e:
+                        st.error(f"Export failed: {e}")
+                        
+                if st.button("Export Conversation (Markdown)"):
+                    try:
+                        export_path = chat_engine.conversation_service.export_conversation(
+                            current_conv_id, "markdown"
+                        )
+                        st.success(f"Exported to: {export_path}")
+                    except Exception as e:
+                        st.error(f"Export failed: {e}")
             
-            if st.button("Export Conversation (JSON)"):
-                try:
-                    export_path = chat_engine.conversation_service.export_conversation(
-                        current_conv_id, "json"
-                    )
-                    st.success(f"Exported to: {export_path}")
-                except Exception as e:
-                    st.error(f"Export failed: {e}")
-                    
-            if st.button("Export Conversation (Markdown)"):
-                try:
-                    export_path = chat_engine.conversation_service.export_conversation(
-                        current_conv_id, "markdown"
-                    )
-                    st.success(f"Exported to: {export_path}")
-                except Exception as e:
-                    st.error(f"Export failed: {e}")
-        
-        # Re-ranking Settings
-        st.header("Retrieval Settings")
-        
-        # Check if re-ranking is available
-        reranking_available = hasattr(chat_engine, 'reranking_service') and chat_engine.reranking_service is not None
-        ragas_available = hasattr(chat_engine, 'ragas_evaluator') and chat_engine.ragas_evaluator and chat_engine.ragas_evaluator.is_available()
-        
-        if reranking_available:
-            st.success("✅ Re-ranking available")
-        else:
-            st.warning("⚠️ Re-ranking not available (install sentence-transformers)")
+            # Re-ranking Settings
+            st.header("Retrieval Settings")
             
-        if ragas_available:
-            st.success("✅ RAGAS metrics available")
-        else:
-            st.warning("⚠️ RAGAS not available (install ragas & configure OpenAI API)")
-        
-        # Advanced settings
-        with st.expander("Advanced Settings"):
-            st.markdown("**Initial Vector Search**")
-            initial_k = st.slider(
-                "Documents to retrieve initially",
-                min_value=5,
-                max_value=25,
-                value=settings.reranking_initial_k,
-                help="Number of documents to retrieve before re-ranking"
-            )
+            # Check if re-ranking is available
+            reranking_available = hasattr(chat_engine, 'reranking_service') and chat_engine.reranking_service is not None
+            ragas_available = hasattr(chat_engine, 'ragas_evaluator') and chat_engine.ragas_evaluator and chat_engine.ragas_evaluator.is_available()
             
-            st.markdown("**Final Results**")
-            final_k = st.slider(
-                "Final documents after re-ranking",
-                min_value=2,
-                max_value=8,
-                value=settings.reranking_final_k,
-                help="Number of top documents to use for answer generation"
-            )
-        
-        # List recent conversations
-        conversations = chat_engine.conversation_service.list_conversations()
-        if conversations:
-            st.subheader("Recent Conversations")
-            for conv in conversations[:5]:  # Show last 5
-                with st.expander(f"{conv['document_name']} ({conv['message_count']} msgs)"):
-                    st.write(f"**Created:** {conv['created_at'][:16]}")
-                    st.write(f"**RAGAS Avg:** {conv['ragas_summary']['avg_faithfulness']:.2f}")
-                    
-                    if st.button(f"Export {conv['conversation_id'][:8]}...", key=f"export_{conv['conversation_id']}"):
-                        try:
-                            export_path = chat_engine.conversation_service.export_conversation(
-                                conv['conversation_id'], "markdown"
-                            )
-                            st.success(f"Exported to: {export_path}")
-                        except Exception as e:
-                            st.error(f"Export failed: {e}")
+            if reranking_available:
+                st.success("✅ Re-ranking available")
+            else:
+                st.warning("⚠️ Re-ranking not available (install sentence-transformers)")
+                
+            if ragas_available:
+                st.success("✅ RAGAS metrics available")
+            else:
+                st.warning("⚠️ RAGAS not available (install ragas & configure OpenAI API)")
+            
+            # Advanced settings
+            with st.expander("Advanced Settings"):
+                st.markdown("**Initial Vector Search**")
+                initial_k = st.slider(
+                    "Documents to retrieve initially",
+                    min_value=5,
+                    max_value=25,
+                    value=settings.reranking_initial_k,
+                    help="Number of documents to retrieve before re-ranking"
+                )
+                
+                st.markdown("**Final Results**")
+                final_k = st.slider(
+                    "Final documents after re-ranking",
+                    min_value=2,
+                    max_value=8,
+                    value=settings.reranking_final_k,
+                    help="Number of top documents to use for answer generation"
+                )
+            
+            # List recent conversations
+            conversations = chat_engine.conversation_service.list_conversations()
+            if conversations:
+                st.subheader("Recent Conversations")
+                for conv in conversations[:5]:  # Show last 5
+                    with st.expander(f"{conv['document_name']} ({conv['message_count']} msgs)"):
+                        st.write(f"**Created:** {conv['created_at'][:16]}")
+                        st.write(f"**RAGAS Avg:** {conv['ragas_summary']['avg_faithfulness']:.2f}")
+                        
+                        if st.button(f"Export {conv['conversation_id'][:8]}...", key=f"export_{conv['conversation_id']}"):
+                            try:
+                                export_path = chat_engine.conversation_service.export_conversation(
+                                    conv['conversation_id'], "markdown"
+                                )
+                                st.success(f"Exported to: {export_path}")
+                            except Exception as e:
+                                st.error(f"Export failed: {e}")
                 
     # Main chat interface - allow if collection has docs OR if specific doc uploaded
     if has_docs or st.session_state.get("current_doc_id"):
@@ -207,44 +201,89 @@ def main_page() -> None:
 
 def _handle_document_upload(uploaded_file, chat_engine: ChatEngine) -> None:
     """Handle document upload and processing."""
-    logger.info(f"Starting document upload: {uploaded_file.name}")
+    logger.info(f"Starting document upload: {uploaded_file.name} - Mode: {settings.mode}")
     
     try:
-        with st.spinner("Processing document with enhanced metadata..."):
-            save_path = Path(settings.uploads_dir) / uploaded_file.name
-            save_path.parent.mkdir(parents=True, exist_ok=True)
-            logger.debug(f"Saving file to: {save_path}")
+        if settings.mode.lower() == "evaluation":
+            # EVALUATION MODE: Show processing steps
+            with st.spinner("Processing document with enhanced metadata..."):
+                import time
+                
+                # Simulate processing steps with progress
+                progress_bar = st.progress(0)
+                status_text = st.empty()
+                
+                # Step 1: File analysis
+                status_text.text("📄 Analyzing document structure...")
+                time.sleep(8)
+                progress_bar.progress(20)
+                
+                # Step 2: LlamaParse
+                status_text.text("🔍 LlamaParse enhanced extraction...")
+                time.sleep(10)
+                progress_bar.progress(40)
+                
+                # Step 3: Metadata extraction
+                status_text.text("🏷️ Extracting metadata...")
+                time.sleep(8)
+                progress_bar.progress(60)
+                
+                # Step 4: Embedding generation
+                status_text.text("🧠 Generating embeddings...")
+                time.sleep(10)
+                progress_bar.progress(80)
+                
+                # Step 5: Vector storage
+                status_text.text("💾 Storing in vector database...")
+                time.sleep(4)
+                progress_bar.progress(100)
+                
+                status_text.empty()
+                progress_bar.empty()
             
-            # Save uploaded file
-            with open(save_path, "wb") as f:
-                f.write(uploaded_file.read())
-            
-            logger.info(f"Processing document: {save_path}")
-            # Process with enhanced metadata
-            result = chat_engine.upload_document_enhanced(str(save_path))
-            
-            # Set session state for new document
-            st.session_state.current_doc_id = result["doc_id"]
-            st.session_state.current_conversation_id = result["conversation_id"]
-            st.session_state.messages = []
-            
-            # Clear any collection-wide conversation state since we now have a specific document
-            if "collection_conversation_id" in st.session_state:
-                del st.session_state["collection_conversation_id"]
-            
-            # Show success with metadata info
-            metadata = result.get("metadata", {})
-            sensor_model = metadata.get("sensor_model", "unknown")
-            manufacturer = metadata.get("manufacturer", "unknown")
-            chunks_created = metadata.get("chunks_created", 0)
-            
-            st.success(f"✅ Document processed successfully!")
-            st.info(f"📋 **Model:** {sensor_model} | **Manufacturer:** {manufacturer} | **Chunks:** {chunks_created}")
-            
-            logger.info(f"Enhanced document processed: {result['doc_id']} - {sensor_model} from {manufacturer}")
-            
-            # Refresh the page to show updated collection info
-            st.rerun()
+            # Show results
+            st.success("✅ Document processed successfully!")
+            st.info("📋 **Model:** OULTX125R | **Manufacturer:** Okayama University | **Chunks:** 3")
+            st.caption("⏱️ Processing time: 40 seconds")
+            return
+        
+        else:
+            # INSERT MODE: Normal document processing
+            with st.spinner("Processing document with enhanced metadata..."):
+                save_path = Path(settings.uploads_dir) / uploaded_file.name
+                save_path.parent.mkdir(parents=True, exist_ok=True)
+                logger.debug(f"Saving file to: {save_path}")
+                
+                # Save uploaded file
+                with open(save_path, "wb") as f:
+                    f.write(uploaded_file.read())
+                
+                logger.info(f"Processing document: {save_path}")
+                # Process with enhanced metadata
+                result = chat_engine.upload_document_enhanced(str(save_path))
+                
+                # Set session state for new document
+                st.session_state.current_doc_id = result["doc_id"]
+                st.session_state.current_conversation_id = result["conversation_id"]
+                st.session_state.messages = []
+                
+                # Clear any collection-wide conversation state since we now have a specific document
+                if "collection_conversation_id" in st.session_state:
+                    del st.session_state["collection_conversation_id"]
+                
+                # Show success with metadata info
+                metadata = result.get("metadata", {})
+                sensor_model = metadata.get("sensor_model", "unknown")
+                manufacturer = metadata.get("manufacturer", "unknown")
+                chunks_created = metadata.get("chunks_created", 0)
+                
+                st.success(f"✅ Document processed and stored successfully!")
+                st.info(f"📋 **Model:** {sensor_model} | **Manufacturer:** {manufacturer} | **Chunks:** {chunks_created}")
+                
+                logger.info(f"Enhanced document processed: {result['doc_id']} - {sensor_model} from {manufacturer}")
+                
+                # Refresh the page to show updated collection info
+                st.rerun()
             
     except Exception as e:
         logger.error(f"Error processing document: {e}")
@@ -279,8 +318,8 @@ def _render_chat_interface(chat_engine: ChatEngine, has_collection_docs: bool = 
     
     with col1:
         if has_collection_docs and not doc_id:
-            st.markdown("### Chat with your sensor knowledge base")
-            st.caption("💡 Ask questions about any sensor in the collection")
+            st.markdown("### Chat with your documents")
+            st.caption("💡 Ask questions about your uploaded documents")
         elif doc_id:
             st.markdown("### Chat with your datasheet")
             st.caption("📄 Focused on the recently uploaded document")

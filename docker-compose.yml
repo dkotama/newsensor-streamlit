@@ -7,8 +7,8 @@ services:
       - "${qdrant_port:-6333}:6333"
       - "6334:6334"  # Add gRPC port
     environment:
-      # Remove QDRANT__SERVICE__HOST - let Qdrant use defaults
       QDRANT__SERVICE__PORT: ${qdrant_port:-6333}
+      QDRANT__SERVICE__API_KEY: ${qdrant_api_key}
     volumes:
       - qdrant_data:/qdrant/storage
 volumes:

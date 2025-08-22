@@ -21,9 +21,50 @@ class QdrantService:
     """Service for interacting with Qdrant vector database with enhanced metadata support."""
     
     def __init__(self) -> None:
-        self.client = QdrantClient(host=settings.qdrant_host, port=settings.qdrant_port)
-        self.collection_name = settings.qdrant_collection
-        self._ensure_collection()
+        # Initialize client based on environment and API key
+        try:
+            if settings.qdrant_api_key:
+                # Check if host looks like a URL (for cloud deployments)
+                if settings.qdrant_host.startswith(('http://', 'https://')):
+                    self.client = QdrantClient(
+                        url=settings.qdrant_host,
+                        api_key=settings.qdrant_api_key
+                    )
+                    logger.info(f"Connected to Qdrant Cloud with API key authentication at {settings.qdrant_host}")
+                else:
+                    # Construct URL based on environment
+                    if settings.env.lower() == "production":
+                        url = f"https://{settings.qdrant_host}:{settings.qdrant_port}"
+                    else:
+                        url = f"http://{settings.qdrant_host}:{settings.qdrant_port}"
+                    
+                    self.client = QdrantClient(
+                        url=url,
+                        api_key=settings.qdrant_api_key
+                    )
+                    logger.info(f"Connected to Qdrant with API key authentication at {url} (env: {settings.env})")
+            else:
+                # No API key - use basic connection
+                if settings.qdrant_host.startswith(('http://', 'https://')):
+                    self.client = QdrantClient(url=settings.qdrant_host)
+                    logger.info(f"Connected to Qdrant without authentication at {settings.qdrant_host}")
+                else:
+                    # Construct URL based on environment
+                    if settings.env.lower() == "production":
+                        url = f"https://{settings.qdrant_host}:{settings.qdrant_port}"
+                    else:
+                        url = f"http://{settings.qdrant_host}:{settings.qdrant_port}"
+                    
+                    self.client = QdrantClient(url=url)
+                    logger.info(f"Connected to Qdrant without authentication at {url} (env: {settings.env})")
+            
+            self.collection_name = settings.qdrant_collection
+            self._ensure_collection()
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize Qdrant client: {e}")
+            logger.error(f"Connection details - Host: {settings.qdrant_host}, Port: {settings.qdrant_port}, Env: {settings.env}")
+            raise
         
     def _ensure_collection(self) -> None:
         """Ensure the collection exists."""
@@ -40,9 +81,16 @@ class QdrantService:
                     )
                 )
                 logger.info(f"Created collection: {self.collection_name}")
+            else:
+                logger.info(f"Collection {self.collection_name} already exists")
                 
         except Exception as e:
-            logger.error(f"Error ensuring collection: {e}")
+            logger.error(f"Error ensuring collection {self.collection_name}: {e}")
+            logger.error("This might indicate a connection issue with Qdrant. Please check:")
+            logger.error("1. Qdrant server is running")
+            logger.error("2. Host and port are correct")
+            logger.error("3. API key is valid (if using authentication)")
+            logger.error(f"4. Network connectivity to {settings.qdrant_host}:{settings.qdrant_port}")
             raise
     
     def store_enhanced_chunks(self, chunks: List[Dict[str, Any]], embeddings: List[List[float]], source_path: str) -> str:

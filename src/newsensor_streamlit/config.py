@@ -56,6 +56,11 @@ class Settings(BaseSettings):
     qdrant_api_key: str = Field(default="", description="Qdrant API key for authentication")
     qdrant_collection: str = Field(default="newsensor_datasheets", description="Qdrant collection name")
     
+    # MongoDB Configuration for Conversations
+    mongodb_uri: str = Field(default="mongodb://localhost:27017", description="MongoDB connection URI")
+    mongodb_database: str = Field(default="newsensor_conversations", description="MongoDB database name")
+    mongodb_conversations_collection: str = Field(default="conversations", description="MongoDB collection for conversations")
+    
     # Application mode
     mode: str = Field(default="insert", description="Application mode: 'evaluation' or 'insert'")
     env: str = Field(default="development", description="Environment: 'development' or 'production'")

@@ -11,5 +11,17 @@ services:
       QDRANT__SERVICE__API_KEY: ${qdrant_api_key}
     volumes:
       - qdrant_data:/qdrant/storage
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-lite
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${mongo_username:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${mongo_password:-password}
+    volumes:
+      - mongodb_data:/data/db
+
 volumes:
   qdrant_data:
+  mongodb_data:

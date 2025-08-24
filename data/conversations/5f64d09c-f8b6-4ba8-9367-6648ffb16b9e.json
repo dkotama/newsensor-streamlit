@@ -1,0 +1,282 @@
+{
+  "conversation_id": "5f64d09c-f8b6-4ba8-9367-6648ffb16b9e",
+  "doc_id": null,
+  "document_name": "OULTX125R - Datasheet.pdf (system - Overview)",
+  "created_at": "2025-08-24T17:44:04.827381",
+  "updated_at": "2025-08-24T17:50:59.884335",
+  "messages": [
+    {
+      "timestamp": "2025-08-24T17:44:37.857672",
+      "question": " Apa fungsi utama dari sensor OULTX125R dalam aplikasi IoT  ",
+      "answer": "Fungsi utama dari sensor OULTX125R dalam aplikasi IoT adalah untuk mengukur tingkat cahaya ambient dan directional secara presisi. Sensor ini memberikan data yang dapat diandalkan untuk berbagai aplikasi, termasuk:\n\n1. **Automasi Rumah Pintar**: Mengontrol pencahayaan dengan memanfaatkan cahaya alami untuk meningkatkan efisiensi energi dan menjaga pencahayaan ruangan yang konsisten.\n\n2. **Pemantauan Keamanan**: Mendeteksi sumber cahaya yang tidak sah, seperti sinar senter, untuk meningkatkan keamanan dengan memberikan alarm atau notifikasi.\n\n3. **Optimisasi Pencahayaan Pertanian**: Memantau dan mengatur pencahayaan di area pertanian dalam ruangan atau rumah kaca untuk mendukung pertumbuhan tanaman.\n\nSensor ini juga dilengkapi dengan output digital yang standar untuk integrasi yang mudah dengan pengendali eksternal, serta indikator LED untuk umpan balik operasional secara real-time.",
+      "context": "Excerpt 1: OULTX125R Datasheet\n\n# **OULTX125R Integration Datasheet**\n\n## **Overview**\n\n\nThe OULTX125R is an advanced dual-light sensor system designed for precise measurement of\n\n\nambient and directional light levels in IoT applications. It delivers reliable data for smart home\n\n\nautomation, energy management, and security systems. The sensor provides a standardized\n\n\ndigital output for seamless integration with external controllers like Raspberry Pi, complemented\n\n\nby three LED indicators for real-time operational feedback. Its compact design, low power\n\n\nconsumption, and versatile connectivity options make it an ideal choice for developers\n\n\nenhancing environmental monitoring in diverse projects.\n\n## **System Architecture**\n\n### **Pin Connections (Mermaid Diagram)**\n\n\n1\n\n\nOULTX125R Datasheet\n\n---\n\nExcerpt 2: GPIO13 HIGH, prompting the controller to brighten lights and close blinds\n\n\nfor privacy.\n\n\n      - ​ **Benefits** : Enhances energy efficiency by optimizing natural light usage and\n\n\nmaintains consistent room illumination.\n\n\n2.​ **Security Monitoring** :\n\n\n      - ​ **Setup** : Install in a dark room or hallway for intrusion detection.\n\n\n      - ​ **Operation** : A sudden light source (e.g., flashlight, ADC spike to ~2500) causes a\n\n\ndifference > 100, setting GPIO13 HIGH and illuminating the green LED. The\n\n\ncontroller triggers an alarm or sends a notification.\n\n\n      - ​ **Benefits** : Provides real-time detection of unauthorized light sources, enhancing\n\n\nsecurity.\n\n\n3.​ **Agricultural Lighting Optimization** :\n\n\n6\n\n\nOULTX125R Datasheet\n\n\n      - ​ **Setup** : Deploy in a greenhouse or indoor grow area.\n\n\n      - ​ **Operation** : Ambient sensor monitors overall light, directional sensor tracks\n\n\nsunlight. GPIO13 goes HIGH when natural light is insufficient (difference > 100),\n\n---\n\nExcerpt 3: ensure reliable power delivery and Serial communication.\n\n\n     - ​ For portable or standalone setups, a 5V USB power bank can be used,\n\n\nmaintaining compatibility with the USB Type-C interface.\n\n## **Integration Guide**\n\n### **Application Scenarios**\n\n\n1.​ **Smart Home Lighting Control** :\n\n\n      - ​ **Setup** : Position the OULTX125R near a window in a 15x15 ft living room. Sensor\n\n\n#1 measures room-wide light (ambient), while Sensor #2 targets window light\n\n\n(directional).\n\n\n      - ​ **Operation** :\n\n\n         - ​ Morning: High directional light (e.g., sunrise, ADC 3500) compared to\n\n\nlower ambient (1500) sets GPIO13 HIGH, green LED on. The controller\n\n\nopens motorized blinds and dims smart lights to leverage natural light.\n\n\n         - ​ Midday: Balanced light levels (difference < 100) set GPIO13 LOW,\n\n\nminimizing adjustments for energy efficiency.\n\n\n         - ​ Evening: Low directional light (500) with moderate ambient (2000) sets\n\n---\n\nExcerpt 4: The OULTX125R employs a modular architecture to ensure robust performance and\n\n\nstraightforward integration:\n\n\n  - ​ **Core Microcontroller** : The ESP32 DevKitC (dual-core, 240 MHz) processes analog\n\n\nlight signals, calculates the difference between ambient and directional light, and drives\n\n\noutputs for integration and feedback.\n\n\n  - ​ **Sensors** : Two light-sensitive modules detect:\n\n\n      - ​ **Ambient Light** : Measures overall environmental light (e.g., room lighting from\n\n\nlamps or natural sources).\n\n\n      - ​ **Directional Light** : Captures light from a specific direction (e.g., sunlight through\n\n\na window).\n\n\n  - ​ **Indicators** : Three LEDs provide visual status:\n\n\n      - ​ **Red LED** : Illuminates when ambient light is low (<2000 ADC value).\n\n\n      - ​ **Blue LED** : Illuminates when directional light is low (<2000 ADC value).\n\n\n      - ​ **Green LED** : Illuminates when the light difference exceeds 100 ADC units,\n\n\nsignaling a significant environmental change.\n\n---\n\nExcerpt 5: - ​ **Output** : GPIO13 delivers a digital signal (3.3V HIGH/0V LOW) when the light difference\n\n\nexceeds 100, enabling easy interfacing with external systems.\n\n\n  - ​ **Debug Interface** : Serial output over USB (115200 baud) provides detailed sensor data,\n\n\nincluding ambient, directional, difference values, and GPIO13 state, for monitoring and\n\n\ncalibration.\n\n\n  - ​ **Power Management** : Powered via ESP32 USB Type-C (5V) or VIN pin, with internal\n\n\nregulation to 3.3V for sensors and LEDs, ensuring stable operation.\n\n## **Specifications**\n\n### **General**\n\n\n  - ​ **Sensor Type** : Dual light intensity sensor\n\n\n  - ​ **Microcontroller** : Expressif ESP32 DevKitC (Dual-core, 240 MHz)\n\n\n  - ​ **Dimensions** : ~50mm x 25mm (ESP32) + 20mm x 15mm per sensor module\n\n\n  - ​ **Weight** : ~25g (including LEDs)\n\n\n  - ​ **Operating Voltage** : 3.3V or 5V DC\n\n\n  - ​ **Power Consumption** : <500mW (typical)\n\n\n3\n\n\nOULTX125R Datasheet\n\n### **Sensors**",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.88,
+        "context_recall": 0.95
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 5,
+        "final_chunk_count": 5,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "system"
+        ],
+        "processing_time": 5.485,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-24T17:45:19.418531",
+      "question": "Komponen mikrokontroler apa yang digunakan pada OULTX125R?  ",
+      "answer": "Mikrokontroler yang digunakan pada OULTX125R adalah ESP32 DevKitC, yang merupakan mikrokontroler dual-core dengan kecepatan 240 MHz.",
+      "context": "Excerpt 1: The OULTX125R employs a modular architecture to ensure robust performance and\n\n\nstraightforward integration:\n\n\n  - ​ **Core Microcontroller** : The ESP32 DevKitC (dual-core, 240 MHz) processes analog\n\n\nlight signals, calculates the difference between ambient and directional light, and drives\n\n\noutputs for integration and feedback.\n\n\n  - ​ **Sensors** : Two light-sensitive modules detect:\n\n\n      - ​ **Ambient Light** : Measures overall environmental light (e.g., room lighting from\n\n\nlamps or natural sources).\n\n\n      - ​ **Directional Light** : Captures light from a specific direction (e.g., sunlight through\n\n\na window).\n\n\n  - ​ **Indicators** : Three LEDs provide visual status:\n\n\n      - ​ **Red LED** : Illuminates when ambient light is low (<2000 ADC value).\n\n\n      - ​ **Blue LED** : Illuminates when directional light is low (<2000 ADC value).\n\n\n      - ​ **Green LED** : Illuminates when the light difference exceeds 100 ADC units,\n\n\nsignaling a significant environmental change.\n\n---\n\nExcerpt 2: OULTX125R Datasheet\n\n# **OULTX125R Integration Datasheet**\n\n## **Overview**\n\n\nThe OULTX125R is an advanced dual-light sensor system designed for precise measurement of\n\n\nambient and directional light levels in IoT applications. It delivers reliable data for smart home\n\n\nautomation, energy management, and security systems. The sensor provides a standardized\n\n\ndigital output for seamless integration with external controllers like Raspberry Pi, complemented\n\n\nby three LED indicators for real-time operational feedback. Its compact design, low power\n\n\nconsumption, and versatile connectivity options make it an ideal choice for developers\n\n\nenhancing environmental monitoring in diverse projects.\n\n## **System Architecture**\n\n### **Pin Connections (Mermaid Diagram)**\n\n\n1\n\n\nOULTX125R Datasheet\n\n---\n\nExcerpt 3: - ​ **Output** : GPIO13 delivers a digital signal (3.3V HIGH/0V LOW) when the light difference\n\n\nexceeds 100, enabling easy interfacing with external systems.\n\n\n  - ​ **Debug Interface** : Serial output over USB (115200 baud) provides detailed sensor data,\n\n\nincluding ambient, directional, difference values, and GPIO13 state, for monitoring and\n\n\ncalibration.\n\n\n  - ​ **Power Management** : Powered via ESP32 USB Type-C (5V) or VIN pin, with internal\n\n\nregulation to 3.3V for sensors and LEDs, ensuring stable operation.\n\n## **Specifications**\n\n### **General**\n\n\n  - ​ **Sensor Type** : Dual light intensity sensor\n\n\n  - ​ **Microcontroller** : Expressif ESP32 DevKitC (Dual-core, 240 MHz)\n\n\n  - ​ **Dimensions** : ~50mm x 25mm (ESP32) + 20mm x 15mm per sensor module\n\n\n  - ​ **Weight** : ~25g (including LEDs)\n\n\n  - ​ **Operating Voltage** : 3.3V or 5V DC\n\n\n  - ​ **Power Consumption** : <500mW (typical)\n\n\n3\n\n\nOULTX125R Datasheet\n\n### **Sensors**\n\n---\n\nExcerpt 4: - ​ Calibrate sensors in stable lighting conditions to ensure consistent output.\n\n## **Safety and Compliance**\n\n\n  - ​ **Certifications** : CE, FCC (ESP32 module)\n\n\n  - ​ **RoHS** : Compliant\n\n\n  - ​ **Safety Notes** :\n\n\n      - ​ Ensure proper insulation of all connections to prevent short circuits.\n\n\n      - ​ Use only specified voltage (5V via USB or VIN) to avoid damage.\n\n\n      - ​ Avoid exposure to moisture or extreme temperatures beyond specified range.\n\n## **Ordering Information**\n\n\n10\n\n\nOULTX125R Datasheet\n\n\n  - ​ **Part Number** : OULTX125R\n\n\n  - ​ **Kit Contents** : ESP32 DevKitC, 2x light sensor modules, 3x LEDs (red, blue, green), 3x\n\n\n220Ω resistors, jumper wires\n\n\n  - ​ **Contact** : Supplier details available for bulk orders or custom configurations\n\n\n11\n\n---\n\nExcerpt 5: |Connection<br>Point|Function|Description|\n|---|---|---|\n|3V3|Power Supply|Provides 3.3V to sensor modules and<br>LEDs, regulated from 5V USB input.|\n|GND|Ground|Common ground for all components and<br>external controllers (e.g., Raspberry Pi).|\n|VP ADC|Ambient Sensor Input|Analog input for ambient light<br>measurement.|\n|VN ADC|Directional Sensor Input|Analog input for directional light<br>measurement.|\n|GPIO27|Red LED Control|Drives red LED to indicate low ambient light<br>(<2000 ADC).|\n|GPIO14|Blue LED Control|Drives blue LED to indicate low directional<br>light (<2000 ADC).|\n|GPIO12|Green LED Control|Drives green LED to indicate significant<br>light difference (>100 ADC).|\n|GPIO13|Digital Output|Outputs 3.3V HIGH when light difference ><br>100, LOW otherwise, for external use.|\n|USB Type-C|Power and Debug|Supplies 5V power and Serial debug data<br>(115200 baud) to Raspberry Pi or host.|\n\n\n2\n\n\nOULTX125R Datasheet",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 0.26,
+        "context_precision": 0.88,
+        "context_recall": 0.95
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 5,
+        "final_chunk_count": 5,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "system"
+        ],
+        "processing_time": 2.883,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-24T17:45:34.863869",
+      "question": " LED warna apa yang menyala jika cahaya ambient rendah (<2000 ADC)?  ",
+      "answer": "LED yang menyala jika cahaya ambient rendah (<2000 ADC) adalah LED merah.",
+      "context": "Excerpt 1: - ​ **Type** : Light-sensitive modules with adjustable sensitivity\n\n\n  - ​ **Sensing Range** : 0-100,000 lux (after calibration)\n\n\n  - ​ **Output** : Analog (0-3.3V, mapped to 0-4095 via 12-bit ADC)\n\n\n  - ​ **Response Time** : <10ms\n\n\n  - ​ **Calibration** : Adjustable via onboard controls for optimal range\n\n### **Indicators**\n\n\n  - ​ **Red LED** : Indicates low ambient light (<2000 ADC value)\n\n\n  - ​ **Blue LED** : Indicates low directional light (<2000 ADC value)\n\n\n  - ​ **Green LED** : Indicates significant light difference (>100 ADC value)\n\n### **Input**\n\n\n  - ​ **Light Input** :\n\n\n     - ​ Sensor #1: Ambient light (connected to ESP32 ADC)\n\n\n      - ​ Sensor #2: Directional light (connected to ESP32 ADC)\n\n\n  - ​ **Power Input** : 5V DC via ESP32 USB Type-C or VIN pin\n\n### **Output**\n\n\n  - ​ **Primary Output** :\n\n\n      - ​ **Pin** : GPIO13 (digital, 3.3V HIGH/0V LOW)\n\n\n      - ​ **Condition** : HIGH when light difference (ambient vs. directional) > 100; LOW\n\n\notherwise\n\n---\n\nExcerpt 2: The OULTX125R employs a modular architecture to ensure robust performance and\n\n\nstraightforward integration:\n\n\n  - ​ **Core Microcontroller** : The ESP32 DevKitC (dual-core, 240 MHz) processes analog\n\n\nlight signals, calculates the difference between ambient and directional light, and drives\n\n\noutputs for integration and feedback.\n\n\n  - ​ **Sensors** : Two light-sensitive modules detect:\n\n\n      - ​ **Ambient Light** : Measures overall environmental light (e.g., room lighting from\n\n\nlamps or natural sources).\n\n\n      - ​ **Directional Light** : Captures light from a specific direction (e.g., sunlight through\n\n\na window).\n\n\n  - ​ **Indicators** : Three LEDs provide visual status:\n\n\n      - ​ **Red LED** : Illuminates when ambient light is low (<2000 ADC value).\n\n\n      - ​ **Blue LED** : Illuminates when directional light is low (<2000 ADC value).\n\n\n      - ​ **Green LED** : Illuminates when the light difference exceeds 100 ADC units,\n\n\nsignaling a significant environmental change.\n\n---\n\nExcerpt 3: |Connection<br>Point|Function|Description|\n|---|---|---|\n|3V3|Power Supply|Provides 3.3V to sensor modules and<br>LEDs, regulated from 5V USB input.|\n|GND|Ground|Common ground for all components and<br>external controllers (e.g., Raspberry Pi).|\n|VP ADC|Ambient Sensor Input|Analog input for ambient light<br>measurement.|\n|VN ADC|Directional Sensor Input|Analog input for directional light<br>measurement.|\n|GPIO27|Red LED Control|Drives red LED to indicate low ambient light<br>(<2000 ADC).|\n|GPIO14|Blue LED Control|Drives blue LED to indicate low directional<br>light (<2000 ADC).|\n|GPIO12|Green LED Control|Drives green LED to indicate significant<br>light difference (>100 ADC).|\n|GPIO13|Digital Output|Outputs 3.3V HIGH when light difference ><br>100, LOW otherwise, for external use.|\n|USB Type-C|Power and Debug|Supplies 5V power and Serial debug data<br>(115200 baud) to Raspberry Pi or host.|\n\n\n2\n\n\nOULTX125R Datasheet\n\n---\n\nExcerpt 4: - ​ **Purpose** : Signal for external controllers (e.g., Raspberry Pi GPIO)\n\n\n  - ​ **Debug Output** :\n\n\n     - ​ Serial over USB (115200 baud)\n\n\n     - ​ Format: Ambient: <value> | Directional: <value> | Diff:\n\n\n<value> | Output Pin 13: <HIGH/LOW>\n\n\n  - ​ **Indicator Output** :\n\n\n4\n\n\nOULTX125R Datasheet\n\n\n     - ​ Red LED: On when ambient < 2000\n\n\n     - ​ Blue LED: On when directional < 2000\n\n\n     - ​ Green LED: On when difference > 100\n\n### **Performance**\n\n\n  - ​ **Resolution** : 12-bit ADC (0-4095)\n\n\n  - ​ **Accuracy** : ±5% (post-calibration)\n\n\n  - ​ **Sampling Rate** : 1 Hz (configurable)\n\n\n  - ​ **Latency** : <50ms\n\n### **Connectivity**\n\n\n  - ​ **Integration** : GPIO13 digital output for controllers (e.g., Raspberry Pi, Arduino)\n\n\n  - ​ **Debug** : USB Type-C for Serial monitoring (accessible via Raspberry Pi)\n\n\n  - ​ **Power** : USB Type-C (5V) or 5V/3.3V external supply\n\n### **Environmental**\n\n\n  - ​ **Operating Temperature** : -20°C to 60°C\n\n---\n\nExcerpt 5: - ​ In dim lighting (e.g., covered sensor or dark room), adjust sensor controls to\n\n\nachieve ADC readings of ~100-1000.\n\n\n      - ​ In bright lighting (e.g., direct sunlight or flashlight), adjust for ~2000-3500.\n\n\n      - ​ Avoid saturation (constant 4095 readings), which indicates excessive sensitivity.\n\n\n3.​ **Verification** :\n\n\n      - ​ Monitor Serial output via USB to check Ambient and Directional values.\n\n\n      - ​ Test with varied lighting conditions (e.g., cover one sensor, illuminate the other) to\n\n\nensure differential response.\n\n\n     - ​ Confirm GPIO13 toggles HIGH when light difference exceeds 100.\n\n\n4.​ **Fine-Tuning** :\n\n\n7\n\n\nOULTX125R Datasheet\n\n\n      - ​ Adjust thresholds in firmware (e.g., <2000 for LEDs, >100 for GPIO13) based on\n\n\nspecific project requirements.\n\n\n      - ​ Recalibrate if deploying in a new environment with different lighting conditions.\n\n\n5.​ **Best Practices** :",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 0.15,
+        "context_precision": 0.88,
+        "context_recall": 0.95
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 5,
+        "final_chunk_count": 5,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "system"
+        ],
+        "processing_time": 2.432,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-24T17:46:38.087253",
+      "question": "berikan saya spesifikasi singkat OULTX125R",
+      "answer": "Berikut adalah spesifikasi singkat OULTX125R:\n\n- **Tipe Sensor**: Dual light intensity sensor\n- **Mikrokontroler**: ESP32 DevKitC (dual-core, 240 MHz)\n- **Dimensi**: ~50mm x 25mm (ESP32) + 20mm x 15mm per sensor module\n- **Berat**: ~25g (termasuk LED)\n- **Tegangan Operasi**: 3.3V atau 5V DC\n- **Konsumsi Daya**: <500mW (tipikal)\n- **Resolusi**: 12-bit ADC (0-4095)\n- **Akurasi**: ±5% (setelah kalibrasi)\n- **Laju Sampling**: 1 Hz (dapat dikonfigurasi)\n- **Latensi**: <50ms\n- **Suhu Operasi**: -20°C hingga 60°C\n- **Output**: GPIO13 (digital signal 3.3V HIGH/0V LOW)\n- **Indikator LED**: Merah, Biru, Hijau untuk status cahaya ambient dan directional\n\nOULTX125R dirancang untuk aplikasi IoT, seperti otomatisasi rumah pintar dan manajemen energi.",
+      "context": "Excerpt 1: - ​ Calibrate sensors in stable lighting conditions to ensure consistent output.\n\n## **Safety and Compliance**\n\n\n  - ​ **Certifications** : CE, FCC (ESP32 module)\n\n\n  - ​ **RoHS** : Compliant\n\n\n  - ​ **Safety Notes** :\n\n\n      - ​ Ensure proper insulation of all connections to prevent short circuits.\n\n\n      - ​ Use only specified voltage (5V via USB or VIN) to avoid damage.\n\n\n      - ​ Avoid exposure to moisture or extreme temperatures beyond specified range.\n\n## **Ordering Information**\n\n\n10\n\n\nOULTX125R Datasheet\n\n\n  - ​ **Part Number** : OULTX125R\n\n\n  - ​ **Kit Contents** : ESP32 DevKitC, 2x light sensor modules, 3x LEDs (red, blue, green), 3x\n\n\n220Ω resistors, jumper wires\n\n\n  - ​ **Contact** : Supplier details available for bulk orders or custom configurations\n\n\n11\n\n---\n\nExcerpt 2: - ​ **Output** : GPIO13 delivers a digital signal (3.3V HIGH/0V LOW) when the light difference\n\n\nexceeds 100, enabling easy interfacing with external systems.\n\n\n  - ​ **Debug Interface** : Serial output over USB (115200 baud) provides detailed sensor data,\n\n\nincluding ambient, directional, difference values, and GPIO13 state, for monitoring and\n\n\ncalibration.\n\n\n  - ​ **Power Management** : Powered via ESP32 USB Type-C (5V) or VIN pin, with internal\n\n\nregulation to 3.3V for sensors and LEDs, ensuring stable operation.\n\n## **Specifications**\n\n### **General**\n\n\n  - ​ **Sensor Type** : Dual light intensity sensor\n\n\n  - ​ **Microcontroller** : Expressif ESP32 DevKitC (Dual-core, 240 MHz)\n\n\n  - ​ **Dimensions** : ~50mm x 25mm (ESP32) + 20mm x 15mm per sensor module\n\n\n  - ​ **Weight** : ~25g (including LEDs)\n\n\n  - ​ **Operating Voltage** : 3.3V or 5V DC\n\n\n  - ​ **Power Consumption** : <500mW (typical)\n\n\n3\n\n\nOULTX125R Datasheet\n\n### **Sensors**\n\n---\n\nExcerpt 3: OULTX125R Datasheet\n\n# **OULTX125R Integration Datasheet**\n\n## **Overview**\n\n\nThe OULTX125R is an advanced dual-light sensor system designed for precise measurement of\n\n\nambient and directional light levels in IoT applications. It delivers reliable data for smart home\n\n\nautomation, energy management, and security systems. The sensor provides a standardized\n\n\ndigital output for seamless integration with external controllers like Raspberry Pi, complemented\n\n\nby three LED indicators for real-time operational feedback. Its compact design, low power\n\n\nconsumption, and versatile connectivity options make it an ideal choice for developers\n\n\nenhancing environmental monitoring in diverse projects.\n\n## **System Architecture**\n\n### **Pin Connections (Mermaid Diagram)**\n\n\n1\n\n\nOULTX125R Datasheet\n\n---\n\nExcerpt 4: The OULTX125R employs a modular architecture to ensure robust performance and\n\n\nstraightforward integration:\n\n\n  - ​ **Core Microcontroller** : The ESP32 DevKitC (dual-core, 240 MHz) processes analog\n\n\nlight signals, calculates the difference between ambient and directional light, and drives\n\n\noutputs for integration and feedback.\n\n\n  - ​ **Sensors** : Two light-sensitive modules detect:\n\n\n      - ​ **Ambient Light** : Measures overall environmental light (e.g., room lighting from\n\n\nlamps or natural sources).\n\n\n      - ​ **Directional Light** : Captures light from a specific direction (e.g., sunlight through\n\n\na window).\n\n\n  - ​ **Indicators** : Three LEDs provide visual status:\n\n\n      - ​ **Red LED** : Illuminates when ambient light is low (<2000 ADC value).\n\n\n      - ​ **Blue LED** : Illuminates when directional light is low (<2000 ADC value).\n\n\n      - ​ **Green LED** : Illuminates when the light difference exceeds 100 ADC units,\n\n\nsignaling a significant environmental change.\n\n---\n\nExcerpt 5: - ​ **Purpose** : Signal for external controllers (e.g., Raspberry Pi GPIO)\n\n\n  - ​ **Debug Output** :\n\n\n     - ​ Serial over USB (115200 baud)\n\n\n     - ​ Format: Ambient: <value> | Directional: <value> | Diff:\n\n\n<value> | Output Pin 13: <HIGH/LOW>\n\n\n  - ​ **Indicator Output** :\n\n\n4\n\n\nOULTX125R Datasheet\n\n\n     - ​ Red LED: On when ambient < 2000\n\n\n     - ​ Blue LED: On when directional < 2000\n\n\n     - ​ Green LED: On when difference > 100\n\n### **Performance**\n\n\n  - ​ **Resolution** : 12-bit ADC (0-4095)\n\n\n  - ​ **Accuracy** : ±5% (post-calibration)\n\n\n  - ​ **Sampling Rate** : 1 Hz (configurable)\n\n\n  - ​ **Latency** : <50ms\n\n### **Connectivity**\n\n\n  - ​ **Integration** : GPIO13 digital output for controllers (e.g., Raspberry Pi, Arduino)\n\n\n  - ​ **Debug** : USB Type-C for Serial monitoring (accessible via Raspberry Pi)\n\n\n  - ​ **Power** : USB Type-C (5V) or 5V/3.3V external supply\n\n### **Environmental**\n\n\n  - ​ **Operating Temperature** : -20°C to 60°C",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.88,
+        "context_recall": 0.95
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 5,
+        "final_chunk_count": 5,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "system"
+        ],
+        "processing_time": 6.555,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-24T17:49:44.852400",
+      "question": "Please help me implement with raspberry 4 step-by-step",
+      "answer": "Certainly! Below is a step-by-step guide to implement the project using a Raspberry Pi 4, based on the excerpts provided.\n\n### Step 1: Gather Required Components\n- Raspberry Pi 4\n- ESP32 Development Board\n- Sensors (light sensors)\n- LEDs (Red, Blue, Green)\n- Resistors (220Ω for LEDs)\n- USB Type-C cable\n- Jumper wires\n- Breadboard (optional)\n\n### Step 2: Connect the Hardware\n1. **Connect the Sensors**:\n   - Wire the sensors to the Raspberry Pi GPIO pins as per the provided diagram (not included here).\n   - Ensure the sensor outputs are connected to the correct ADC inputs.\n\n2. **Connect the LEDs**:\n   - Connect the anode (long leg) of each LED to the respective GPIO pins:\n     - Red LED to GPIO27\n     - Blue LED to GPIO14\n     - Green LED to GPIO12\n   - Connect the cathode (short leg) of each LED to a 220Ω resistor, and then to GND.\n\n3. **Connect GPIO13**:\n   - Connect GPIO13 from the ESP32 to GPIO17 (BCM) on the Raspberry Pi.\n\n4. **Power the ESP32**:\n   - Connect the ESP32 USB Type-C to the Raspberry Pi USB-A port for power.\n\n### Step 3: Install Required Software\n1. **Update Raspberry Pi**:\n   ```bash\n   sudo apt update\n   sudo apt upgrade\n   ```\n\n2. **Install Python Libraries**:\n   - Install RPi.GPIO and pyserial:\n   ```bash\n   sudo apt install python3-rpi.gpio\n   sudo apt install python3-pip\n   pip3 install pyserial\n   ```\n\n### Step 4: Calibrate the Sensors\n1. **Perform Calibration**:\n   - Ensure you perform calibration in a controlled setting to avoid external light interference.\n   - Adjust sensor sensitivity to ensure readings are within the expected range (avoid saturation at 4095).\n\n### Step 5: Write Python Scripts\n1. **GPIO Reading Script**:\n   Create a Python script to read GPIO output from the sensor:\n   ```python\n   import RPi.GPIO as GPIO\n   import time\n\n   GPIO.setmode(GPIO.BCM)\n   INPUT_PIN = 17\n   GPIO.setup(INPUT_PIN, GPIO.IN)\n\n   while True:\n       print(\"Sensor:\", \"HIGH\" if GPIO.input(INPUT_PIN) else \"LOW\")\n       time.sleep(1)\n   ```\n   Save this as `gpio_read.py`.\n\n2. **Serial Reading Script**:\n   Create another Python script to read serial data from the ESP32:\n   ```python\n   import serial\n   import time\n\n   ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)\n   time.sleep(2)  # Wait for connection\n\n   while True:\n       if ser.in_waiting > 0:\n           line = ser.readline().decode('utf-8').rstrip()\n           print(line)\n           time.sleep(0.1)\n   ```\n   Save this as `serial_read.py`.\n\n### Step 6: Run the Scripts\n1. **Run GPIO Reading Script**:\n   Open a terminal and run:\n   ```bash\n   sudo python3 gpio_read.py\n   ```\n\n2. **Run Serial Reading Script**:\n   Open another terminal and run:\n   ```bash\n   python3 serial_read.py\n   ```\n\n### Step 7: Monitor and Debug\n- Use the output from both scripts to verify sensor readings, LED states, and GPIO13 output.\n- Adjust firmware thresholds for specific project needs as necessary.\n\n### Step 8: Troubleshooting\n- If you encounter issues:\n  - Ensure all connections are secure.\n  - Check the power supply to the ESP32.\n  - Verify the correct serial port is being used in the script.\n  - Adjust sensor sensitivity if readings are saturated.\n\n### Step 9: Final Adjustments\n- Modify the firmware thresholds in the ESP32 code as needed for your specific application.\n- Test the system in different lighting conditions to ensure it responds correctly.\n\nBy following these steps, you should be able to successfully implement the project using a Raspberry Pi 4. If you have any specific questions or need further assistance, feel free to ask!",
+      "context": "Excerpt 1: - ​ Perform calibration in a controlled setting to avoid external light interference.\n\n\n      - ​ Regularly verify calibration to maintain accuracy over time.\n\n### **Integration Steps**\n\n\n1.​ **Connect Sensor** :\n\n\n     - ​ Wire sensors, LEDs, and GPIO13 as shown in the diagram.\n\n\n      - ​ Power via USB Type-C (e.g., from Raspberry Pi USB-A port or 5V adapter).\n\n\n      - ​ Optionally connect GPIO13 to Pi GPIO (e.g., BCM 17) for digital signal.\n\n\n2.​ **Calibrate Sensors** :\n\n\n      - ​ Adjust sensor sensitivity to ensure readings are within the expected range (avoid\n\n\n4095 saturation).\n\n\n3.​ **Read GPIO Output** :\n\n\n     - ​ Connect GPIO13 to Pi GPIO (e.g., BCM 17).\n\n\nUse Python for Raspberry Pi:​\n\n\nimport RPi.GPIO as GPIO\n\n\nimport time\n\n\nGPIO.setmode(GPIO.BCM)\n\n\nINPUT_PIN = 17\n\n\nGPIO.setup(INPUT_PIN, GPIO.IN)\n\n\nwhile True:\n\n\nprint(\"Sensor:\", \"HIGH\" if GPIO.input(INPUT_PIN) else \"LOW\")\n\n\ntime.sleep(1)\n\n\n     - ​\n\n\n     - ​ Run with sudo python script.py .\n\n---\n\nExcerpt 2: 4.​ **Debug via USB on Raspberry Pi** :\n\n\n     - ​ Connect ESP32 USB Type-C to Pi USB-A port.\n\n\n      - ​ Identify device: Run ls /dev/tty* (e.g., /dev/ttyUSB0 or /dev/ttyACM0 ).\n\n\n8\n\n\nOULTX125R Datasheet\n\n\nUse Python to read Serial:​\n\n\nimport serial\n\n\nimport time\n\n\nser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)\n\n\ntime.sleep(2) # Wait for connection\n\n\nwhile True:\n\n\nif ser.in_waiting > 0:\n\n\nline = ser.readline().decode('utf-8').rstrip()\n\n\nprint(line)\n\n\ntime.sleep(0.1)\n\n\n     - ​\n\n\n      - ​ Install pyserial : pip install pyserial .\n\n\n     - ​ Run with python script.py .\n\n\n     - ​ Expected output: Ambient: <value> | Directional: <value> | Diff:\n\n\n<value> | Output Pin 13: <HIGH/LOW> .\n\n\n5.​ **Monitor and Debug** :\n\n\n      - ​ Use Serial data to verify sensor readings, LED states, and GPIO13 output.\n\n\n      - ​ Adjust firmware thresholds for specific project needs (e.g., modify diff > 100\n\n\nor light < 2000).\n\n### **Software**\n\n---\n\nExcerpt 3: - ​ **Firmware** : Preloaded C/C++ for ESP32 (Arduino-compatible)\n\n\n  - ​ **Features** : Light difference detection, LED feedback, GPIO13 digital output, Serial debug\n\n\noutput\n\n\n  - ​ **Customization** : Modify thresholds (e.g., diff > 100, light < 2000) or sampling rate in\n\n\nfirmware to suit specific applications\n\n\n  - ​ **Source Code Availability** : Contact supplier for access to firmware source for advanced\n\n\ncustomization\n\n## **Common Troubleshooting**\n\n\n9\n\n\nOULTX125R Datasheet\n\n\n  - ​ **No Serial Output on Raspberry Pi** :\n\n\n     - ​ Ensure ESP32 USB Type-C is connected to Pi USB-A; check ls /dev/tty* for\n\n\ndevice (e.g., /dev/ttyUSB0 ).\n\n\n      - ​ Verify Python script uses correct port and 115200 baud.\n\n\n      - ​ Confirm ESP32 is powered (USB LED on, typically visible on DevKitC).\n\n\n  - ​ **Sensor Readings Saturated (4095)** :\n\n\n      - ​ Adjust sensor sensitivity controls to reduce output in bright light.\n\n---\n\nExcerpt 4: - ​ Test in dim light (expect 100-1000); bright light (2000-3500).\n\n\n      - ​ Ensure sensor outputs are connected to correct ADC inputs.\n\n\n  - ​ **LEDs Not Lighting** :\n\n\n     - ​ Make sure LEDs are on: Check red (GPIO27), blue (GPIO14), green (GPIO12).\n\n\n      - ​ Verify anode to GPIO, cathode to 220Ω resistor to GND.\n\n\n      - ​ Ensure light levels meet thresholds (e.g., <2000 for red/blue LEDs).\n\n\n      - ​ Test LEDs independently by setting GPIO HIGH in firmware.\n\n\n  - ​ **No GPIO13 Output** :\n\n\n     - ​ Check connection to Pi GPIO (e.g., BCM 17) and shared GND.\n\n\n      - ​ Verify light difference > 100 (vary light on one sensor, e.g., cover or illuminate).\n\n\n     - ​ Measure GPIO13 with a multimeter (3.3V HIGH, 0V LOW).\n\n\n  - ​ **Unstable Readings** :\n\n\n     - ​ Secure all wiring (VCC to 3V3, GND to GND).\n\n\n      - ​ Minimize electrical noise (use short wires, avoid proximity to power sources).\n\n---\n\nExcerpt 5: signaling the controller to activate grow lights.\n\n\n      - ​ **Benefits** : Optimizes plant growth conditions while minimizing power\n\n\nconsumption.\n\n\n4.​ **Office Environment Management** :\n\n\n      - ​ **Setup** : Place in an office with large windows and adjustable lighting.\n\n\n      - ​ **Operation** : High directional light from windows sets GPIO13 HIGH, prompting\n\n\nthe controller to dim overhead lights. Low ambient light in meeting rooms triggers\n\n\nred LED and brighter lights. Significant differences (e.g., during presentations)\n\n\nadjust lighting dynamically.\n\n\n      - ​ **Benefits** : Improves occupant comfort and reduces energy costs in dynamic\n\n\nlighting environments.\n\n### **Calibration Procedure**\n\n\nAccurate calibration is critical for reliable light measurements and preventing output saturation:\n\n\n1.​ **Initial Setup** :\n\n\n     - ​ Connect sensors, LEDs, and power as per the diagram.\n\n\n     - ​ Power via USB Type-C for ease of debugging.\n\n\n2.​ **Sensitivity Adjustment** :",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.88,
+        "context_recall": 0.95
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 5,
+        "final_chunk_count": 5,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "system"
+        ],
+        "processing_time": 15.077,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-24T17:50:24.927410",
+      "question": "what did i ask before ?",
+      "answer": "I'm sorry, but I don't have access to previous interactions or questions you've asked. Could you please repeat your question or provide more context?",
+      "context": "Excerpt 1: - ​ **Firmware** : Preloaded C/C++ for ESP32 (Arduino-compatible)\n\n\n  - ​ **Features** : Light difference detection, LED feedback, GPIO13 digital output, Serial debug\n\n\noutput\n\n\n  - ​ **Customization** : Modify thresholds (e.g., diff > 100, light < 2000) or sampling rate in\n\n\nfirmware to suit specific applications\n\n\n  - ​ **Source Code Availability** : Contact supplier for access to firmware source for advanced\n\n\ncustomization\n\n## **Common Troubleshooting**\n\n\n9\n\n\nOULTX125R Datasheet\n\n\n  - ​ **No Serial Output on Raspberry Pi** :\n\n\n     - ​ Ensure ESP32 USB Type-C is connected to Pi USB-A; check ls /dev/tty* for\n\n\ndevice (e.g., /dev/ttyUSB0 ).\n\n\n      - ​ Verify Python script uses correct port and 115200 baud.\n\n\n      - ​ Confirm ESP32 is powered (USB LED on, typically visible on DevKitC).\n\n\n  - ​ **Sensor Readings Saturated (4095)** :\n\n\n      - ​ Adjust sensor sensitivity controls to reduce output in bright light.\n\n---\n\nExcerpt 2: - ​ Calibrate sensors in stable lighting conditions to ensure consistent output.\n\n## **Safety and Compliance**\n\n\n  - ​ **Certifications** : CE, FCC (ESP32 module)\n\n\n  - ​ **RoHS** : Compliant\n\n\n  - ​ **Safety Notes** :\n\n\n      - ​ Ensure proper insulation of all connections to prevent short circuits.\n\n\n      - ​ Use only specified voltage (5V via USB or VIN) to avoid damage.\n\n\n      - ​ Avoid exposure to moisture or extreme temperatures beyond specified range.\n\n## **Ordering Information**\n\n\n10\n\n\nOULTX125R Datasheet\n\n\n  - ​ **Part Number** : OULTX125R\n\n\n  - ​ **Kit Contents** : ESP32 DevKitC, 2x light sensor modules, 3x LEDs (red, blue, green), 3x\n\n\n220Ω resistors, jumper wires\n\n\n  - ​ **Contact** : Supplier details available for bulk orders or custom configurations\n\n\n11\n\n---\n\nExcerpt 3: |Connection<br>Point|Function|Description|\n|---|---|---|\n|3V3|Power Supply|Provides 3.3V to sensor modules and<br>LEDs, regulated from 5V USB input.|\n|GND|Ground|Common ground for all components and<br>external controllers (e.g., Raspberry Pi).|\n|VP ADC|Ambient Sensor Input|Analog input for ambient light<br>measurement.|\n|VN ADC|Directional Sensor Input|Analog input for directional light<br>measurement.|\n|GPIO27|Red LED Control|Drives red LED to indicate low ambient light<br>(<2000 ADC).|\n|GPIO14|Blue LED Control|Drives blue LED to indicate low directional<br>light (<2000 ADC).|\n|GPIO12|Green LED Control|Drives green LED to indicate significant<br>light difference (>100 ADC).|\n|GPIO13|Digital Output|Outputs 3.3V HIGH when light difference ><br>100, LOW otherwise, for external use.|\n|USB Type-C|Power and Debug|Supplies 5V power and Serial debug data<br>(115200 baud) to Raspberry Pi or host.|\n\n\n2\n\n\nOULTX125R Datasheet\n\n---\n\nExcerpt 4: 4.​ **Debug via USB on Raspberry Pi** :\n\n\n     - ​ Connect ESP32 USB Type-C to Pi USB-A port.\n\n\n      - ​ Identify device: Run ls /dev/tty* (e.g., /dev/ttyUSB0 or /dev/ttyACM0 ).\n\n\n8\n\n\nOULTX125R Datasheet\n\n\nUse Python to read Serial:​\n\n\nimport serial\n\n\nimport time\n\n\nser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)\n\n\ntime.sleep(2) # Wait for connection\n\n\nwhile True:\n\n\nif ser.in_waiting > 0:\n\n\nline = ser.readline().decode('utf-8').rstrip()\n\n\nprint(line)\n\n\ntime.sleep(0.1)\n\n\n     - ​\n\n\n      - ​ Install pyserial : pip install pyserial .\n\n\n     - ​ Run with python script.py .\n\n\n     - ​ Expected output: Ambient: <value> | Directional: <value> | Diff:\n\n\n<value> | Output Pin 13: <HIGH/LOW> .\n\n\n5.​ **Monitor and Debug** :\n\n\n      - ​ Use Serial data to verify sensor readings, LED states, and GPIO13 output.\n\n\n      - ​ Adjust firmware thresholds for specific project needs (e.g., modify diff > 100\n\n\nor light < 2000).\n\n### **Software**\n\n---\n\nExcerpt 5: - ​ **Type** : Light-sensitive modules with adjustable sensitivity\n\n\n  - ​ **Sensing Range** : 0-100,000 lux (after calibration)\n\n\n  - ​ **Output** : Analog (0-3.3V, mapped to 0-4095 via 12-bit ADC)\n\n\n  - ​ **Response Time** : <10ms\n\n\n  - ​ **Calibration** : Adjustable via onboard controls for optimal range\n\n### **Indicators**\n\n\n  - ​ **Red LED** : Indicates low ambient light (<2000 ADC value)\n\n\n  - ​ **Blue LED** : Indicates low directional light (<2000 ADC value)\n\n\n  - ​ **Green LED** : Indicates significant light difference (>100 ADC value)\n\n### **Input**\n\n\n  - ​ **Light Input** :\n\n\n     - ​ Sensor #1: Ambient light (connected to ESP32 ADC)\n\n\n      - ​ Sensor #2: Directional light (connected to ESP32 ADC)\n\n\n  - ​ **Power Input** : 5V DC via ESP32 USB Type-C or VIN pin\n\n### **Output**\n\n\n  - ​ **Primary Output** :\n\n\n      - ​ **Pin** : GPIO13 (digital, 3.3V HIGH/0V LOW)\n\n\n      - ​ **Condition** : HIGH when light difference (ambient vs. directional) > 100; LOW\n\n\notherwise",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 0.3,
+        "context_precision": 0.88,
+        "context_recall": 0.95
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 5,
+        "final_chunk_count": 5,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "system"
+        ],
+        "processing_time": 2.578,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-24T17:50:59.884295",
+      "question": "Please help me implement the OULTX125R to raspberry pi 4 ",
+      "answer": "To implement the OULTX125R sensor with a Raspberry Pi 4, follow these steps:\n\n### Hardware Requirements:\n1. **Raspberry Pi 4** (with Raspbian OS installed)\n2. **OULTX125R Sensor**\n3. **USB Type-C cable** (to connect the OULTX125R to the Raspberry Pi)\n4. **Power supply** for the Raspberry Pi\n5. **Optional**: USB power bank for portable setups\n\n### Step-by-Step Implementation:\n\n#### 1. **Connect the OULTX125R to Raspberry Pi:**\n   - Use the USB Type-C cable to connect the OULTX125R to one of the USB-A ports on the Raspberry Pi 4.\n\n#### 2. **Identify the Serial Port:**\n   - Open a terminal on your Raspberry Pi.\n   - Run the following command to identify the connected device:\n     ```bash\n     ls /dev/tty*\n     ```\n   - Look for entries like `/dev/ttyUSB0` or `/dev/ttyACM0`. This is the port you will use in your Python script.\n\n#### 3. **Install Required Python Library:**\n   - Ensure you have Python and pip installed. If not, you can install them using:\n     ```bash\n     sudo apt update\n     sudo apt install python3 python3-pip\n     ```\n   - Install the `pyserial` library:\n     ```bash\n     pip3 install pyserial\n     ```\n\n#### 4. **Create the Python Script:**\n   - Open a text editor (like nano) and create a new Python script:\n     ```bash\n     nano sensor_read.py\n     ```\n   - Copy and paste the following code into the script, replacing `/dev/ttyUSB0` with the correct port identified earlier:\n     ```python\n     import serial\n     import time\n\n     # Replace '/dev/ttyUSB0' with your identified port\n     ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)\n     time.sleep(2)  # Wait for connection\n\n     while True:\n         if ser.in_waiting > 0:\n             line = ser.readline().decode('utf-8').rstrip()\n             print(line)\n             time.sleep(0.1)\n     ```\n   - Save the file and exit the editor (in nano, press `CTRL + X`, then `Y`, and `Enter`).\n\n#### 5. **Run the Python Script:**\n   - In the terminal, run the script using:\n     ```bash\n     python3 sensor_read.py\n     ```\n   - You should see output similar to:\n     ```\n     Ambient: <value> | Directional: <value> | Diff: <value> | Output Pin 13: <HIGH/LOW>\n     ```\n\n#### 6. **Monitor and Debug:**\n   - Use the output from the script to verify sensor readings and LED states.\n   - Adjust firmware thresholds if necessary (e.g., modify `diff > 100` or `light < 2000`) based on your project needs.\n\n### Additional Notes:\n- Ensure that the ESP32 is powered (the USB LED should be on).\n- If you encounter issues with no serial output, double-check the connections and ensure the correct port and baud rate are used.\n- For advanced customization, you may contact the supplier for access to the firmware source code.\n\nBy following these steps, you should be able to successfully implement the OULTX125R sensor with your Raspberry Pi 4.",
+      "context": "Excerpt 1: 4.​ **Debug via USB on Raspberry Pi** :\n\n\n     - ​ Connect ESP32 USB Type-C to Pi USB-A port.\n\n\n      - ​ Identify device: Run ls /dev/tty* (e.g., /dev/ttyUSB0 or /dev/ttyACM0 ).\n\n\n8\n\n\nOULTX125R Datasheet\n\n\nUse Python to read Serial:​\n\n\nimport serial\n\n\nimport time\n\n\nser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)\n\n\ntime.sleep(2) # Wait for connection\n\n\nwhile True:\n\n\nif ser.in_waiting > 0:\n\n\nline = ser.readline().decode('utf-8').rstrip()\n\n\nprint(line)\n\n\ntime.sleep(0.1)\n\n\n     - ​\n\n\n      - ​ Install pyserial : pip install pyserial .\n\n\n     - ​ Run with python script.py .\n\n\n     - ​ Expected output: Ambient: <value> | Directional: <value> | Diff:\n\n\n<value> | Output Pin 13: <HIGH/LOW> .\n\n\n5.​ **Monitor and Debug** :\n\n\n      - ​ Use Serial data to verify sensor readings, LED states, and GPIO13 output.\n\n\n      - ​ Adjust firmware thresholds for specific project needs (e.g., modify diff > 100\n\n\nor light < 2000).\n\n### **Software**\n\n---\n\nExcerpt 2: - ​ **Firmware** : Preloaded C/C++ for ESP32 (Arduino-compatible)\n\n\n  - ​ **Features** : Light difference detection, LED feedback, GPIO13 digital output, Serial debug\n\n\noutput\n\n\n  - ​ **Customization** : Modify thresholds (e.g., diff > 100, light < 2000) or sampling rate in\n\n\nfirmware to suit specific applications\n\n\n  - ​ **Source Code Availability** : Contact supplier for access to firmware source for advanced\n\n\ncustomization\n\n## **Common Troubleshooting**\n\n\n9\n\n\nOULTX125R Datasheet\n\n\n  - ​ **No Serial Output on Raspberry Pi** :\n\n\n     - ​ Ensure ESP32 USB Type-C is connected to Pi USB-A; check ls /dev/tty* for\n\n\ndevice (e.g., /dev/ttyUSB0 ).\n\n\n      - ​ Verify Python script uses correct port and 115200 baud.\n\n\n      - ​ Confirm ESP32 is powered (USB LED on, typically visible on DevKitC).\n\n\n  - ​ **Sensor Readings Saturated (4095)** :\n\n\n      - ​ Adjust sensor sensitivity controls to reduce output in bright light.\n\n---\n\nExcerpt 3: OULTX125R Datasheet\n\n# **OULTX125R Integration Datasheet**\n\n## **Overview**\n\n\nThe OULTX125R is an advanced dual-light sensor system designed for precise measurement of\n\n\nambient and directional light levels in IoT applications. It delivers reliable data for smart home\n\n\nautomation, energy management, and security systems. The sensor provides a standardized\n\n\ndigital output for seamless integration with external controllers like Raspberry Pi, complemented\n\n\nby three LED indicators for real-time operational feedback. Its compact design, low power\n\n\nconsumption, and versatile connectivity options make it an ideal choice for developers\n\n\nenhancing environmental monitoring in diverse projects.\n\n## **System Architecture**\n\n### **Pin Connections (Mermaid Diagram)**\n\n\n1\n\n\nOULTX125R Datasheet\n\n---\n\nExcerpt 4: |Connection<br>Point|Function|Description|\n|---|---|---|\n|3V3|Power Supply|Provides 3.3V to sensor modules and<br>LEDs, regulated from 5V USB input.|\n|GND|Ground|Common ground for all components and<br>external controllers (e.g., Raspberry Pi).|\n|VP ADC|Ambient Sensor Input|Analog input for ambient light<br>measurement.|\n|VN ADC|Directional Sensor Input|Analog input for directional light<br>measurement.|\n|GPIO27|Red LED Control|Drives red LED to indicate low ambient light<br>(<2000 ADC).|\n|GPIO14|Blue LED Control|Drives blue LED to indicate low directional<br>light (<2000 ADC).|\n|GPIO12|Green LED Control|Drives green LED to indicate significant<br>light difference (>100 ADC).|\n|GPIO13|Digital Output|Outputs 3.3V HIGH when light difference ><br>100, LOW otherwise, for external use.|\n|USB Type-C|Power and Debug|Supplies 5V power and Serial debug data<br>(115200 baud) to Raspberry Pi or host.|\n\n\n2\n\n\nOULTX125R Datasheet\n\n---\n\nExcerpt 5: ensure reliable power delivery and Serial communication.\n\n\n     - ​ For portable or standalone setups, a 5V USB power bank can be used,\n\n\nmaintaining compatibility with the USB Type-C interface.\n\n## **Integration Guide**\n\n### **Application Scenarios**\n\n\n1.​ **Smart Home Lighting Control** :\n\n\n      - ​ **Setup** : Position the OULTX125R near a window in a 15x15 ft living room. Sensor\n\n\n#1 measures room-wide light (ambient), while Sensor #2 targets window light\n\n\n(directional).\n\n\n      - ​ **Operation** :\n\n\n         - ​ Morning: High directional light (e.g., sunrise, ADC 3500) compared to\n\n\nlower ambient (1500) sets GPIO13 HIGH, green LED on. The controller\n\n\nopens motorized blinds and dims smart lights to leverage natural light.\n\n\n         - ​ Midday: Balanced light levels (difference < 100) set GPIO13 LOW,\n\n\nminimizing adjustments for energy efficiency.\n\n\n         - ​ Evening: Low directional light (500) with moderate ambient (2000) sets",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.88,
+        "context_recall": 0.95
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 5,
+        "final_chunk_count": 5,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "system"
+        ],
+        "processing_time": 10.883,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    }
+  ],
+  "ragas_summary": {
+    "total_questions": 7,
+    "avg_faithfulness": 0.0,
+    "avg_answer_relevancy": 0.0,
+    "avg_context_precision": 0.0,
+    "avg_context_recall": 0.0
+  }
+}

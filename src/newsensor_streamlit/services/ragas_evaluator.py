@@ -18,29 +18,52 @@ class RagasEvaluator:
         self._embeddings = None
         
     def _get_evaluator_llm(self):
-        """Lazy load the evaluator LLM."""
+        """Lazy load the evaluator LLM with provider-specific configuration."""
         if self._evaluator_llm is None:
             try:
                 from langchain_openai import ChatOpenAI
-                self._evaluator_llm = ChatOpenAI(
-                    model=self.evaluator_model,
-                    temperature=0.0,
-                    api_key=settings.openai_api_key
-                )
-                logger.info(f"Initialized RAGAS evaluator with {self.evaluator_model}")
+                
+                if settings.rag_provider_enum.value == "openai":
+                    self._evaluator_llm = ChatOpenAI(
+                        model=self.evaluator_model,
+                        temperature=0.0,
+                        api_key=settings.openai_api_key
+                    )
+                else:  # openrouter
+                    self._evaluator_llm = ChatOpenAI(
+                        model=self.evaluator_model,
+                        temperature=0.0,
+                        api_key=settings.openrouter_api_key,
+                        base_url="https://openrouter.ai/api/v1"
+                    )
+                
+                logger.info(f"Initialized RAGAS evaluator with {self.evaluator_model} (provider: {settings.rag_provider_enum.value})")
             except Exception as e:
                 logger.error(f"Failed to initialize RAGAS evaluator: {e}")
                 raise
         return self._evaluator_llm
     
     def _get_embeddings(self):
-        """Lazy load embeddings for RAGAS."""
+        """Lazy load embeddings for RAGAS with provider-specific configuration."""
         if self._embeddings is None:
             try:
                 from langchain_openai import OpenAIEmbeddings
-                self._embeddings = OpenAIEmbeddings(
-                    api_key=settings.openai_api_key
-                )
+                
+                if settings.rag_provider_enum.value == "openai":
+                    self._embeddings = OpenAIEmbeddings(
+                        api_key=settings.openai_api_key
+                    )
+                else:  # openrouter - Note: OpenRouter may not support embeddings API
+                    # For now, fallback to OpenAI embeddings even with OpenRouter provider
+                    # This is because OpenRouter might not have embeddings endpoint
+                    if settings.openai_api_key:
+                        logger.warning("Using OpenAI embeddings as fallback for RAGAS (OpenRouter may not support embeddings)")
+                        self._embeddings = OpenAIEmbeddings(
+                            api_key=settings.openai_api_key
+                        )
+                    else:
+                        raise ValueError("OpenAI API key required for embeddings when using OpenRouter")
+                
                 logger.info("Initialized RAGAS embeddings")
             except Exception as e:
                 logger.error(f"Failed to initialize RAGAS embeddings: {e}")
@@ -54,10 +77,19 @@ class RagasEvaluator:
             import datasets
             from langchain_openai import ChatOpenAI, OpenAIEmbeddings
             
-            # Check if OpenAI API key is configured
-            if not settings.openai_api_key:
-                logger.warning("OpenAI API key not configured for RAGAS evaluation")
-                return False
+            # Check if the appropriate API key is configured based on provider
+            if settings.rag_provider_enum.value == "openai":
+                if not settings.openai_api_key:
+                    logger.warning("OpenAI API key not configured for RAGAS evaluation")
+                    return False
+            else:  # openrouter
+                if not settings.openrouter_api_key:
+                    logger.warning("OpenRouter API key not configured for RAGAS evaluation")
+                    return False
+                # Also need OpenAI key for embeddings fallback
+                if not settings.openai_api_key:
+                    logger.warning("OpenAI API key required for embeddings when using OpenRouter")
+                    return False
                 
             return True
             

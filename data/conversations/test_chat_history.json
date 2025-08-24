@@ -1,0 +1,32 @@
+[
+  {
+    "type": "human",
+    "content": "What is the operating voltage of OULTX125R?",
+    "timestamp": ""
+  },
+  {
+    "type": "ai",
+    "content": "Tegangan operasi dari sensor OULTX125R adalah 12-24V DC. Hal ini dapat ditemukan dalam konteks yang diberikan.",
+    "timestamp": ""
+  },
+  {
+    "type": "human",
+    "content": "What about the accuracy of that sensor?",
+    "timestamp": ""
+  },
+  {
+    "type": "ai",
+    "content": "Akurasi dari sensor OULTX125R adalah ±0.5°C. Informasi ini juga terdapat dalam konteks yang diberikan.",
+    "timestamp": ""
+  },
+  {
+    "type": "human",
+    "content": "Can I use it with 15V supply?",
+    "timestamp": ""
+  },
+  {
+    "type": "ai",
+    "content": "Ya, Anda dapat menggunakan sensor OULTX125R dengan suplai 15V, karena 15V berada dalam rentang tegangan operasi yang ditentukan, yaitu 12-24V DC.",
+    "timestamp": ""
+  }
+]

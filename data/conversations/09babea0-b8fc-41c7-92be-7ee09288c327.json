@@ -1,0 +1,121 @@
+{
+  "conversation_id": "09babea0-b8fc-41c7-92be-7ee09288c327",
+  "doc_id": null,
+  "document_name": "OULTX125R - Datasheet ID.pdf (OULTX125R - unknown)",
+  "created_at": "2025-08-22T14:38:26.065249",
+  "updated_at": "2025-08-22T14:39:36.287828",
+  "messages": [
+    {
+      "timestamp": "2025-08-22T14:38:57.603643",
+      "question": "berapakah tegangan OULTX125R ?",
+      "answer": "Maaf, tetapi informasi mengenai tegangan OULTX125R tidak tersedia dalam kutipan yang diberikan. Untuk mengetahui spesifikasi lengkap termasuk tegangan, Anda mungkin perlu merujuk pada datasheet resmi atau dokumentasi produk dari produsen.",
+      "context": "Excerpt 1: OULTX125R Datasheet\n\n# OULTX125R Integration Datasheet\n\n# Overview\n\nOULTX125R adalah sistem sensor cahaya ganda canggih yang dirancang untuk pengukuran presisi tingkat cahaya ambient dan directional dalam aplikasi IoT. Sensor ini memberikan data yang andal untuk otomatisasi rumah pintar, manajemen energi, dan sistem keamanan. Perangkat ini menyediakan output digital standar untuk integrasi mudah dengan controller eksternal seperti Raspberry Pi, dilengkapi dengan tiga LED indikator untuk feedback operasional secara real-time.\n\n# OULTX1ZSR Integration Datasheet\n\n# Overview\n\n---\n\nExcerpt 2: The OULTX1ZSR is an advanced dual-light sensor system designed for precise measurement of ambient and directional light levels in IoT applications. It delivers reliable data for smart home automation, energy management, and security systems. The sensor provides a standardized digital output for seamless integration with external controllers like Raspberry Pi, complemented by three LED indicators for real-time operational feedback. Its compact design, low power consumption, and versatile connectivity options make it an ideal choice for developers enhancing environmental monitoring in diverse projects.\n\n# System Architecture\n\n# Pin Connections (Mermaid Diagram)\n\nOULTX125 Smart Light Sensor\n\nOULTX125 Single Column Datasheet\n\nDesain yang ringkas, konsumsi daya rendah, dan opsi konektivitas yang fleksibel menjadikannya pilihan ideal bagi pengembang dalam meningkatkan monitoring lingkungan di berbagai proyek.",
+      "sources": [
+        "OULTX125R - Datasheet ID.pdf",
+        "OULTX125R - Datasheet ID.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 0.48,
+        "context_precision": 0.82,
+        "context_recall": 0.86
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 2,
+        "final_chunk_count": 2,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "OULTX125R"
+        ],
+        "processing_time": 3.315,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-22T14:39:19.151638",
+      "question": "Spesifikasi OULTX125R ",
+      "answer": "Berikut adalah spesifikasi OULTX125R berdasarkan informasi yang tersedia:\n\n### OULTX125R Spesifikasi\n\n- **Tipe Sensor**: Sensor cahaya ganda\n- **Fungsi**: Pengukuran presisi tingkat cahaya ambient dan directional\n- **Aplikasi**: IoT, otomatisasi rumah pintar, manajemen energi, sistem keamanan\n- **Output**: Digital standar untuk integrasi dengan controller eksternal (misalnya Raspberry Pi)\n- **Indikator**: Tiga LED untuk feedback operasional secara real-time\n- **Desain**: Kompak\n- **Konsumsi Daya**: Rendah\n- **Opsi Konektivitas**: Fleksibel\n\nSensor ini dirancang untuk memberikan data yang andal dan dapat digunakan dalam berbagai proyek pemantauan lingkungan.",
+      "context": "Excerpt 1: OULTX125R Datasheet\n\n# OULTX125R Integration Datasheet\n\n# Overview\n\nOULTX125R adalah sistem sensor cahaya ganda canggih yang dirancang untuk pengukuran presisi tingkat cahaya ambient dan directional dalam aplikasi IoT. Sensor ini memberikan data yang andal untuk otomatisasi rumah pintar, manajemen energi, dan sistem keamanan. Perangkat ini menyediakan output digital standar untuk integrasi mudah dengan controller eksternal seperti Raspberry Pi, dilengkapi dengan tiga LED indikator untuk feedback operasional secara real-time.\n\n# OULTX1ZSR Integration Datasheet\n\n# Overview\n\n---\n\nExcerpt 2: The OULTX1ZSR is an advanced dual-light sensor system designed for precise measurement of ambient and directional light levels in IoT applications. It delivers reliable data for smart home automation, energy management, and security systems. The sensor provides a standardized digital output for seamless integration with external controllers like Raspberry Pi, complemented by three LED indicators for real-time operational feedback. Its compact design, low power consumption, and versatile connectivity options make it an ideal choice for developers enhancing environmental monitoring in diverse projects.\n\n# System Architecture\n\n# Pin Connections (Mermaid Diagram)\n\nOULTX125 Smart Light Sensor\n\nOULTX125 Single Column Datasheet\n\nDesain yang ringkas, konsumsi daya rendah, dan opsi konektivitas yang fleksibel menjadikannya pilihan ideal bagi pengembang dalam meningkatkan monitoring lingkungan di berbagai proyek.",
+      "sources": [
+        "OULTX125R - Datasheet ID.pdf",
+        "OULTX125R - Datasheet ID.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.82,
+        "context_recall": 0.86
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 2,
+        "final_chunk_count": 2,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "OULTX125R"
+        ],
+        "processing_time": 3.335,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    },
+    {
+      "timestamp": "2025-08-22T14:39:36.287787",
+      "question": "Apakah mikrokontroler yang dipakai ?",
+      "answer": "Dalam kedua datasheet yang disebutkan, tidak ada informasi spesifik mengenai mikrokontroler yang digunakan. Namun, disebutkan bahwa sensor OULTX125R dan OULTX1ZSR dapat diintegrasikan dengan controller eksternal seperti Raspberry Pi. Ini menunjukkan bahwa mikrokontroler yang umum digunakan dalam aplikasi ini adalah Raspberry Pi, tetapi tidak ada detail lebih lanjut tentang mikrokontroler lain yang mungkin digunakan.",
+      "context": "Excerpt 1: OULTX125R Datasheet\n\n# OULTX125R Integration Datasheet\n\n# Overview\n\nOULTX125R adalah sistem sensor cahaya ganda canggih yang dirancang untuk pengukuran presisi tingkat cahaya ambient dan directional dalam aplikasi IoT. Sensor ini memberikan data yang andal untuk otomatisasi rumah pintar, manajemen energi, dan sistem keamanan. Perangkat ini menyediakan output digital standar untuk integrasi mudah dengan controller eksternal seperti Raspberry Pi, dilengkapi dengan tiga LED indikator untuk feedback operasional secara real-time.\n\n# OULTX1ZSR Integration Datasheet\n\n# Overview\n\n---\n\nExcerpt 2: The OULTX1ZSR is an advanced dual-light sensor system designed for precise measurement of ambient and directional light levels in IoT applications. It delivers reliable data for smart home automation, energy management, and security systems. The sensor provides a standardized digital output for seamless integration with external controllers like Raspberry Pi, complemented by three LED indicators for real-time operational feedback. Its compact design, low power consumption, and versatile connectivity options make it an ideal choice for developers enhancing environmental monitoring in diverse projects.\n\n# System Architecture\n\n# Pin Connections (Mermaid Diagram)\n\nOULTX125 Smart Light Sensor\n\nOULTX125 Single Column Datasheet\n\nDesain yang ringkas, konsumsi daya rendah, dan opsi konektivitas yang fleksibel menjadikannya pilihan ideal bagi pengembang dalam meningkatkan monitoring lingkungan di berbagai proyek.",
+      "sources": [
+        "OULTX125R - Datasheet ID.pdf",
+        "OULTX125R - Datasheet ID.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 0.84,
+        "context_precision": 0.82,
+        "context_recall": 0.86
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 2,
+        "final_chunk_count": 2,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "OULTX125R"
+        ],
+        "processing_time": 3.475,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    }
+  ],
+  "ragas_summary": {
+    "total_questions": 3,
+    "avg_faithfulness": 0.0,
+    "avg_answer_relevancy": 0.0,
+    "avg_context_precision": 0.0,
+    "avg_context_recall": 0.0
+  }
+}

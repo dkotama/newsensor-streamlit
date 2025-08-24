@@ -74,25 +74,33 @@ class LlamaParseService:
                     verbose=True,
                     language="en",
                     parsing_instruction=f"""
-                    Extract key information from this sensor datasheet and format as structured text:
-                    
-                    SENSOR MODEL: [Primary sensor model number - exact as written]
-                    MANUFACTURER: [Brand/company name]
-                    ALTERNATE MODELS: [Any alternative model numbers, comma-separated]
-                    SENSOR TYPE: [Type of sensor - temperature, humidity, pressure, etc.]
-                    OPERATING TEMPERATURE: [Temperature range if specified]
-                    ACCURACY: [Measurement accuracy if specified]
-                    SUPPLY VOLTAGE: [Voltage range if specified]
-                    OUTPUT TYPE: [Output signal type if specified]
-                    FEATURES: [Key features, comma-separated]
-                    APPLICATIONS: [Typical applications, comma-separated]
-                    TOTAL PAGES: [Total number of pages in the document]
-                    SPECIFICATIONS PAGE: [Page number where specifications are found, if identifiable]
-                    FEATURES PAGE: [Page number where features section is found, if identifiable]
-                    WIRING PAGE: [Page number where wiring/installation info is found, if identifiable]
-                    
-                    Focus on extracting exact values as they appear in the document.
-                    If information is not found, write "not specified".
+                    # Verbatim Datasheet Parser Prompt
+
+                    You are a **verbatim extractor**. Your job is to copy text snippets **exactly as they appear** in the provided PDF datasheet.  
+                    Do **not** paraphrase, summarize, reformat, standardize units, correct typos, infer missing values, or merge/condense lines.  
+                    Preserve capitalization, punctuation, symbols, units, whitespace, and line breaks within each extracted value.
+
+                    When a field is not present in the document, output exactly: `not specified`.
+
+                    Return the result in this exact schema (fields must appear in this order and with these labels).  
+                    Content for any field may be multi-line if the source text is multi-line.  
+                    Include the **page number(s)** where each value was found in square brackets at the end of the field.
+
+                    ## Extraction Rules
+
+                    1. Copy the **exact** string spans from the PDF where each field is stated (e.g., model numbers, ranges, voltages, headings, bullet lists).  
+                    2. If multiple occurrences exist, concatenate them in the **original order of appearance**, separated by a single blank line. Do not deduplicate or sort.  
+                    3. For `TOTAL PAGES`, return the exact page count of the PDF file (numeric), no words added.  
+                    4. For `SPECIFICATIONS PAGE`, `FEATURES PAGE`, and `WIRING PAGE`, prefer page numbers written in the document (e.g., “p. 3”), even if they differ from the PDF’s actual page index. If the document does not label pages, return the actual PDF page index (1-based).  
+                    5. If a field cannot be located after a reasonable scan of the document, return `not specified` (no extra words).  
+                    6. Never add explanations, comments, or rationale in the output—only the schema above.
+
+                    ## Heuristics for Locating Text
+
+                    - Look for headings like **Specifications**, **Electrical Characteristics**, **Features**, **Applications**, **Wiring**, **Pinout**, **Installation**.  
+                    - For **model** and **manufacturer**, check the front page header/footer, title blocks, tables, and ordering information.  
+                    - For **page-number fields**, use the table of contents or section headers if present; otherwise use the PDF page index.  
+ 
                     """
                 )
                 

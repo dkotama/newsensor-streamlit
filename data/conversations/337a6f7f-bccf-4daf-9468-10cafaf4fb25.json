@@ -1,0 +1,15 @@
+{
+  "conversation_id": "337a6f7f-bccf-4daf-9468-10cafaf4fb25",
+  "doc_id": null,
+  "document_name": "OULTX125R - Datasheet ID.pdf (OULTX125R - unknown)",
+  "created_at": "2025-08-22T14:36:42.945095",
+  "updated_at": "2025-08-22T14:36:42.945123",
+  "messages": [],
+  "ragas_summary": {
+    "total_questions": 0,
+    "avg_faithfulness": 0.0,
+    "avg_answer_relevancy": 0.0,
+    "avg_context_precision": 0.0,
+    "avg_context_recall": 0.0
+  }
+}

@@ -486,6 +486,14 @@ class PDFParserService:
             PDFParserBackend.PYPDF2: PyPDF2Parser(settings),
         }
         
+        # Log the configured parser backend
+        try:
+            primary_backend = PDFParserBackend(self.settings.pdf_parser_backend)
+            logger.info(f"PDF parser configured: {primary_backend.value} (fallback: {[b.value for b in self.settings.pdf_parser_fallback_list]})")
+        except ValueError:
+            logger.warning(f"Invalid backend '{self.settings.pdf_parser_backend}', will use fallback")
+        
+        
     def process_pdf(self, file_path: Path) -> Dict[str, Any]:
         """Process PDF using configured backend with fallback chain."""
         logger.info(f"Processing PDF: {file_path}")

@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 
 from loguru import logger
 from newsensor_streamlit.config import settings
-from newsensor_streamlit.services.llama_parse_service import LlamaParseService
+from newsensor_streamlit.services.pdf_parser_service import PDFParserService
 
 
 class DocumentProcessor:
@@ -14,13 +14,8 @@ class DocumentProcessor:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
-        # Use LlamaParse if API key available, otherwise PyPDF fallback
-        if settings.llama_parse_api_key:
-            logger.info("Using LlamaParse for advanced PDF processing")
-            self.parser = LlamaParseService(settings.llama_parse_api_key)
-        else:
-            logger.warning("LlamaParse API key not found, using basic PDF processing")
-            self.parser = LlamaParseService("")  # Will use fallback
+        # Use the proper PDF parser service that respects configuration
+        self.parser = PDFParserService(settings)
 
     def process_pdf(self, file_path: Path) -> dict[str, Any]:
         """Process PDF using best available parser with enhanced metadata."""

@@ -11,8 +11,22 @@ class ConversationMongoDBService:
     """MongoDB service for conversation management."""
     
     def __init__(self):
-        self.mongodb = get_mongodb_client()
-        self.collection = self.mongodb.conversations
+        try:
+            self.mongodb = get_mongodb_client()
+            self.collection = self.mongodb.conversations
+            
+            # Test connection on initialization
+            connection_ok = self.mongodb.test_connection()
+            if not connection_ok:
+                print("WARNING: MongoDB connection test failed during initialization")
+                print(f"URI: {str(self.mongodb.uri)[:30]}...")
+                print(f"Database: {self.mongodb.db_name}")
+                print(f"Collection: {self.mongodb.conversations_collection_name}")
+        except Exception as e:
+            print(f"ERROR: Failed to initialize MongoDB service: {e}")
+            import traceback
+            print(f"Full traceback: {traceback.format_exc()}")
+            raise
         
     def save_conversation(self, conversation_data: Dict[str, Any]) -> bool:
         """Save conversation in the exact same format as JSON files."""
@@ -30,6 +44,14 @@ class ConversationMongoDBService:
             return result.acknowledged
         except Exception as e:
             print(f"Error saving conversation: {e}")
+            print(f"Error type: {type(e).__name__}")
+            # Log more details for debugging
+            print(f"MongoDB URI (masked): {str(self.mongodb.uri)[:30]}...")
+            print(f"Database: {self.mongodb.db_name}")
+            print(f"Collection: {self.mongodb.conversations_collection_name}")
+            print(f"Conversation ID: {conversation_data.get('conversation_id', 'unknown')}")
+            import traceback
+            print(f"Full traceback: {traceback.format_exc()}")
             return False
     
     def load_conversation(self, conversation_id: str) -> Optional[Dict[str, Any]]:

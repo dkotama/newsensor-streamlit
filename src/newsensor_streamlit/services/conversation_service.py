@@ -9,15 +9,21 @@ from typing import Any, Dict, List
 from loguru import logger
 
 from newsensor_streamlit.config import settings
+from newsensor_streamlit.services.conversation_mongodb_service import ConversationMongoDBService
 
 
 class ConversationService:
     """Service for managing conversation history and RAGAS metrics."""
-    
+
     def __init__(self) -> None:
+        # Keep conversations_dir for backward compatibility (exports, etc.)
         self.conversations_dir = Path(settings.conversations_dir)
         self.conversations_dir.mkdir(parents=True, exist_ok=True)
         
+        # Use MongoDB service for actual storage
+        self.mongodb_service = ConversationMongoDBService()
+        logger.info("ConversationService initialized with MongoDB backend")
+
     def create_conversation(self, doc_id: str, document_name: str) -> str:
         """Create a new conversation session."""
         conversation_id = str(uuid.uuid4())
@@ -38,10 +44,14 @@ class ConversationService:
             }
         }
         
-        self._save_conversation(conversation_id, conversation_data)
-        logger.info(f"Created new conversation: {conversation_id} for document: {document_name}")
-        return conversation_id
-        
+        # Save to MongoDB
+        success = self.mongodb_service.save_conversation(conversation_data)
+        if success:
+            logger.info(f"Created new conversation: {conversation_id} for document: {document_name}")
+            return conversation_id
+        else:
+            raise Exception(f"Failed to create conversation in MongoDB")
+    
     def add_message(
         self, 
         conversation_id: str, 
@@ -54,7 +64,7 @@ class ConversationService:
         retrieval_metadata: Dict[str, Any] = None
     ) -> None:
         """Add a message to the conversation with enhanced metrics and metadata."""
-        conversation = self._load_conversation(conversation_id)
+        conversation = self.mongodb_service.load_conversation(conversation_id)
         if not conversation:
             logger.error(f"Conversation {conversation_id} not found")
             return
@@ -77,8 +87,12 @@ class ConversationService:
         metrics_to_update = ragas_metrics if ragas_metrics else metrics
         self._update_ragas_summary(conversation, metrics_to_update)
         
-        self._save_conversation(conversation_id, conversation)
-        logger.info(f"Added message to conversation {conversation_id}")
+        # Save back to MongoDB
+        success = self.mongodb_service.save_conversation(conversation)
+        if success:
+            logger.info(f"Added message to conversation {conversation_id}")
+        else:
+            logger.error(f"Failed to save message to conversation {conversation_id}")
         
         # Log re-ranking usage
         if retrieval_metadata and retrieval_metadata.get("reranking_enabled"):
@@ -87,38 +101,29 @@ class ConversationService:
                 f"{retrieval_metadata.get('final_chunk_count')} chunks, "
                 f"best score: {retrieval_metadata.get('best_relevance_score', 0):.3f}"
             )
-        
+    
     def get_conversation(self, conversation_id: str) -> Dict[str, Any] | None:
         """Retrieve a conversation by ID."""
-        return self._load_conversation(conversation_id)
+        return self.mongodb_service.load_conversation(conversation_id)
         
     def list_conversations(self, doc_id: str = None) -> List[Dict[str, Any]]:
         """List all conversations, optionally filtered by document ID."""
-        conversations = []
+        conversations = self.mongodb_service.list_conversations(doc_id)
         
-        for file_path in self.conversations_dir.glob("*.json"):
-            try:
-                conversation = self._load_conversation(file_path.stem)
-                if conversation:
-                    if doc_id is None or conversation.get("doc_id") == doc_id:
-                        # Return summary info
-                        conversations.append({
-                            "conversation_id": conversation["conversation_id"],
-                            "doc_id": conversation["doc_id"],
-                            "document_name": conversation["document_name"],
-                            "created_at": conversation["created_at"],
-                            "updated_at": conversation["updated_at"],
-                            "message_count": len(conversation["messages"]),
-                            "ragas_summary": conversation["ragas_summary"]
-                        })
-            except Exception as e:
-                logger.warning(f"Error loading conversation {file_path.stem}: {e}")
-                
-        return sorted(conversations, key=lambda x: x["updated_at"], reverse=True)
+        # Add message_count for backward compatibility with UI
+        for conv in conversations:
+            if 'messages' in conv:
+                conv['message_count'] = len(conv['messages'])
+            else:
+                # For summary view, we need to load the full conversation to count messages
+                full_conv = self.mongodb_service.load_conversation(conv['conversation_id'])
+                conv['message_count'] = len(full_conv.get('messages', [])) if full_conv else 0
         
+        return sorted(conversations, key=lambda x: x.get("updated_at", ""), reverse=True)
+
     def export_conversation(self, conversation_id: str, format: str = "json") -> str:
         """Export conversation to different formats."""
-        conversation = self._load_conversation(conversation_id)
+        conversation = self.mongodb_service.load_conversation(conversation_id)
         if not conversation:
             raise ValueError(f"Conversation {conversation_id} not found")
             
@@ -141,30 +146,17 @@ class ConversationService:
             
         logger.info(f"Exported conversation to {export_path}")
         return str(export_path)
-        
+    
     def _load_conversation(self, conversation_id: str) -> Dict[str, Any] | None:
-        """Load conversation from file."""
-        file_path = self.conversations_dir / f"{conversation_id}.json"
-        if not file_path.exists():
-            return None
-            
-        try:
-            with open(file_path, "r") as f:
-                return json.load(f)
-        except Exception as e:
-            logger.error(f"Error loading conversation {conversation_id}: {e}")
-            return None
+        """Load conversation from MongoDB (kept for backward compatibility)."""
+        return self.mongodb_service.load_conversation(conversation_id)
             
     def _save_conversation(self, conversation_id: str, conversation_data: Dict[str, Any]) -> None:
-        """Save conversation to file."""
-        file_path = self.conversations_dir / f"{conversation_id}.json"
-        
-        try:
-            with open(file_path, "w") as f:
-                json.dump(conversation_data, f, indent=2, ensure_ascii=False)
-        except Exception as e:
-            logger.error(f"Error saving conversation {conversation_id}: {e}")
-            raise
+        """Save conversation to MongoDB (kept for backward compatibility)."""
+        success = self.mongodb_service.save_conversation(conversation_data)
+        if not success:
+            logger.error(f"Error saving conversation {conversation_id} to MongoDB")
+            raise Exception(f"Failed to save conversation {conversation_id} to MongoDB")
             
     def _update_ragas_summary(self, conversation: Dict[str, Any], new_metrics: Dict[str, float]) -> None:
         """Update the running RAGAS summary statistics."""

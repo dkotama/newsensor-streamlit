@@ -1,0 +1,54 @@
+{
+  "conversation_id": "f05ec746-ae01-4293-b467-4b62430f1e9a",
+  "doc_id": "collection_wide",
+  "document_name": "Collection",
+  "created_at": "2025-08-25T00:16:39.593885",
+  "updated_at": "2025-08-25T00:17:18.678836",
+  "messages": [
+    {
+      "timestamp": "2025-08-25T00:17:18.678826",
+      "question": " LED warna apa yang menyala jika cahaya ambient rendah (<2000 ADC)?  ",
+      "answer": "Menurut konteks yang diberikan, LED merah akan menyala ketika cahaya ambient rendah (<2000 ADC). Hal ini dapat ditemukan dalam Excerpt 2: \"Red LED: Illuminates when ambient light is low (<2000 ADC value).\"",
+      "context": "Excerpt 1: - ​ **Type** : Light-sensitive modules with adjustable sensitivity\n\n\n  - ​ **Sensing Range** : 0-100,000 lux (after calibration)\n\n\n  - ​ **Output** : Analog (0-3.3V, mapped to 0-4095 via 12-bit ADC)\n\n\n  - ​ **Response Time** : <10ms\n\n\n  - ​ **Calibration** : Adjustable via onboard controls for optimal range\n\n### **Indicators**\n\n\n  - ​ **Red LED** : Indicates low ambient light (<2000 ADC value)\n\n\n  - ​ **Blue LED** : Indicates low directional light (<2000 ADC value)\n\n\n  - ​ **Green LED** : Indicates significant light difference (>100 ADC value)\n\n### **Input**\n\n\n  - ​ **Light Input** :\n\n\n     - ​ Sensor #1: Ambient light (connected to ESP32 ADC)\n\n\n      - ​ Sensor #2: Directional light (connected to ESP32 ADC)\n\n\n  - ​ **Power Input** : 5V DC via ESP32 USB Type-C or VIN pin\n\n### **Output**\n\n\n  - ​ **Primary Output** :\n\n\n      - ​ **Pin** : GPIO13 (digital, 3.3V HIGH/0V LOW)\n\n\n      - ​ **Condition** : HIGH when light difference (ambient vs. directional) > 100; LOW\n\n\notherwise\n\n---\n\nExcerpt 2: The OULTX125R employs a modular architecture to ensure robust performance and\n\n\nstraightforward integration:\n\n\n  - ​ **Core Microcontroller** : The ESP32 DevKitC (dual-core, 240 MHz) processes analog\n\n\nlight signals, calculates the difference between ambient and directional light, and drives\n\n\noutputs for integration and feedback.\n\n\n  - ​ **Sensors** : Two light-sensitive modules detect:\n\n\n      - ​ **Ambient Light** : Measures overall environmental light (e.g., room lighting from\n\n\nlamps or natural sources).\n\n\n      - ​ **Directional Light** : Captures light from a specific direction (e.g., sunlight through\n\n\na window).\n\n\n  - ​ **Indicators** : Three LEDs provide visual status:\n\n\n      - ​ **Red LED** : Illuminates when ambient light is low (<2000 ADC value).\n\n\n      - ​ **Blue LED** : Illuminates when directional light is low (<2000 ADC value).\n\n\n      - ​ **Green LED** : Illuminates when the light difference exceeds 100 ADC units,\n\n\nsignaling a significant environmental change.\n\n---\n\nExcerpt 3: |Connection<br>Point|Function|Description|\n|---|---|---|\n|3V3|Power Supply|Provides 3.3V to sensor modules and<br>LEDs, regulated from 5V USB input.|\n|GND|Ground|Common ground for all components and<br>external controllers (e.g., Raspberry Pi).|\n|VP ADC|Ambient Sensor Input|Analog input for ambient light<br>measurement.|\n|VN ADC|Directional Sensor Input|Analog input for directional light<br>measurement.|\n|GPIO27|Red LED Control|Drives red LED to indicate low ambient light<br>(<2000 ADC).|\n|GPIO14|Blue LED Control|Drives blue LED to indicate low directional<br>light (<2000 ADC).|\n|GPIO12|Green LED Control|Drives green LED to indicate significant<br>light difference (>100 ADC).|\n|GPIO13|Digital Output|Outputs 3.3V HIGH when light difference ><br>100, LOW otherwise, for external use.|\n|USB Type-C|Power and Debug|Supplies 5V power and Serial debug data<br>(115200 baud) to Raspberry Pi or host.|\n\n\n2\n\n\nOULTX125R Datasheet\n\n---\n\nExcerpt 4: - ​ **Purpose** : Signal for external controllers (e.g., Raspberry Pi GPIO)\n\n\n  - ​ **Debug Output** :\n\n\n     - ​ Serial over USB (115200 baud)\n\n\n     - ​ Format: Ambient: <value> | Directional: <value> | Diff:\n\n\n<value> | Output Pin 13: <HIGH/LOW>\n\n\n  - ​ **Indicator Output** :\n\n\n4\n\n\nOULTX125R Datasheet\n\n\n     - ​ Red LED: On when ambient < 2000\n\n\n     - ​ Blue LED: On when directional < 2000\n\n\n     - ​ Green LED: On when difference > 100\n\n### **Performance**\n\n\n  - ​ **Resolution** : 12-bit ADC (0-4095)\n\n\n  - ​ **Accuracy** : ±5% (post-calibration)\n\n\n  - ​ **Sampling Rate** : 1 Hz (configurable)\n\n\n  - ​ **Latency** : <50ms\n\n### **Connectivity**\n\n\n  - ​ **Integration** : GPIO13 digital output for controllers (e.g., Raspberry Pi, Arduino)\n\n\n  - ​ **Debug** : USB Type-C for Serial monitoring (accessible via Raspberry Pi)\n\n\n  - ​ **Power** : USB Type-C (5V) or 5V/3.3V external supply\n\n### **Environmental**\n\n\n  - ​ **Operating Temperature** : -20°C to 60°C\n\n---\n\nExcerpt 5: - ​ In dim lighting (e.g., covered sensor or dark room), adjust sensor controls to\n\n\nachieve ADC readings of ~100-1000.\n\n\n      - ​ In bright lighting (e.g., direct sunlight or flashlight), adjust for ~2000-3500.\n\n\n      - ​ Avoid saturation (constant 4095 readings), which indicates excessive sensitivity.\n\n\n3.​ **Verification** :\n\n\n      - ​ Monitor Serial output via USB to check Ambient and Directional values.\n\n\n      - ​ Test with varied lighting conditions (e.g., cover one sensor, illuminate the other) to\n\n\nensure differential response.\n\n\n     - ​ Confirm GPIO13 toggles HIGH when light difference exceeds 100.\n\n\n4.​ **Fine-Tuning** :\n\n\n7\n\n\nOULTX125R Datasheet\n\n\n      - ​ Adjust thresholds in firmware (e.g., <2000 for LEDs, >100 for GPIO13) based on\n\n\nspecific project requirements.\n\n\n      - ​ Recalibrate if deploying in a new environment with different lighting conditions.\n\n\n5.​ **Best Practices** :",
+      "sources": [
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf",
+        "OULTX125R - Datasheet.pdf"
+      ],
+      "ragas_metrics": {},
+      "legacy_metrics": {
+        "faithfulness": 0.85,
+        "answer_relevancy": 0.41,
+        "context_precision": 0.88,
+        "context_recall": 0.95
+      },
+      "retrieval_metadata": {
+        "reranking_enabled": false,
+        "reranking_model": null,
+        "initial_vector_search_count": 5,
+        "final_chunk_count": 5,
+        "relevance_scores": [],
+        "best_relevance_score": 0.0,
+        "metadata_filtering_used": false,
+        "detected_models": [
+          "system"
+        ],
+        "processing_time": 2.759,
+        "metadata_filters": {
+          "sensor_model": null,
+          "manufacturer": null,
+          "doc_id": null
+        }
+      }
+    }
+  ],
+  "ragas_summary": {
+    "total_questions": 1,
+    "avg_faithfulness": 0.0,
+    "avg_answer_relevancy": 0.0,
+    "avg_context_precision": 0.0,
+    "avg_context_recall": 0.0
+  }
+}

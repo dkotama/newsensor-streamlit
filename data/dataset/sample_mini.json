@@ -1,0 +1,32 @@
+[
+    {
+        "user_input": "What is the battery life of the Advantech EVA-2311 sensor and under what conditions is this achieved?",
+        "response": "The Advantech EVA-2311 sensor has a battery life of up to 5 years, which is based on a 15-minute data transmission interval at a temperature of 25°C.",
+        "retrieved_contexts": "Excerpt 1 : Battery life up till 5 years @25°C 15mins interval setting, Excerpt 2 : EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years basing on certain condition., Excerpt 3 : Power Input: 3.6V AA Battery * 2pcs (Not included), Excerpt 4 : Features: LoRaWAN wireless connectivity, Excerpt 5 : Introduction: EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+        "reference": "The Advantech EVA-2311 sensor has a battery life of up to 5 years, achieved with a 15-minute data transmission interval at 25°C."
+    },
+    {
+        "user_input": "What is the IP rating of the Advantech EVA-2311's probe and its main body?",
+        "response": "For the Advantech EVA-2311, the PT1000 round head probe sensor has an IP67 rating, while the main body of the device has an IP30 rating.",
+        "retrieved_contexts": "Excerpt 1 : Features: IP67 for PT1000 Round Head Probe Sensor, Excerpt 2 : General: IP Class: IP30, Excerpt 3 : The extended sensor itself has 2m length cable, IP67 rating design., Excerpt 4 : Probe Dimension: 5 x 30 mm, Excerpt 5 : Mounting: Wall, Magnetic, Pole",
+        "reference": "The probe of the Advantech EVA-2311 is rated IP67, and the main unit is rated IP30."
+    },
+    {
+        "user_input": "What is the full temperature detection range of the EVA-2311 sensor?",
+        "response": "The Advantech EVA-2311 has a temperature detection range of -70°C to 200°C.",
+        "retrieved_contexts": "Excerpt 1 : Features: -70°C to 200°C temperature detection range, Excerpt 2 : Temperature Sensor Measurement Range: -70°C to 200°C, Excerpt 3 : Accuracy (Host and Sensor are in same environment): ±0.8°C between 0°C and 55°C, Excerpt 4 : It capable to measure temperature at different kinds of applications, such like refrigerator, freezer, cooling pipe, etc., Excerpt 5 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+        "reference": "The temperature detection range for the Advantech EVA-2311 is -70°C to 200°C."
+    },
+    {
+        "user_input": "What wireless communication technology does the EVA-2311 use?",
+        "response": "The EVA-2311 uses LoRaWAN for its wireless communication.",
+        "retrieved_contexts": "Excerpt 1 : Features: LoRaWAN wireless connectivity, Excerpt 2 : Wireless Communication: Topology: Star (LoRa/LoRaWAN), Excerpt 3 : With it's wide range, high penetration rate LoRa connectivity, the data transmission range can up till hundred or thousand meters away., Excerpt 4 : Frequency Band: EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz), Excerpt 5 : LoRaWAN Gateway: WISE-6610-NB, WISE-6610-EB, etc.",
+        "reference": "The EVA-2311 sensor uses LoRaWAN wireless communication technology."
+    },
+    {
+        "user_input": "What is the accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment?",
+        "response": "When the host and sensor are in the same environment, the Advantech EVA-2311 has an accuracy of ±0.8°C between 0°C and 55°C.",
+        "retrieved_contexts": "Excerpt 1 : Accuracy (Host and Sensor are in same enlivenment) ±0.8°C between 0°C and 55°C, Excerpt 2 : Accuracy (Host and Sensor are in different enlivenment) ±{(0.15+0.002*|T2|)+1}°C between -70°C and 0°C, Excerpt 3 : Measurement Range: -70°C to 200°C, Excerpt 4 : The extended sensor itself has 2m length cable., Excerpt 5 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+        "reference": "The accuracy of the Advantech EVA-2311 is ±0.8°C between 0°C and 55°C when the host and sensor are in the same environment."
+    }
+]

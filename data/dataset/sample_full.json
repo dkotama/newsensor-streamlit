@@ -1,0 +1,302 @@
+[
+    {
+        "user_input": "What is the battery life of the Advantech EVA-2311 sensor and under what conditions is this achieved?",
+        "response": "The Advantech EVA-2311 sensor has a battery life of up to 5 years, which is based on a 15-minute data transmission interval at a temperature of 25°C.",
+        "retrieved_contexts": "Excerpt 1 : Battery life up till 5 years @25°C 15mins interval setting, Excerpt 2 : EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years basing on certain condition., Excerpt 3 : Power Input: 3.6V AA Battery * 2pcs (Not included), Excerpt 4 : Features: LoRaWAN wireless connectivity, Excerpt 5 : Introduction: EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+        "reference": "The Advantech EVA-2311 sensor has a battery life of up to 5 years, achieved with a 15-minute data transmission interval at 25°C."
+    },
+    {
+        "user_input": "What is the IP rating of the Advantech EVA-2311's probe and its main body?",
+        "response": "For the Advantech EVA-2311, the PT1000 round head probe sensor has an IP67 rating, while the main body of the device has an IP30 rating.",
+        "retrieved_contexts": "Excerpt 1 : Features: IP67 for PT1000 Round Head Probe Sensor, Excerpt 2 : General: IP Class: IP30, Excerpt 3 : The extended sensor itself has 2m length cable, IP67 rating design., Excerpt 4 : Probe Dimension: 5 x 30 mm, Excerpt 5 : Mounting: Wall, Magnetic, Pole",
+        "reference": "The probe of the Advantech EVA-2311 is rated IP67, and the main unit is rated IP30."
+    },
+    {
+        "user_input": "What is the full temperature detection range of the EVA-2311 sensor?",
+        "response": "The Advantech EVA-2311 has a temperature detection range of -70°C to 200°C.",
+        "retrieved_contexts": "Excerpt 1 : Features: -70°C to 200°C temperature detection range, Excerpt 2 : Temperature Sensor Measurement Range: -70°C to 200°C, Excerpt 3 : Accuracy (Host and Sensor are in same environment): ±0.8°C between 0°C and 55°C, Excerpt 4 : It capable to measure temperature at different kinds of applications, such like refrigerator, freezer, cooling pipe, etc., Excerpt 5 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+        "reference": "The temperature detection range for the Advantech EVA-2311 is -70°C to 200°C."
+    },
+    {
+        "user_input": "What wireless communication technology does the EVA-2311 use?",
+        "response": "The EVA-2311 uses LoRaWAN for its wireless communication.",
+        "retrieved_contexts": "Excerpt 1 : Features: LoRaWAN wireless connectivity, Excerpt 2 : Wireless Communication: Topology: Star (LoRa/LoRaWAN), Excerpt 3 : With it's wide range, high penetration rate LoRa connectivity, the data transmission range can up till hundred or thousand meters away., Excerpt 4 : Frequency Band: EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz), Excerpt 5 : LoRaWAN Gateway: WISE-6610-NB, WISE-6610-EB, etc.",
+        "reference": "The EVA-2311 sensor uses LoRaWAN wireless communication technology."
+    },
+    {
+        "user_input": "What is the accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment?",
+        "response": "When the host and sensor are in the same environment, the Advantech EVA-2311 has an accuracy of ±0.8°C between 0°C and 55°C.",
+        "retrieved_contexts": "Excerpt 1 : Accuracy (Host and Sensor are in same enlivenment) ±0.8°C between 0°C and 55°C, Excerpt 2 : Accuracy (Host and Sensor are in different enlivenment) ±{(0.15+0.002*|T2|)+1}°C between -70°C and 0°C, Excerpt 3 : Measurement Range: -70°C to 200°C, Excerpt 4 : The extended sensor itself has 2m length cable., Excerpt 5 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+        "reference": "The accuracy of the Advantech EVA-2311 is ±0.8°C between 0°C and 55°C when the host and sensor are in the same environment."
+    },
+    {
+        "user_input": "What is the temperature accuracy of the PANJIT PJ85775 sensor across its different operating ranges?",
+        "response": "The PANJIT PJ85775 has a temperature accuracy of ±0.5°C from 0°C to 50°C, ±1.0°C from -20°C to 85°C, and ±1.5°C from -40°C to 125°C.",
+        "retrieved_contexts": "Excerpt 1 : Temperature Accuracy without calibration : ±0.5°C from 0°C to 50°C, Excerpt 2 : Temperature Accuracy without calibration : ±1.0°C from -20°C to 85°C, Excerpt 3 : Temperature Accuracy without calibration : ±1.5°C from -40°C to 125°C, Excerpt 4 : The PJ85775 is a digital temperature sensor with ±0.5°C accuracy., Excerpt 5 : Each chip is specially calibrated for ±0.5°C (Max.) accuracy over 0°C to 50°C range in factory before shipment.",
+        "reference": "The PANJIT PJ85775 temperature accuracy is ±0.5°C (0°C to 50°C), ±1.0°C (-20°C to 85°C), and ±1.5°C (-40°C to 125°C)."
+    },
+    {
+        "user_input": "What digital communication interfaces are compatible with the PJ85775 sensor?",
+        "response": "The PJ85775 sensor is compatible with SMBus, I²C, and 2-wire digital interfaces.",
+        "retrieved_contexts": "Excerpt 1 : Temperature data can be read out directly via digital interface (compatible with SMBus, I²C or 2-wire)., Excerpt 2 : Compatible with SMBus, 2-wire and I²C interface, Excerpt 3 : PJ85775 supports I²C communication with speed up to 400 kHz., Excerpt 4 : The chip supports SMBus timeout., Excerpt 5 : The PJ85775 device responds to a two-wire general-call address (0000 000).",
+        "reference": "The PJ85775 sensor supports SMBus, I²C, and 2-wire digital interfaces."
+    },
+    {
+        "user_input": "What is the operating voltage range for the PANJIT PJ85775?",
+        "response": "The PANJIT PJ85775 has an operating voltage range of 1.75V to 5.5V.",
+        "retrieved_contexts": "Excerpt 1 : FEATURES: Operation Voltage: 1.75 V to 5.5 V, Excerpt 2 : RECOMMENDED OPERATING CONDITIONS: Vcc Supply Voltage MIN 1.75 MAX 5.5 V, Excerpt 3 : ELECTRICAL CHARACTERISTICS: Vcc Supply voltage range MIN 1.75 MAX 5.5 V, Excerpt 4 : ABSOLUTE MAXIMUM RATINGS: Supply Voltage Vcc to GND MIN -0.3 MAX 7 V, Excerpt 5 : Power supply input pin, using 0.1uF low ESR ceramic capacitor to ground",
+        "reference": "The operating voltage for the PANJIT PJ85775 is 1.75V to 5.5V."
+    },
+    {
+        "user_input": "In which packages is the PJ85775 sensor available?",
+        "response": "The PJ85775 sensor is available in SOP-8 and MSOP-8 packages.",
+        "retrieved_contexts": "Excerpt 1 : Available Package: SOP-8 and MSOP-8., Excerpt 2 : In a SOP8/MSOP-8 Package, Excerpt 3 : ORDERING INFORMATION: Package SOP-8, MSOP-8, Excerpt 4 : PACKAGE OUTLINE DIMENSION (SOP-8), Excerpt 5 : PACKAGE OUTLINE DIMENSION (MSOP-8)",
+        "reference": "The PJ85775 sensor is available in both SOP-8 and MSOP-8 packages."
+    },
+    {
+        "user_input": "What is the temperature resolution of the PANJIT PJ85775 sensor?",
+        "response": "The PANJIT PJ85775 sensor offers a temperature resolution of 0.0625°C, provided by its 12-bit ADC.",
+        "retrieved_contexts": "Excerpt 1 : It includes a high precision band-gap circuit, a 12-bit analog to digital converter that can offer 0.0625°C resolution., Excerpt 2 : FEATURES: 12 bit ADC for 0.0625°C resolution, Excerpt 3 : ELECTRICAL CHARACTERISTICS: TRESOLUTION Temperature Resolution TYP 0.0625 °C, Excerpt 4 : In extended format, the resolution of AD converter does not change., Excerpt 5 : When EM bit is set as '1', the temperature resolution is still 0.0625°C resolution.",
+        "reference": "The temperature resolution of the PANJIT PJ85775 is 0.0625°C."
+    },
+    {
+        "user_input": "What is the specified temperature operating range for the YAGEO Nexensos LS219 sensor?",
+        "response": "The YAGEO Nexensos LS219 sensor is designed for a temperature range of -50°C to +150°C.",
+        "retrieved_contexts": "Excerpt 1 : Temperature range -50°C to +150°C, Excerpt 2 : Designed for low temperature applications, Excerpt 3 : Typical applications include HVAC, Food and Beverage, Medical and Industrial equipment., Excerpt 4 : Validity of Class F 0.3 (B): -50°C to +150°C, Excerpt 5 : Typical drift of R(0°C) is <0.04% after 1000 hours at +150 C.",
+        "reference": "The YAGEO Nexensos LS219 has a temperature operating range of -50°C to +150°C."
+    },
+    {
+        "user_input": "What is the long-term stability drift of the LS219 sensor's resistance at 0°C?",
+        "response": "The typical long-term stability drift of the YAGEO Nexensos LS219's resistance at 0°C is less than 0.04% after being stored for 1000 hours at +150°C.",
+        "retrieved_contexts": "Excerpt 1 : Excellent long term stability and low drift, Excerpt 2 : Long-Term Stability: Typical drift of R(0°C) is <0.04% after 1000 hours at +150 C., Excerpt 3 : The drift of the resistance value at 0°C after a storage for 1000 hours in air at the declared upper temperature limit is not more than the tolerance value of the declared tolerance class., Excerpt 4 : LS series Pt-RTDs are designed for high volume low temperature applications where long term stability, interchangeability and accuracy are vital., Excerpt 5 : Temperature range -50°C to +150°C",
+        "reference": "The typical long-term stability drift for the YAGEO Nexensos LS219 is less than 0.04% after 1000 hours at +150°C."
+    },
+    {
+        "user_input": "What nominal resistance values are available for the YAGEO LS219?",
+        "response": "The YAGEO LS219 is available with nominal resistance values of Pt100 and Pt1000.",
+        "retrieved_contexts": "Excerpt 1 : Nominal Resistance Ro [Ω]: Pt100, Pt1000, Excerpt 2 : Order Number for Pt100: 5205115, Excerpt 3 : Order Number for Pt1000: 5203377, Excerpt 4 : Measuring Current Pt100 Ω: 0.3 to 1 mA, Excerpt 5 : Measuring Current Pt1000 Ω: 0.1 to 0.3 mA",
+        "reference": "The YAGEO LS219 is available in Pt100 and Pt1000 nominal resistance versions."
+    },
+    {
+        "user_input": "What is the recommended measuring current for the Pt1000 version of the LS219 sensor?",
+        "response": "The recommended measuring current for the Pt1000 version of the YAGEO LS219 sensor is 0.1 to 0.3 mA.",
+        "retrieved_contexts": "Excerpt 1 : Measuring Current Pt1000 Ω: 0.1 to 0.3 mA (self-heating has to be considered), Excerpt 2 : Measuring Current Pt100 Ω: 0.3 to 1 mA, Excerpt 3 : Self-Heating: 0.03 K/mW (Pt1000; Water v=0.4m/s), Excerpt 4 : Nominal Resistance Ro [Ω]: Pt1000, Excerpt 5 : The measuring point for the nominal resistance is 2 mm from the end of the sensor body.",
+        "reference": "The recommended measuring current for the YAGEO LS219 Pt1000 is 0.1 to 0.3 mA."
+    },
+    {
+        "user_input": "Which DIN standard does the YAGEO LS219 temperature sensor conform to?",
+        "response": "The YAGEO LS219 Pt Temperature Sensor conforms to the DIN EN IEC 60751 standard.",
+        "retrieved_contexts": "Excerpt 1 : LS219, Pt Temperature Sensor according to DIN EN IEC 60751, Excerpt 2 : The drift of the resistance value at 0°C... is not more than the tolerance value of the declared tolerance class according DIN EN IEC 60751., Excerpt 3 : Tolerance Class: F 0.3 (B), Excerpt 4 : Temperature Coefficient TCR = 3850 ppm/K, Excerpt 5 : LS series Pt-RTDs are designed for high volume low temperature applications",
+        "reference": "The YAGEO LS219 sensor conforms to the DIN EN IEC 60751 standard."
+    },
+    {
+        "user_input": "What is the temperature measurement accuracy of the Banner S15S sensor?",
+        "response": "The Banner S15S sensor has a temperature accuracy of ±0.8°C from -40°C to 0°C, ±0.7°C from 0°C to +60°C, and ±1.3°C from +60°C to +85°C.",
+        "retrieved_contexts": "Excerpt 1 : Temperature Accuracy: -40°C to 0°C: ±0.8°C (±1.5°F), Excerpt 2 : Temperature Accuracy: 0°C to +60°C: ±0.7°C (±1°F), Excerpt 3 : Temperature Accuracy: +60°C to +85°C: ±1.3°C (±2.2°F), Excerpt 4 : Temperature Measuring Range: -40°C to +85°C (-40 °F to +185 °F), Excerpt 5 : Temperature Resolution: 0.1°C",
+        "reference": "The temperature accuracy of the Banner S15S is ±0.8°C (-40°C to 0°C), ±0.7°C (0°C to +60°C), and ±1.3°C (+60°C to +85°C)."
+    },
+    {
+        "user_input": "What is the accuracy of the humidity measurement for the Banner S15S-TH-MQ?",
+        "response": "The Banner S15S-TH-MQ has a humidity accuracy of ±2% at 25°C, ±3% from 0°C to +70°C (between 10% to 90% RH), and ±7% from 0°C to +70°C (for 0-10% or 90-100% RH).",
+        "retrieved_contexts": "Excerpt 1 : Humidity Accuracy: ±2% at 25°C, Excerpt 2 : Humidity Accuracy: ±3% at 0°C to +70°C and 10% to 90% RH, Excerpt 3 : Humidity Accuracy: ±7% at 0°C to +70°C, and 0% to 10% or 90% to 100% RH, Excerpt 4 : Humidity Measuring Range: 0 to 100% relative humidity (RH), Excerpt 5 : Humidity Resolution: 0.1% RH",
+        "reference": "The humidity accuracy for the Banner S15S-TH-MQ is ±2% at 25°C and varies between ±3% and ±7% over its operating range."
+    },
+    {
+        "user_input": "What communication protocol does the Banner S15S sensor use?",
+        "response": "The Banner S15S sensor connects and communicates via RS485 Modbus registers.",
+        "retrieved_contexts": "Excerpt 1 : Features: Connects via RS485 Modbus® registers, Excerpt 2 : S15S Modbus Configuration, Excerpt 3 : Male connector: Modbus, Excerpt 4 : Modbus Communication LED Indicator (Amber LED 1), Excerpt 5 : Wiring Diagrams: RS485/D1/B/+, RS485/D0/A/-",
+        "reference": "The Banner S15S sensor uses the RS485 Modbus protocol."
+    },
+    {
+        "user_input": "What software is used to configure the Banner S15S sensor?",
+        "response": "The Banner S15S sensor is configured using Banner's SNAP SIGNAL Configuration Software.",
+        "retrieved_contexts": "Excerpt 1 : Configuration Instructions: SNAP SIGNAL Configuration Software, Excerpt 2 : Banner's SNAP SIGNAL Configuration Software offers an easy way to configure and demonstrate Banner Modbus devices., Excerpt 3 : Free to download and available on the Banner website., Excerpt 4 : BWA-UCT-900 cable required to connect PC-based SNAP SIGNAL Configuration Software to Banner Modbus devices., Excerpt 5 : The easy-to-use software provides a variety of tools and works with Banner Modbus devices.",
+        "reference": "Banner's SNAP SIGNAL Configuration Software is used to configure the S15S sensor."
+    },
+    {
+        "user_input": "What are the environmental ratings for the Banner S15S sensor?",
+        "response": "The Banner S15S sensor has environmental ratings of IP65, IP67, and IP68 at the M12 connection, and is also UL Type 1.",
+        "retrieved_contexts": "Excerpt 1 : Environmental Rating at M12 Connection: IP65, IP67, IP68, Excerpt 2 : UL Type 1, Excerpt 3 : Rugged overmolded design, Excerpt 4 : Construction: Coupling Material: Nickel-plated brass; Connector Body: PVC translucent black, Excerpt 5 : Operating Conditions Temperature: -40°C to +70°C",
+        "reference": "The Banner S15S sensor is rated IP65, IP67, IP68, and UL Type 1."
+    },
+    {
+        "user_input": "What types of gases can the Bosch BME690 sensor detect?",
+        "response": "The Bosch BME690 gas sensor can detect Volatile Organic Compounds (VOCs), volatile sulfur compounds (VSCs), and other gases like carbon monoxide and hydrogen.",
+        "retrieved_contexts": "Excerpt 1 : The gas sensor can detect Volatile Organic Compounds (VOCs), volatile sulfur compounds (VSCs) and other gases such as carbon monoxide and hydrogen., Excerpt 2 : The BME690 is a metal oxide-based sensor that detects gases by adsorption... The BME690 reacts to most volatile compounds., Excerpt 3 : The BME690 is capable of measuring the sum of VOCs/contaminants in the surrounding air., Excerpt 4 : In standard configuration, the presence of VSCs is being detected as indicator for e.g. bacteria growth., Excerpt 5 : Bad breath or spoiled food detection based on the measurement of volatile sulfur compounds, which are an indicator of bacteria growth.",
+        "reference": "The Bosch BME690 can detect VOCs, VSCs, carbon monoxide, and hydrogen."
+    },
+    {
+        "user_input": "What is the accuracy tolerance of the humidity sensor in the BME690?",
+        "response": "The humidity sensor in the Bosch BME690 has an accuracy tolerance of ±3% relative humidity.",
+        "retrieved_contexts": "Excerpt 1 : Key parameters for humidity sensor: Accuracy tolerance: ±3% r.H., Excerpt 2 : Humidity sensor specification: Absolute Accuracy: ±3% r.H. (20-80% r.H., 25°C, including hysteresis), Excerpt 3 : Key parameters for humidity sensor: Hysteresis: ±1% r.H., Excerpt 4 : Operating Range: 0-100% r.H., Excerpt 5 : The BME690 is the gas sensor with... integrated high-linearity and high-accuracy pressure, humidity and temperature sensors.",
+        "reference": "The accuracy tolerance of the BME690's humidity sensor is ±3% r.H."
+    },
+    {
+        "user_input": "How much current does the Bosch BME690 consume in ultra-low power (ULP) mode?",
+        "response": "In ultra-low power (ULP) mode for pressure, humidity, temperature, and air quality measurements, the Bosch BME690 consumes 50 µA.",
+        "retrieved_contexts": "Excerpt 1 : Current consumption: 50 µA at ULP mode for p/h/T & air quality, Excerpt 2 : Key parameters for gas sensor: Average Supply Current: 0.05 mA in ultra-low power mode, Excerpt 3 : BSEC power mode: Ultra-low power mode (ULP) Update rate 3.3 mHz, Average current consumption 0.05 mA, Excerpt 4 : Reduced power consumption for LP and ULP mode compared to BME680/BME688, Excerpt 5 : The BME690 is especially developed for mobile & connected applications where size and low power consumption are critical requirements.",
+        "reference": "The Bosch BME690 consumes 50 µA (or 0.05 mA) in ultra-low power (ULP) mode."
+    },
+    {
+        "user_input": "What digital interfaces does the Bosch BME690 support?",
+        "response": "The Bosch BME690 supports both I2C (up to 3.4 MHz) and SPI (3 and 4 wire, up to 10 MHz) digital interfaces.",
+        "retrieved_contexts": "Excerpt 1 : Key features: Digital interface: I2C (up to 3.4 MHz) and SPI (3 and 4 wire, up to 10 MHz), Excerpt 2 : The sensor supports the I2C and SPI digital interfaces, where it acts as a slave for both protocols., Excerpt 3 : The I2C interface supports the Standard, Fast and High Speed modes., Excerpt 4 : The SPI interface supports both SPI mode '00' and mode '11' in 4-wire and 3-wire configuration., Excerpt 5 : Interface selection is done automatically based on CSB (chip select) status.",
+        "reference": "The Bosch BME690 supports I2C and SPI (3 and 4 wire) interfaces."
+    },
+    {
+        "user_input": "What are some of the key outputs provided by the BSEC software for the BME690?",
+        "response": "The BSEC software for the BME690 provides several key outputs, including an Index for Air Quality (IAQ), bVOC-equivalents (ppm), CO2-equivalents (ppm), Gas scan result (%), and an Intensity level.",
+        "retrieved_contexts": "Excerpt 1 : Key parameters for gas sensor: Output data processing: Major direct outputs: Index for Air Quality (IAQ), bVOC- & CO2-equivalents (ppm), Gas scan result (%) & Intensity level, Excerpt 2 : The BSEC provides numerous useful outputs (see Table 20), e.g. an Index for Air Quality (IAQ), bVOC- & CO2-equivalents (ppm) and Gas scan results (%)., Excerpt 3 : BSEC outputs: IAQ (0-500), Static IAQ, CO2 equivalent (ppm), b-VOC equivalent (ppm), TVOC equivalent (ppb)., Excerpt 4 : The IAQ output is an index that can have values between 0 and 500., Excerpt 5 : The BME AI-Studio tool enables customers to train the BME690 gas scanner on their specific application.",
+        "reference": "Key outputs of the BSEC software for the BME690 include Index for Air Quality (IAQ), CO2 equivalent (ppm), and b-VOC equivalent (ppm)."
+    },
+    {
+        "user_input": "Compare the upper temperature measurement limit of the Advantech EVA-2311 and the Banner S15S.",
+        "response": "The Advantech EVA-2311 has a higher upper temperature measurement limit of +200°C, whereas the Banner S15S has an upper limit of +85°C.",
+        "retrieved_contexts": "Excerpt 1 : EVA-2311 Temperature Sensor Measurement Range: -70°C to 200°C, Excerpt 2 : S15S Temperature Measuring Range: -40°C to +85°C, Excerpt 3 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor., Excerpt 4 : S15S works in a variety of environments to provide temperature and humidity measurements., Excerpt 5 : The extended sensor itself (EVA-2311) has 2m length cable.",
+        "reference": "The Advantech EVA-2311 can measure up to +200°C, while the Banner S15S measures up to +85°C."
+    },
+    {
+        "user_input": "What are the communication protocols used by the EVA-2311 and the S15S sensors?",
+        "response": "The Advantech EVA-2311 uses the LoRaWAN wireless protocol, while the Banner S15S communicates using RS485 Modbus.",
+        "retrieved_contexts": "Excerpt 1 : EVA-2311 Features: LoRaWAN wireless connectivity, Excerpt 2 : S15S Features: Connects via RS485 Modbus® registers, Excerpt 3 : EVA-2311 Wireless Communication: Topology: Star (LoRa/LoRaWAN), Excerpt 4 : S15S Modbus Configuration: Sensor Data - Read Only, Excerpt 5 : With it's wide range, high penetration rate LoRa connectivity (EVA-2311)...",
+        "reference": "The EVA-2311 uses LoRaWAN, and the S15S uses RS485 Modbus."
+    },
+    {
+        "user_input": "How does the best-case temperature accuracy of the PANJIT PJ85775 compare to that of the Bosch BME690?",
+        "response": "Both the PANJIT PJ85775 and the Bosch BME690 have a best-case temperature accuracy of ±0.5°C. For the PJ85775, this is in the 0°C to 50°C range, and for the BME690, it is in the 0°C to 65°C range.",
+        "retrieved_contexts": "Excerpt 1 : PJ85775 Temperature Accuracy without calibration : ±0.5°C from 0°C to 50°C, Excerpt 2 : BME690 Key parameters for temperature sensor: Absolute accuracy ±0.5°C (0-65°C), Excerpt 3 : The PJ85775 is a digital temperature sensor with ±0.5°C accuracy., Excerpt 4 : BME690 Temperature sensor specification: Absolute accuracy AT 0-65 °C: ±0.5 °C, Excerpt 5 : Each chip (PJ85775) is specially calibrated for ±0.5°C (Max.) accuracy over 0°C to 50°C range.",
+        "reference": "Both the PJ85775 and BME690 offer a best-case temperature accuracy of ±0.5°C within their specified ranges."
+    },
+    {
+        "user_input": "What is the sleep or standby current for the PANJIT PJ85775 compared to the Bosch BME690?",
+        "response": "The PANJIT PJ85775 has a typical standby/shutdown current of 1.0 µA, while the Bosch BME690 has a typical sleep current of 0.11 µA.",
+        "retrieved_contexts": "Excerpt 1 : PJ85775 FEATURES: Standby Current: 1.0 uA (Typ.), Excerpt 2 : BME690 General Electrical Specification: Sleep current: Typ 0.11 µA, Excerpt 3 : PJ85775 ELECTRICAL CHARACTERISTICS: ISD Shutdown Current TYP 1.0 µA, Excerpt 4 : BME690 is especially developed for mobile & connected applications where size and low power consumption are critical requirements., Excerpt 5 : The BME690 has a gas scanner function.",
+        "reference": "The PJ85775 has a typical standby current of 1.0 µA, while the BME690's typical sleep current is significantly lower at 0.11 µA."
+    },
+    {
+        "user_input": "What is the material of the probe leads for the YAGEO LS219 and the probe cable length for the Advantech EVA-2311?",
+        "response": "The leads of the YAGEO LS219 are Ni-silvercoated. The probe for the Advantech EVA-2311 has a 2-meter long cable.",
+        "retrieved_contexts": "Excerpt 1 : LS219 Lead Type: Ni-silvercoated, Excerpt 2 : EVA-2311: The extended sensor itself has 2m length cable, Excerpt 3 : LS219 Connection Technology: Crimping, Soft Soldering, Excerpt 4 : EVA-2311 Probe Dimension: 5 x 30 mm, Excerpt 5 : LS219: Optimized for soldering connection",
+        "reference": "The YAGEO LS219 has Ni-silvercoated leads, and the Advantech EVA-2311 probe has a 2m cable."
+    },
+    {
+        "user_input": "Compare the maximum operating temperatures of the YAGEO LS219 and the Advantech EVA-2311.",
+        "response": "The Advantech EVA-2311 has a higher maximum operating temperature of +200°C, compared to the YAGEO LS219's maximum of +150°C.",
+        "retrieved_contexts": "Excerpt 1 : LS219 Temperature range -50°C to +150°C, Excerpt 2 : EVA-2311 Temperature Sensor Measurement Range: -70°C to 200°C, Excerpt 3 : LS219 Typical drift of R(0°C) is <0.04% after 1000 hours at +150 C., Excerpt 4 : EVA-2311 features: -70°C to 200°C temperature detection range, Excerpt 5 : LS219 is designed for low temperature applications.",
+        "reference": "The maximum operating temperature is +200°C for the EVA-2311 and +150°C for the LS219."
+    },
+    {
+        "user_input": "What is the humidity measurement accuracy of the Banner S15S compared to the Bosch BME690?",
+        "response": "The Banner S15S has a humidity accuracy of ±2% at 25°C, while the Bosch BME690 has an accuracy tolerance of ±3% relative humidity.",
+        "retrieved_contexts": "Excerpt 1 : S15S Humidity Accuracy: ±2% at 25°C, Excerpt 2 : BME690 Key parameters for humidity sensor: Accuracy tolerance: ±3% r.H., Excerpt 3 : S15S Humidity Accuracy: ±3% at 0°C to +70°C and 10% to 90% RH, Excerpt 4 : BME690 Humidity sensor specification: Absolute Accuracy: ±3% r.H. (20-80% r.H., 25°C, including hysteresis), Excerpt 5 : Both sensors measure temperature and humidity.",
+        "reference": "The Banner S15S offers ±2% accuracy at 25°C, while the Bosch BME690 has a ±3% accuracy tolerance."
+    },
+    {
+        "user_input": "What are the IP ratings for the Banner S15S and the Bosch BME690?",
+        "response": "The Banner S15S is rated IP65, IP67, and IP68. The datasheet for the Bosch BME690 does not specify an IP rating, but states it is robust and can be used in high condensation applications.",
+        "retrieved_contexts": "Excerpt 1 : S15S Environmental Rating at M12 Connection: IP65, IP67, IP68, Excerpt 2 : The BME690 is more robust to previous products and can be used in high condensation applications., Excerpt 3 : S15S is also UL Type 1., Excerpt 4 : The BME690 product is RoHS compliant, halogen-free, MSL1., Excerpt 5 : BME690 is housed in a robust yet compact 3.0 x 3.0 x 0.9 mm³ package.",
+        "reference": "The Banner S15S is rated IP65, IP67, and IP68. An IP rating is not specified for the Bosch BME690."
+    },
+    {
+        "user_input": "What are the typical applications for the PANJIT PJ85775 and the YAGEO LS219?",
+        "response": "The PANJIT PJ85775 is intended for applications like smart HVAC systems and portable devices. The YAGEO LS219 is used in HVAC, food and beverage, medical, and industrial equipment.",
+        "retrieved_contexts": "Excerpt 1 : PJ85775 APPLICATIONS: Smart HVAC System, Portable Device, Thermal Management, Excerpt 2 : LS219 Typical applications include HVAC, Food and Beverage, Medical and Industrial equipment., Excerpt 3 : PJ85775 can be used as standalone thermostat., Excerpt 4 : LS219 is designed for high volume low temperature applications., Excerpt 5 : Both are temperature sensors.",
+        "reference": "The PJ85775 is for smart HVAC and portables, while the LS219 is for HVAC, food & beverage, medical, and industrial use."
+    },
+    {
+        "user_input": "Does the YAGEO LS219 support the I2C interface like the PANJIT PJ85775 does?",
+        "response": "No, the YAGEO LS219 datasheet does not mention support for an I2C interface. It is a Pt-RTD sensor with wire leads for soldering or crimping. The PANJIT PJ85775 does support I2C.",
+        "retrieved_contexts": "Excerpt 1 : PJ85775 Compatible with SMBus, 2-wire and I²C interface, Excerpt 2 : LS219 Connection Technology: Crimping, Soft Soldering, Excerpt 3 : PJ85775 supports I²C communication with speed up to 400 kHz., Excerpt 4 : LS219 Lead Type: Ni-silvercoated, Excerpt 5 : LS219, Pt Temperature Sensor according to DIN EN IEC 60751",
+        "reference": "No, the YAGEO LS219 does not support I2C; it provides analog resistance output via leads. The PANJIT PJ85775 does support I2C."
+    },
+    {
+        "user_input": "Among the Advantech EVA-2311, PANJIT PJ85775, YAGEO LS219, Banner S15S, and Bosch BME690, which sensor offers the widest temperature detection range?",
+        "response": "The Advantech EVA-2311 offers the widest temperature detection range, from -70°C to 200°C.",
+        "retrieved_contexts": "Excerpt 1 : EVA-2311 Temperature Sensor Measurement Range: -70°C to 200°C, Excerpt 2 : PJ85775 Temperature Range: -40°C to 125°C, Excerpt 3 : LS219 Temperature range -50°C to +150°C, Excerpt 4 : S15S Temperature Measuring Range: -40°C to +85°C, Excerpt 5 : BME690 Operating range: -40 - +85°C",
+        "reference": "The Advantech EVA-2311 has the widest temperature range of -70°C to 200°C."
+    },
+    {
+        "user_input": "Which of the provided sensors support an I2C interface?",
+        "response": "The PANJIT PJ85775 and the Bosch BME690 both support the I2C digital interface.",
+        "retrieved_contexts": "Excerpt 1 : PJ85775 Compatible with SMBus, 2-wire and I²C interface, Excerpt 2 : BME690 Key features: Digital interface: I2C (up to 3.4 MHz) and SPI..., Excerpt 3 : EVA-2311 uses LoRaWAN wireless connectivity., Excerpt 4 : S15S connects via RS485 Modbus® registers., Excerpt 5 : LS219 has wire leads for connection via Crimping or Soft Soldering.",
+        "reference": "The PANJIT PJ85775 and Bosch BME690 support the I2C interface."
+    },
+    {
+        "user_input": "For monitoring a high-humidity industrial environment with potential water spray, which sensor would be most suitable based on the datasheets?",
+        "response": "The Banner S15S would be the most suitable choice, as it offers IP65, IP67, and IP68 ratings, indicating it is well-protected against dust and water, and it is designed with a rugged overmolded body suitable for industrial settings.",
+        "retrieved_contexts": "Excerpt 1 : S15S Environmental Rating at M12 Connection: IP65, IP67, IP68, Excerpt 2 : S15S Features: Rugged overmolded design, Excerpt 3 : EVA-2311 probe has an IP67 rating, but the main body is only IP30., Excerpt 4 : BME690 can be used in high condensation applications, but no specific IP rating is given., Excerpt 5 : LS219 is designed for HVAC and industrial equipment, but is an unhoused component sensor.",
+        "reference": "The Banner S15S is most suitable for a high-humidity industrial environment due to its high IP ratings (IP65/67/68) and rugged design."
+    },
+    {
+        "user_input": "Compare the power sources for the Advantech EVA-2311 and the Bosch BME690.",
+        "response": "The Advantech EVA-2311 is powered by two 3.6V AA Li-ion batteries. The Bosch BME690 requires a VDD main supply voltage from 1.71V to 3.6V and a separate VDDIO interface voltage from 1.2V to 3.6V.",
+        "retrieved_contexts": "Excerpt 1 : EVA-2311 Power Input: 3.6V AA Battery * 2pcs (Not included), Excerpt 2 : BME690 Supply Voltage: VDD main supply voltage range: 1.71 V to 3.6 V, Excerpt 3 : BME690 Supply Voltage: VDDIO interface voltage range: 1.2 V to 3.6 V, Excerpt 4 : EVA-2311 has a battery life of up to 5 years., Excerpt 5 : BME690 is a component sensor for integration into a larger device's power system.",
+        "reference": "The EVA-2311 uses two 3.6V AA batteries, while the BME690 requires separate VDD (1.71-3.6V) and VDDIO (1.2-3.6V) power supplies."
+    },
+    {
+        "user_input": "Which sensors can measure humidity, and what is the accuracy of each?",
+        "response": "The Banner S15S and Bosch BME690 can measure humidity. The Banner S15S has an accuracy of ±2% at 25°C. The Bosch BME690 has an accuracy tolerance of ±3% relative humidity.",
+        "retrieved_contexts": "Excerpt 1 : S15S is a Temperature and Humidity Sensor. Humidity Accuracy: ±2% at 25°C., Excerpt 2 : BME690 is a digital low power temperature, humidity, pressure and gas sensor. Humidity Accuracy tolerance: ±3% r.H., Excerpt 3 : EVA-2311 is a LoRaWAN Temperature PT1000 Round Head Probe Sensor., Excerpt 4 : PJ85775 is a digital temperature sensor., Excerpt 5 : LS219 is a Pt Temperature Sensor.",
+        "reference": "The Banner S15S (±2% at 25°C) and Bosch BME690 (±3% r.H.) can measure humidity."
+    },
+    {
+        "user_input": "Identify the sensor specifically designed for low-temperature applications and state its full operating temperature range.",
+        "response": "The YAGEO Nexensos LS219 is designed for low-temperature applications and has an operating temperature range of -50°C to +150°C.",
+        "retrieved_contexts": "Excerpt 1 : LS219: Designed for low temperature applications, Excerpt 2 : LS219: Temperature range -50°C to +150°C, Excerpt 3 : LS219: Typical applications include HVAC, Food and Beverage, Medical and Industrial equipment., Excerpt 4 : The other sensors like EVA-2311 and S15S have a lower limit of -70°C and -40°C respectively., Excerpt 5 : LS series Pt-RTDs are designed for high volume low temperature applications.",
+        "reference": "The YAGEO LS219 is designed for low-temperature applications with a range of -50°C to +150°C."
+    },
+    {
+        "user_input": "Which sensor incorporates Artificial Intelligence, and what is its primary use?",
+        "response": "The Bosch BME690 incorporates Artificial Intelligence (AI). Its primary use is to enable a gas scanner function that can be trained for specific applications, like detecting certain classes of gases or determining an Index for Air Quality (IAQ).",
+        "retrieved_contexts": "Excerpt 1 : BME690: Digital low power temperature, humidity, pressure and gas sensor with Al, Excerpt 2 : The BME690 is the gas sensor with Artificial Intelligence (Al)., Excerpt 3 : The BME AI-Studio tool enables customers to train the BME690 gas scanner on their specific application., Excerpt 4 : Same as BME688, the BME690 has a gas scanner function., Excerpt 5 : Features interpreted by Al based software brings selectivity feature.",
+        "reference": "The Bosch BME690 uses AI for its gas scanner function to classify gases and determine air quality."
+    },
+    {
+        "user_input": "Contrast the physical packages of the PANJIT PJ85775 and the Bosch BME690.",
+        "response": "The PANJIT PJ85775 is available in SOP-8 and MSOP-8 plastic packages with leads. The Bosch BME690 comes in a 3.0 x 3.0 x 0.9 mm³ metal lid LGA (Land Grid Array) package, which is a leadless surface-mount package.",
+        "retrieved_contexts": "Excerpt 1 : PJ85775 Available Package: SOP-8 and MSOP-8., Excerpt 2 : BME690 Package: 3.0 mm x 3.0 mm x 0.93 mm metal lid LGA, Excerpt 3 : PJ85775 has 8 pins., Excerpt 4 : BME690 also has 8 pads (pins) in an LGA configuration., Excerpt 5 : The BME690 package is robust and compact.",
+        "reference": "The PJ85775 comes in leaded SOP-8/MSOP-8 packages, while the BME690 uses a leadless metal lid LGA package."
+    },
+    {
+        "user_input": "Which of these sensors are explicitly mentioned as being suitable for HVAC applications?",
+        "response": "The YAGEO Nexensos LS219 and the PANJIT PJ85775 are explicitly mentioned as being suitable for HVAC applications in their datasheets.",
+        "retrieved_contexts": "Excerpt 1 : LS219 Typical applications include HVAC..., Excerpt 2 : PJ85775 APPLICATIONS: Smart HVAC System..., Excerpt 3 : EVA-2311 is for applications like refrigerators and freezers., Excerpt 4 : S15S works in a variety of environments., Excerpt 5 : BME690 is for applications like indoor air quality and smart home devices.",
+        "reference": "The YAGEO LS219 and PANJIT PJ85775 are specified as suitable for HVAC applications."
+    },
+    {
+        "user_input": "What is the highest temperature accuracy offered among all the listed sensors, and which sensors provide it?",
+        "response": "The highest temperature accuracy offered is ±0.5°C. This is provided by both the PANJIT PJ85775 (in the 0°C to 50°C range) and the Bosch BME690 (in the 0°C to 65°C range).",
+        "retrieved_contexts": "Excerpt 1 : PJ85775 Temperature Accuracy: ±0.5°C from 0°C to 50°C, Excerpt 2 : BME690 Absolute accuracy: ±0.5°C (0-65°C), Excerpt 3 : S15S Temperature Accuracy: ±0.7°C (0°C to +60°C), Excerpt 4 : EVA-2311 Accuracy: ±0.8°C between 0°C and 55°C, Excerpt 5 : LS219 has a Tolerance Class of F 0.3 (B), which corresponds to ±(0.3 + 0.005 * |t|) °C.",
+        "reference": "The highest accuracy is ±0.5°C, offered by the PANJIT PJ85775 and the Bosch BME690."
+    },
+    {
+        "user_input": "Which of these sensors utilize a wireless communication protocol and what are those protocols?",
+        "response": "The Advantech EVA-2311 is the only sensor listed that uses a wireless communication protocol, which is LoRaWAN.",
+        "retrieved_contexts": "Excerpt 1 : EVA-2311 Features: LoRaWAN wireless connectivity, Excerpt 2 : S15S connects via RS485 Modbus., Excerpt 3 : PJ85775 and BME690 use wired interfaces like I2C and SPI., Excerpt 4 : LS219 is a resistive sensor with direct wire leads., Excerpt 5 : EVA-2311 Wireless Communication Topology: Star (LoRa/LoRaWAN)",
+        "reference": "The Advantech EVA-2311 uses the LoRaWAN wireless protocol."
+    },
+    {
+        "user_input": "Compare the release or status dates of the YAGEO LS219 and the Bosch BME690 datasheets.",
+        "response": "The YAGEO LS219 datasheet has a status date of March 2025, while the Bosch BME690 datasheet has a release date of May 2025.",
+        "retrieved_contexts": "Excerpt 1 : LS219 Document: Status: 03/2025, Excerpt 2 : BME690 Document release date: May, 2025, Excerpt 3 : PANJIT PJ85775 release date: Jan., 2024, Excerpt 4 : Banner S15S release date: June 10, 2024, Excerpt 5 : Advantech EVA-2311 release date: 19-Apr-2024",
+        "reference": "The YAGEO LS219 datasheet has a status date of March 2025, and the Bosch BME690 datasheet has a release date of May 2025."
+    },
+    {
+        "user_input": "Which sensor is specifically identified as a platinum resistance temperature detector (RTD)?",
+        "response": "The YAGEO Nexensos LS219 is specifically identified as a platinum resistance temperature detector (Pt-RTD). The Advantech EVA-2311 also uses a PT1000 probe, which is a type of RTD.",
+        "retrieved_contexts": "Excerpt 1 : LS219, Pt Temperature Sensor according to DIN EN IEC 60751, Excerpt 2 : LS series Pt-RTDs are designed for high volume low temperature applications., Excerpt 3 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor., Excerpt 4 : The other sensors (PJ85775, S15S, BME690) are semiconductor-based sensors., Excerpt 5 : The measuring point for the nominal resistance is 2 mm from the end of the sensor body (LS219).",
+        "reference": "The YAGEO LS219 is identified as a Pt-RTD. The EVA-2311 also uses a PT1000 RTD probe."
+    },
+    {
+        "user_input": "For a long-term, low-power, battery-operated deployment, which would be a better choice between the BME690 and the EVA-2311?",
+        "response": "The Advantech EVA-2311 is a better choice for a long-term, low-power deployment as it is a complete, self-contained unit with a specified battery life of up to 5 years. The BME690 is a component sensor that requires integration, and its power consumption, while low in ULP mode (50 µA), depends heavily on the specific use case and implementation.",
+        "retrieved_contexts": "Excerpt 1 : EVA-2311: Battery life up till 5 years @25°C 15mins interval setting, Excerpt 2 : BME690 Current consumption: 50 µA at ULP mode for p/h/T & air quality, Excerpt 3 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor (a complete product)., Excerpt 4 : BME690 is a component sensor developed for mobile & connected applications., Excerpt 5 : BME690 power consumption can be up to 12mA in continuous mode.",
+        "reference": "The Advantech EVA-2311 is better for long-term battery deployment as it's a complete product with a 5-year battery life specification."
+    },
+    {
+        "user_input": "Which manufacturers produce the sensors from the list that are capable of measuring humidity?",
+        "response": "Banner Engineering (S15S) and Bosch Sensortec (BME690) are the manufacturers that produce the sensors from the list capable of measuring humidity.",
+        "retrieved_contexts": "Excerpt 1 : Banner S15S Temperature and Humidity Sensor, Excerpt 2 : Bosch BME690 Digital low power temperature, humidity, pressure and gas sensor, Excerpt 3 : Advantech EVA-2311 is a temperature sensor., Excerpt 4 : PANJIT PJ85775 is a temperature sensor., Excerpt 5 : YAGEO Nexensos LS219 is a temperature sensor.",
+        "reference": "Banner Engineering and Bosch Sensortec manufacture the humidity-capable sensors in the list."
+    }
+]

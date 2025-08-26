@@ -105,7 +105,7 @@ class RagasEvaluator:
         contexts: List[str], 
         ground_truth: str = None
     ) -> Dict[str, float]:
-        """Evaluate answer using real RAGAS metrics."""
+        """Evaluate answer using real RAGAS metrics with new API."""
         
         if not self.is_available():
             if not self.fallback_silent:
@@ -113,77 +113,68 @@ class RagasEvaluator:
             return {}
         
         try:
-            # Import RAGAS components
-            from ragas import evaluate
-            from ragas.metrics import (
-                faithfulness,
-                answer_relevancy,
-                context_precision,
-                context_recall
-            )
-            from datasets import Dataset
+            # Set OpenAI API key in environment for RAGAS internal use
+            import os
+            if settings.openai_api_key and not os.getenv("OPENAI_API_KEY"):
+                os.environ["OPENAI_API_KEY"] = settings.openai_api_key
             
-            # Prepare evaluator components
+            # Import RAGAS components - new API
+            from ragas import evaluate, SingleTurnSample, EvaluationDataset
+            from ragas.metrics import Faithfulness, AnswerRelevancy, ContextPrecision, ContextRecall
+            
+            # Prepare evaluator LLM 
             evaluator_llm = self._get_evaluator_llm()
-            embeddings = self._get_embeddings()
             
-            # Configure metrics with our LLM and embeddings
-            faithfulness.llm = evaluator_llm
-            answer_relevancy.llm = evaluator_llm
-            answer_relevancy.embeddings = embeddings
-            context_precision.llm = evaluator_llm
-            context_recall.llm = evaluator_llm
-            context_recall.embeddings = embeddings
-            
-            # Prepare data for RAGAS evaluation
-            # Ensure contexts is a list of lists (required format)
-            if isinstance(contexts, list) and len(contexts) > 0:
-                if isinstance(contexts[0], str):
-                    # Convert list of strings to list of lists
-                    contexts_formatted = [contexts]
-                else:
-                    contexts_formatted = contexts
+            # Prepare contexts - ensure it's a list of strings
+            if isinstance(contexts, list):
+                context_list = contexts
             else:
-                contexts_formatted = [[]]
+                # If contexts is a single string, split it or wrap it in a list
+                context_list = [contexts] if contexts else []
             
-            # Create dataset
-            data = Dataset.from_dict({
-                'question': [question],
-                'answer': [answer],
-                'contexts': contexts_formatted,
-                'ground_truth': [ground_truth] if ground_truth else [answer]
-            })
+            # Create sample data as dictionary (EvaluationDataset.from_list expects dicts)
+            sample_data = {
+                "user_input": question,
+                "response": answer,
+                "retrieved_contexts": context_list,  # Must be a list
+                "reference": ground_truth if ground_truth else answer
+            }
+            
+            # Create evaluation dataset from list of dicts (not pre-converted samples)
+            dataset = EvaluationDataset.from_list([sample_data])
+            
+            # Define metrics to evaluate
+            metrics = [
+                Faithfulness(),
+                AnswerRelevancy(),
+                ContextPrecision(),
+                ContextRecall()
+            ]
             
             logger.info(f"Evaluating with RAGAS: Q='{question[:50]}...', A='{answer[:50]}...'")
             
             # Run evaluation
             start_time = time.time()
             result = evaluate(
-                data,
-                metrics=[faithfulness, answer_relevancy, context_precision, context_recall],
-                raise_exceptions=False  # Don't crash on errors
+                dataset=dataset,
+                metrics=metrics,
+                llm=evaluator_llm
             )
             evaluation_time = time.time() - start_time
             
-            # Extract scores - handle both Series and scalar values
-            def extract_score(value):
-                """Safely extract numeric score from RAGAS result."""
-                if hasattr(value, 'iloc'):
-                    # It's a pandas Series
-                    return float(value.iloc[0]) if len(value) > 0 else 0.0
-                else:
-                    # It's already a scalar
-                    return float(value)
+            # Convert to pandas DataFrame to extract metrics
+            df = result.to_pandas()
             
-            metrics = {
-                "faithfulness": round(extract_score(result["faithfulness"]), 3),
-                "answer_relevancy": round(extract_score(result["answer_relevancy"]), 3),
-                "context_precision": round(extract_score(result["context_precision"]), 3),
-                "context_recall": round(extract_score(result["context_recall"]), 3)
+            # Extract scores from the first (and only) row
+            extracted_metrics = {
+                "faithfulness": round(float(df.iloc[0]['faithfulness']), 3),
+                "answer_relevancy": round(float(df.iloc[0]['answer_relevancy']), 3),
+                "context_precision": round(float(df.iloc[0]['context_precision']), 3),
+                "context_recall": round(float(df.iloc[0]['context_recall']), 3)
             }
             
-            logger.info(f"RAGAS evaluation completed in {evaluation_time:.2f}s: {metrics}")
-            return metrics
+            logger.info(f"RAGAS evaluation completed in {evaluation_time:.2f}s: {extracted_metrics}")
+            return extracted_metrics
             
         except Exception as e:
             logger.error(f"RAGAS evaluation failed: {e}")

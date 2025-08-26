@@ -4,10 +4,11 @@ import hashlib
 import uuid
 from pathlib import Path
 from typing import TYPE_CHECKING, Dict, Any, Optional
+import re
 
 from loguru import logger
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, PointStruct, VectorParams, Filter, FieldCondition, MatchValue
+from qdrant_client.models import Distance, PointStruct, VectorParams, Filter, FieldCondition, MatchValue, MatchAny
 
 from newsensor_streamlit.config import settings
 
@@ -93,9 +94,36 @@ class QdrantService:
             logger.error(f"4. Network connectivity to {settings.qdrant_host}:{settings.qdrant_port}")
             raise
     
-    def store_enhanced_chunks(self, chunks: List[Dict[str, Any]], embeddings: List[List[float]], source_path: str) -> str:
+    def _ensure_collection_exists(self, collection_name: str) -> None:
+        """Ensure a specific collection exists."""
+        try:
+            collections = self.client.get_collections()
+            collection_names = [c.name for c in collections.collections]
+            
+            if collection_name not in collection_names:
+                self.client.create_collection(
+                    collection_name=collection_name,
+                    vectors_config=VectorParams(
+                        size=768,
+                        distance=Distance.COSINE
+                    )
+                )
+                logger.info(f"Created collection: {collection_name}")
+                
+        except Exception as e:
+            logger.error(f"Error ensuring collection {collection_name}: {e}")
+            raise
+    
+    def store_enhanced_chunks(self, chunks: List[Dict[str, Any]], embeddings: List[List[float]], source_path: str, collection_name: str = None) -> str:
         """Store enhanced metadata-aware chunks and embeddings."""
         doc_id = f"doc_{hash(source_path)}"
+        
+        # Use provided collection name or default
+        target_collection = collection_name or self.collection_name
+        
+        # Ensure target collection exists
+        if collection_name and collection_name != self.collection_name:
+            self._ensure_collection_exists(collection_name)
         
         points = []
         for idx, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
@@ -144,14 +172,22 @@ class QdrantService:
             points.append(point)
             
         self.client.upsert(
-            collection_name=self.collection_name,
+            collection_name=target_collection,
             points=points
         )
         
+        return doc_id
             
-    def store_document(self, chunks: List[Document], embeddings: List[List[float]], source_path: str) -> str:
+    def store_document(self, chunks: List[Document], embeddings: List[List[float]], source_path: str, collection_name: str = None) -> str:
         """Store document chunks and embeddings (legacy method for backward compatibility)."""
         doc_id = f"doc_{hash(source_path)}"
+        
+        # Use provided collection name or default
+        target_collection = collection_name or self.collection_name
+        
+        # Ensure target collection exists
+        if collection_name and collection_name != self.collection_name:
+            self._ensure_collection_exists(collection_name)
         
         points = []
         for idx, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
@@ -174,70 +210,184 @@ class QdrantService:
             points.append(point)
             
         self.client.upsert(
-            collection_name=self.collection_name,
+            collection_name=target_collection,
             points=points
         )
         
         return doc_id
     
-    def search_with_metadata_filter(self, query: str, sensor_model: str = None, manufacturer: str = None, 
-                                   sensor_type: str = None, k: int = 5) -> List[Dict[str, Any]]:
-        """Search with metadata filtering for precise sensor-specific results."""
+    def search_with_multi_sensor_filter(self, query: str, k: int = 5, collection_name: str = None) -> List[Document]:
+        """
+        Enhanced search that detects multiple sensor models from query and searches for them.
+        Simplified to focus only on sensor models, removing manufacturer and sensor_type requirements.
+        """
         try:
             from newsensor_streamlit.services.embedding_service import EmbeddingService
             embedding_service = EmbeddingService()
             
+            # Extract sensor models from the query
+            detected_sensors = self._extract_sensor_models_from_query(query)
+            
             # Create context hint for better query embedding
-            context_parts = []
-            if sensor_model:
-                context_parts.append(f"sensor model {sensor_model}")
-            if manufacturer:
-                context_parts.append(f"from {manufacturer}")
-            context_hint = " ".join(context_parts) if context_parts else None
+            context_hint = None
+            if detected_sensors:
+                context_hint = f"sensors: {', '.join(detected_sensors)}"
+                logger.info(f"Detected sensor models in query: {detected_sensors}")
             
             query_embedding = embedding_service.generate_query_embedding(query, context_hint)
+            target_collection = collection_name or self.collection_name
             
-            # Build metadata filter
-            filter_conditions = []
-            
-            if sensor_model and sensor_model.lower() != "unknown":
-                # Search in searchable_models array for variations
-                filter_conditions.append(
-                    FieldCondition(key="searchable_models", match=MatchValue(value=sensor_model))
-                )
-            
-            if manufacturer and manufacturer.lower() != "unknown":
-                filter_conditions.append(
-                    FieldCondition(key="manufacturer", match=MatchValue(value=manufacturer))
-                )
-                
-            if sensor_type and sensor_type.lower() != "unknown":
-                filter_conditions.append(
-                    FieldCondition(key="sensor_type", match=MatchValue(value=sensor_type))
-                )
-            
-            # Create filter object
+            # Build metadata filter for multiple sensors
             search_filter = None
-            if filter_conditions:
-                search_filter = Filter(must=filter_conditions)
+            if detected_sensors:
+                # Create OR conditions for multiple sensor models
+                sensor_conditions = []
+                for sensor in detected_sensors:
+                    # Try multiple variations of the sensor name
+                    sensor_variations = [sensor, sensor.upper(), sensor.lower()]
+                    
+                    # Add conditions for exact match and searchable_models array
+                    sensor_conditions.extend([
+                        FieldCondition(key="sensor_model", match=MatchValue(value=sensor)),
+                        FieldCondition(key="searchable_models", match=MatchAny(any=sensor_variations)),
+                        FieldCondition(key="alternate_models", match=MatchAny(any=sensor_variations))
+                    ])
+                
+                # Use 'should' for OR logic between different sensor models
+                search_filter = Filter(should=sensor_conditions) if sensor_conditions else None
             
             # Search with metadata filtering
             search_result = self.client.search(
-                collection_name=self.collection_name,
+                collection_name=target_collection,
                 query_vector=query_embedding,
                 limit=k,
                 with_payload=True,
                 query_filter=search_filter
             )
             
-            logger.info(f"Metadata-filtered search returned {len(search_result)} results")
-            return self._convert_to_enhanced_documents(search_result)
+            result_count = len(search_result)
+            if detected_sensors:
+                logger.info(f"Multi-sensor filtered search returned {result_count} results for sensors: {detected_sensors}")
+            else:
+                logger.info(f"Semantic search (no sensors detected) returned {result_count} results")
+            
+            return self._convert_to_documents(search_result)
+            
+        except Exception as e:
+            logger.error(f"Error in multi-sensor search: {e}")
+            return []
+    
+    def _extract_sensor_models_from_query(self, query: str) -> List[str]:
+        """
+        Extract sensor model names from the user query using pattern matching.
+        Supports common sensor naming patterns like EVA-2311, S15S, LS219, etc.
+        """
+        detected_sensors = []
+        
+        # Common sensor model patterns
+        patterns = [
+            r'\b[A-Z]{2,4}-\d{3,4}\b',  # Pattern like EVA-2311, S15S-1234
+            r'\b[A-Z]{2,4}\d{3,4}\b',   # Pattern like EVA2311, S15S1234
+            r'\b[A-Z]+\d+[A-Z]*\b',     # Pattern like LS219, PJ85775
+            r'\b[A-Z]{1,2}\d{2,3}[A-Z]?\b',  # Pattern like S15S, L219A
+        ]
+        
+        query_upper = query.upper()
+        
+        for pattern in patterns:
+            matches = re.findall(pattern, query_upper)
+            for match in matches:
+                if match not in detected_sensors:
+                    detected_sensors.append(match)
+        
+        # Also check for known sensor models from our database
+        known_sensors = self._get_known_sensor_models()
+        for sensor in known_sensors:
+            if sensor.upper() in query_upper and sensor not in detected_sensors:
+                detected_sensors.append(sensor)
+        
+        return detected_sensors
+    
+    def _get_known_sensor_models(self) -> List[str]:
+        """Get a list of known sensor models from the collection for reference matching."""
+        try:
+            # Quick scroll to get sample of sensor models
+            scroll_result = self.client.scroll(
+                collection_name=self.collection_name,
+                limit=100,  # Sample size
+                with_payload=["sensor_model", "searchable_models"],
+                with_vectors=False
+            )
+            
+            known_models = set()
+            for point in scroll_result[0]:
+                if point.payload:
+                    # Add direct sensor_model
+                    sensor_model = point.payload.get("sensor_model")
+                    if sensor_model and sensor_model != "unknown":
+                        known_models.add(sensor_model)
+                    
+                    # Add searchable_models
+                    searchable_models = point.payload.get("searchable_models", [])
+                    for model in searchable_models:
+                        if model and model != "unknown":
+                            known_models.add(model)
+            
+            return list(known_models)
+            
+        except Exception as e:
+            logger.warning(f"Could not retrieve known sensor models: {e}")
+            return []
+    
+    def search_with_metadata_filter(self, query: str, sensor_model: str = None, manufacturer: str = None, 
+                                   sensor_type: str = None, k: int = 5, collection_name: str = None) -> List[Document]:
+        """
+        Legacy method for backward compatibility. Now simplified to focus only on sensor models.
+        For multi-sensor detection, use search_with_multi_sensor_filter instead.
+        """
+        try:
+            from newsensor_streamlit.services.embedding_service import EmbeddingService
+            embedding_service = EmbeddingService()
+            
+            # Create context hint for better query embedding
+            context_hint = f"sensor model {sensor_model}" if sensor_model else None
+            
+            query_embedding = embedding_service.generate_query_embedding(query, context_hint)
+            
+            # Build simplified metadata filter - only sensor model
+            search_filter = None
+            if sensor_model and sensor_model.lower() != "unknown":
+                # Try multiple variations and fields for flexibility
+                sensor_variations = [sensor_model, sensor_model.upper(), sensor_model.lower()]
+                
+                sensor_conditions = [
+                    FieldCondition(key="sensor_model", match=MatchValue(value=sensor_model)),
+                    FieldCondition(key="searchable_models", match=MatchAny(any=sensor_variations)),
+                    FieldCondition(key="alternate_models", match=MatchAny(any=sensor_variations))
+                ]
+                
+                search_filter = Filter(should=sensor_conditions)
+            
+            # Use provided collection name or default
+            target_collection = collection_name or self.collection_name
+            
+            # Search with metadata filtering
+            search_result = self.client.search(
+                collection_name=target_collection,
+                query_vector=query_embedding,
+                limit=k,
+                with_payload=True,
+                query_filter=search_filter
+            )
+            
+            logger.info(f"Simplified metadata-filtered search returned {len(search_result)} results")
+            return self._convert_to_documents(search_result)
             
         except Exception as e:
             logger.error(f"Error in metadata-filtered search: {e}")
             return []
     
-    def search_similar(self, query: str, doc_id: str, k: int = 5) -> List[Document]:
+    def search_similar(self, query: str, doc_id: str, k: int = 5, collection_name: str = None) -> List[Document]:
         """Search for similar context chunks (legacy method)."""
         try:
             from newsensor_streamlit.services.embedding_service import EmbeddingService
@@ -246,9 +396,12 @@ class QdrantService:
                 query, task_type="RETRIEVAL_QUERY"
             )
             
+            # Use provided collection name or default
+            target_collection = collection_name or self.collection_name
+            
             # Search for similar documents
             search_result = self.client.search(
-                collection_name=self.collection_name,
+                collection_name=target_collection,
                 query_vector=query_embedding,
                 limit=k,
                 with_payload=True,
@@ -263,39 +416,10 @@ class QdrantService:
             logger.error(f"Error searching similar documents: {e}")
             return []
     
-    def store_document(self, chunks: List[Document], embeddings: List[List[float]], source_path: str) -> str:
-        """Store document chunks and embeddings."""
-        doc_id = f"doc_{hash(source_path)}"
-        
-        points = []
-        for idx, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
-            # Create unique ID based on content hash + index
-            content_hash = hashlib.md5(chunk.page_content.encode()).hexdigest()[:8]
-            point_id = abs(int(content_hash, 16)) + idx
-            
-            point = PointStruct(
-                id=point_id,
-                vector=embedding,
-                payload={
-                    "content": chunk.page_content,
-                    "metadata": chunk.metadata,
-                    "source_path": str(source_path),
-                    "chunk_index": idx,
-                    "doc_id": doc_id,
-                    "timestamp": str(Path(source_path).stat().st_mtime)
-                }
-            )
-            points.append(point)
-            
-        self.client.upsert(
-            collection_name=self.collection_name,
-            points=points
-        )
-        
     def search_for_reranking(self, query: str, doc_id: str = None, k: int = 12, 
                            sensor_model: str = None, manufacturer: str = None) -> List[dict]:
         """
-        Search for documents optimized for re-ranking with optional metadata filtering.
+        Search for documents optimized for re-ranking. Simplified to focus only on sensor models.
         Returns raw document data with scores for re-ranking service.
         """
         try:
@@ -303,16 +427,11 @@ class QdrantService:
             embedding_service = EmbeddingService()
             
             # Create context hint for better query embedding
-            context_parts = []
-            if sensor_model:
-                context_parts.append(f"sensor model {sensor_model}")
-            if manufacturer:
-                context_parts.append(f"from {manufacturer}")
-            context_hint = " ".join(context_parts) if context_parts else None
+            context_hint = f"sensor model {sensor_model}" if sensor_model else None
             
             query_embedding = embedding_service.generate_query_embedding(query, context_hint)
             
-            # Build filter conditions
+            # Build simplified filter conditions - only sensor model and doc_id
             filter_conditions = []
             
             if doc_id:
@@ -321,19 +440,22 @@ class QdrantService:
                 )
             
             if sensor_model and sensor_model.lower() != "unknown":
-                filter_conditions.append(
-                    FieldCondition(key="searchable_models", match=MatchValue(value=sensor_model))
-                )
-            
-            if manufacturer and manufacturer.lower() != "unknown":
-                filter_conditions.append(
-                    FieldCondition(key="manufacturer", match=MatchValue(value=manufacturer))
-                )
-            
-            # Create filter object
-            search_filter = None
-            if filter_conditions:
-                search_filter = Filter(must=filter_conditions)
+                # Use flexible sensor model matching
+                sensor_variations = [sensor_model, sensor_model.upper(), sensor_model.lower()]
+                
+                sensor_conditions = [
+                    FieldCondition(key="sensor_model", match=MatchValue(value=sensor_model)),
+                    FieldCondition(key="searchable_models", match=MatchAny(any=sensor_variations)),
+                    FieldCondition(key="alternate_models", match=MatchAny(any=sensor_variations))
+                ]
+                
+                # If we have other must conditions, add sensor conditions as should
+                if filter_conditions:
+                    search_filter = Filter(must=filter_conditions, should=sensor_conditions)
+                else:
+                    search_filter = Filter(should=sensor_conditions)
+            else:
+                search_filter = Filter(must=filter_conditions) if filter_conditions else None
             
             # Search for similar documents with larger k for re-ranking
             search_result = self.client.search(
@@ -364,7 +486,7 @@ class QdrantService:
                     }
                     documents.append(doc_data)
             
-            logger.info(f"Retrieved {len(documents)} documents for re-ranking with metadata filtering")
+            logger.info(f"Retrieved {len(documents)} documents for re-ranking (simplified sensor-based filtering)")
             return documents
             
         except Exception as e:

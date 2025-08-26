@@ -1,0 +1,211 @@
+[
+    {
+        "user_input": "What is the battery life of the Advantech EVA-2311 sensor and under what conditions is this achieved?",
+        "response": "The Advantech EVA-2311 sensor has a battery life of up to 5 years, achieved with a 15-minute data transmission interval at 25°C.",
+        "retrieved_contexts": [
+            "Battery life up till 5 years @25°C, 15mins interval setting",
+            "EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years basing on certain condition",
+            "Power Input: 3.6V AA Battery *2pcs (Not included)",
+            "Battery Life: 5 years@25°C, 15mins interval setting"
+        ],
+        "reference": "The Advantech EVA-2311 sensor has a battery life of up to 5 years, achieved with a 15-minute data transmission interval at 25°C."
+    },
+    {
+        "user_input": "What is the full temperature detection range of the EVA-2311 sensor?",
+        "response": "The EVA-2311 sensor has a temperature detection range from -70°C to 200°C.",
+        "retrieved_contexts": [
+            "-70°C to 200°C temperature detection range",
+            "Measurement Range: -70°C to 200°C",
+            "IP67 rating design with -70°C to 200°C temperature detection range",
+            "Temperature Sensor Measurement Range: -70°C to 200°C"
+        ],
+        "reference": "The temperature detection range for the Advantech EVA-2311 is -70°C to 200°C."
+    },
+    {
+        "user_input": "What wireless communication technology does the EVA-2311 use?",
+        "response": "The EVA-2311 uses LoRaWAN wireless communication technology.",
+        "retrieved_contexts": [
+            "LoRaWAN wireless connectivity",
+            "Topology: Star (LoRa/LoRaWAN)",
+            "EVA-2311 is a LoRaWAN PT1000 round head probe sensor",
+            "Configuration Interface: Wireless downlink commands"
+        ],
+        "reference": "The EVA-2311 sensor uses LoRaWAN wireless communication technology."
+    },
+    {
+        "user_input": "What is the accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment?",
+        "response": "The accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment is ±0.8°C between 0°C and 55°C.",
+        "retrieved_contexts": [
+            "Accuracy (Host and Sensor are in same environment) ±0.8°C between 0°C and 55°C",
+            "Temperature Sensor accuracy specifications",
+            "Measurement Range: -70°C to 200°C"
+        ],
+        "reference": "The accuracy of the Advantech EVA-2311 is ±0.8°C between 0°C and 55°C when the host and sensor are in the same environment."
+    },
+    {
+        "user_input": "What are the available LoRaWAN frequency bands for the EVA-2311?",
+        "response": "The EVA-2311 supports EU 863-870 MHz, US 902-928 MHz, AU 915-928 MHz, and AS 919-924 MHz frequency bands.",
+        "retrieved_contexts": [
+            "Frequency Band EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz)",
+            "EVA-2311-NA LoRaWAN Temperature PT1000 Round Head Probe Sensor - US 902-928 (MHz)",
+            "EVA-2311-EA LoRaWAN Temperature PT1000 Round Head Probe Sensor - EU 863-870 (MHz)",
+            "EVA-2311-TA LoRaWAN Temperature PT1000 Round Head Probe Sensor - AS 919-924 (MHz)",
+            "EVA-2311-ZA LoRaWAN Temperature PT1000 Round Head Probe Sensor - AU 915-928 (MHz)"
+        ],
+        "reference": "The EVA-2311 supports EU 863-870, US 902-928, AU 915-928, and AS 919-924 MHz frequency bands."
+    },
+    {
+        "user_input": "What is the length of the probe cable for the EVA-2311?",
+        "response": "The EVA-2311 probe cable is 2000 mm (2 meters) long.",
+        "retrieved_contexts": [
+            "Wire Length: 2000 mm",
+            "The extended sensor itself has 2m length cable",
+            "LoRaWAN Temperature PT1000 Round Head Probe Sensor with 2m cable"
+        ],
+        "reference": "The Advantech EVA-2311 probe cable is 2000 mm long."
+    },
+    {
+        "user_input": "What are the storage temperature and humidity limits for the EVA-2311?",
+        "response": "The storage limits for the EVA-2311 are -40°C to 85°C temperature and 0% to 90% RH humidity.",
+        "retrieved_contexts": [
+            "Storage Temperature: -40°C ~ 85°C",
+            "Storage Humidity: 0% ~ 90% RH",
+            "Environment specifications for storage conditions"
+        ],
+        "reference": "The storage limits for the EVA-2311 are -40°C to 85°C and 0% to 90% RH."
+    },
+    {
+        "user_input": "What type of temperature probe does the EVA-2311 use?",
+        "response": "The EVA-2311 uses a PT1000 round head probe for temperature measurement.",
+        "retrieved_contexts": [
+            "LoRaWAN Temperature PT1000 Round Head Probe Sensor",
+            "EVA-2311 is a LoRaWAN PT1000 round head probe sensor",
+            "IP67 for PT1000 Round Head Probe Sensor"
+        ],
+        "reference": "The Advantech EVA-2311 uses a PT1000 probe."
+    },
+    {
+        "user_input": "What is the transmit power of the Advantech EVA-2311?",
+        "response": "The transmit power of the Advantech EVA-2311 is up to 20dBm.",
+        "retrieved_contexts": [
+            "Transmit Power: Up to 20dBm",
+            "Wireless Communication specifications",
+            "LoRaWAN transmission capabilities"
+        ],
+        "reference": "The transmit power of the Advantech EVA-2311 is up to 20dBm."
+    },
+    {
+        "user_input": "What is the accuracy formula for different environments between -70°C and 0°C?",
+        "response": "The accuracy of the EVA-2311 in different environments between -70°C and 0°C is ±{(0.15 + 0.002 * |T2|) + 1}°C.",
+        "retrieved_contexts": [
+            "Accuracy (Host and Sensor are in different environment) ±{(0.15 + 0.002* |T2|)+1}°C between -70°C and 0°C",
+            "Temperature accuracy specifications for different environments",
+            "±{(0.15 + 0.002* |T2|)+0.6}°C between 55°C and 200°C"
+        ],
+        "reference": "The accuracy of the EVA-2311 in different environments between -70°C and 0°C is ±{(0.15 + 0.002 * |T2|) + 1}°C."
+    },
+    {
+        "user_input": "What are the dimensions and IP rating of the EVA-2311 main unit?",
+        "response": "The EVA-2311 main unit has dimensions of 112 x 51 x 71.5 mm (H x W x D) and an IP30 rating.",
+        "retrieved_contexts": [
+            "Dimension (H x W x D): 112 x 51 x 71.5 mm",
+            "IP Class: IP30",
+            "General specifications of the main unit",
+            "Physical characteristics and protection rating"
+        ],
+        "reference": "The dimensions of the Advantech EVA-2311 are 112 x 51 x 71.5 mm with IP30 rating."
+    },
+    {
+        "user_input": "Is the EVA-2311 CE and FCC certified for wireless operation?",
+        "response": "Yes, the EVA-2311 is CE (RED) and FCC certified, along with TELEC, RCM, and NCC certifications.",
+        "retrieved_contexts": [
+            "Certification: CE (RED), FCC, TELEC, RCM, NCC",
+            "Wireless regulatory compliance",
+            "International certification standards met"
+        ],
+        "reference": "The Advantech EVA-2311 holds CE (RED), FCC, TELEC, RCM, and NCC certifications."
+    },
+    {
+        "user_input": "Does the EVA-2311 have LED indicators and what do they show?",
+        "response": "Yes, the EVA-2311 has LED indicators that show power on, TX (transmission), and reset to default status.",
+        "retrieved_contexts": [
+            "LED Indicator: Power on, TX, reset to default",
+            "Status indication through LED display",
+            "Visual feedback for operational states"
+        ],
+        "reference": "The LED on the EVA-2311 indicates power on, transmission (TX), and reset."
+    },
+    {
+        "user_input": "What is the configuration interface for the EVA-2311?",
+        "response": "The EVA-2311 uses wireless downlink commands as its configuration interface.",
+        "retrieved_contexts": [
+            "Configuration Interface: Wireless downlink commands",
+            "Remote configuration capabilities",
+            "Wireless parameter setting method"
+        ],
+        "reference": "Configuration of the Advantech EVA-2311 is done via wireless downlink commands."
+    },
+    {
+        "user_input": "What mounting options are available for the EVA-2311?",
+        "response": "The EVA-2311 can be mounted using wall, magnetic, or pole mounting options.",
+        "retrieved_contexts": [
+            "Mounting: Wall, Magnetic, Pole",
+            "Installation flexibility options",
+            "Multiple mounting configurations supported"
+        ],
+        "reference": "The EVA-2311 supports wall, magnetic, and pole mounting."
+    },
+    {
+        "user_input": "What type of power source does the EVA-2311 require?",
+        "response": "The EVA-2311 requires 2 AA 3.6V lithium batteries for power operation (batteries not included).",
+        "retrieved_contexts": [
+            "Power Input: 3.6V AA Battery *2pcs (Not included)",
+            "EVA-2311 is powered by 2 AA 3.6v Li-ion batteries",
+            "Bat.Cylindrical 3.6V/2500mAh AA Li/SOCl2 accessories available"
+        ],
+        "reference": "The EVA-2311 requires 2 AA 3.6V batteries (not included)."
+    },
+    {
+        "user_input": "What is the operating temperature and humidity range for the EVA-2311?",
+        "response": "The EVA-2311 operates in a temperature range of -20°C to 55°C and humidity range of 0% to 90% RH.",
+        "retrieved_contexts": [
+            "Operating Temperature: -20°C to 55°C",
+            "Operating Humidity: 0% ~ 90% RH",
+            "Environmental operating specifications",
+            "Operational environment limits"
+        ],
+        "reference": "The EVA-2311 operates in -20°C to 55°C and 0% to 90% RH conditions."
+    },
+    {
+        "user_input": "What is the communication range of the EVA-2311 LoRaWAN sensor?",
+        "response": "The EVA-2311 can transmit data over hundreds to thousands of meters using LoRaWAN technology with up to 20dBm transmit power.",
+        "retrieved_contexts": [
+            "data transmission range can up till hundred or thousand meters away",
+            "Transmit Power: Up to 20dBm",
+            "high penetration rate LoRa connectivity",
+            "Sensitivity: -148dB"
+        ],
+        "reference": "The EVA-2311 has a transmission range of hundreds to thousands of meters using LoRaWAN."
+    },
+    {
+        "user_input": "What applications is the EVA-2311 specifically designed for?",
+        "response": "The EVA-2311 is designed for temperature monitoring in refrigerators, freezers, cooling pipes, and cold chain applications.",
+        "retrieved_contexts": [
+            "capable to measure temperature at different kinds of applications, such like refrigerator, freezer, cooling pipe",
+            "Cold chain monitoring applications",
+            "Temperature detection range suitable for various cooling applications"
+        ],
+        "reference": "Typical applications for the EVA-2311 include monitoring refrigerators, freezers, and cooling pipes."
+    },
+    {
+        "user_input": "What probe specifications does the EVA-2311 have?",
+        "response": "The EVA-2311 probe has PT1000 sensor type, 5 x 30 mm dimensions, IP67 rating, and 2000 mm cable length.",
+        "retrieved_contexts": [
+            "Probe Dimension: 5 x 30 mm",
+            "IP Class: IP67",
+            "Wire Length: 2000 mm",
+            "LoRaWAN Temperature PT1000 Round Head Probe Sensor"
+        ],
+        "reference": "The EVA-2311 probe is PT1000 type, 5x30mm, IP67 rated with 2000mm cable."
+    }
+]

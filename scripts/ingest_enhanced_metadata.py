@@ -65,9 +65,14 @@ def ingest_with_enhanced_metadata():
                 embedding = embedding_service.generate_metadata_aware_embedding(chunk)
                 embeddings.append(embedding)
             
-            # 4. Store in Qdrant
-            logger.info("Storing enhanced chunks in Qdrant...")
-            doc_id = qdrant_service.store_enhanced_chunks(chunks, embeddings, str(pdf_file))
+            # 4. Store in Qdrant with collection name "sensors_with_metadata"
+            logger.info("Storing enhanced chunks in 'sensors_with_metadata' collection...")
+            doc_id = qdrant_service.store_enhanced_chunks(
+                chunks, 
+                embeddings, 
+                str(pdf_file),
+                collection_name="sensors_with_metadata"  # Explicit collection name
+            )
             
             processing_time = time.time() - start_time
             logger.info(f"✅ Successfully processed {pdf_file.name} in {processing_time:.2f}s")

@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Any, List
+from typing import Any, List, Union
 from enum import Enum
 
-from pydantic import Field
+from pydantic import Field, validator
 from pydantic_settings import BaseSettings
 
 
@@ -30,10 +30,27 @@ class RAGProvider(str, Enum):
 
 class Settings(BaseSettings):
     model_config = {"env_file": ".env"}
+    
+    # API Keys
     google_api_key: str = Field(description="Google API key")
     openai_api_key: str = Field(default="", description="OpenAI API key")
     openrouter_api_key: str = Field(default="", description="OpenRouter API key")
     llama_parse_api_key: str = Field(default="", description="LlamaParse API key")
+    
+    # Database Configuration
+    qdrant_host: str = Field(default="localhost", description="Qdrant host")
+    qdrant_port: int = Field(default=6333, description="Qdrant port")
+    qdrant_api_key: str = Field(default="", description="Qdrant API key for authentication")
+    qdrant_collection: str = Field(default="newsensor_datasheets", description="Qdrant collection name")
+    
+    # MongoDB Configuration for Conversations
+    mongodb_uri: str = Field(default="mongodb://localhost:27017", description="MongoDB connection URI")
+    mongodb_database: str = Field(default="newsensor_conversations", description="MongoDB database name")
+    mongodb_conversations_collection: str = Field(default="conversations", description="MongoDB collection for conversations")
+    
+    # Application mode
+    mode: str = Field(default="insert", description="Application mode: 'evaluation' or 'insert'")
+    env: str = Field(default="development", description="Environment: 'development' or 'production'")
     
     # PDF Parser Configuration
     pdf_parser_backend: str = Field(default="pymupdf4llm", description="Primary PDF parser backend")
@@ -50,31 +67,19 @@ class Settings(BaseSettings):
     rag_provider: str = Field(default="openai", description="RAG provider (openai or openrouter)")
     rag_chat_model: str = Field(default="gpt-4o-mini", description="Model for RAG chat responses")
     rag_temperature: float = Field(default=0.1, description="Temperature for RAG model")
-    
-    qdrant_host: str = Field(default="localhost", description="Qdrant host")
-    qdrant_port: int = Field(default=6333, description="Qdrant port")
-    qdrant_api_key: str = Field(default="", description="Qdrant API key for authentication")
-    qdrant_collection: str = Field(default="newsensor_datasheets", description="Qdrant collection name")
-    
-    # MongoDB Configuration for Conversations
-    mongodb_uri: str = Field(default="mongodb://localhost:27017", description="MongoDB connection URI")
-    mongodb_database: str = Field(default="newsensor_conversations", description="MongoDB database name")
-    mongodb_conversations_collection: str = Field(default="conversations", description="MongoDB collection for conversations")
-    
-    # Application mode
-    mode: str = Field(default="insert", description="Application mode: 'evaluation' or 'insert'")
-    env: str = Field(default="development", description="Environment: 'development' or 'production'")
-    
+    # Directory Paths
     data_dir: Path = Field(default=Path("data"), description="Base data directory")
     docs_dir: Path = Field(default=Path("data/docs"), description="Storage for processed documents")
     uploads_dir: Path = Field(default=Path("data/uploads"), description="Temporary upload directory")
     cache_dir: Path = Field(default=Path("data/cache"), description="Cache directory")
     conversations_dir: Path = Field(default=Path("data/conversations"), description="Conversation history storage")
     
+    # Chunking Configuration
     chunk_size: int = Field(default=512, description="Text chunk size for embedding (optimized for small document set)")
     chunk_overlap: int = Field(default=64, description="Overlap between chunks")
     
-    max_context_chunks: int = Field(default=4, description="Maximum context chunks for LLM (reduced for focused retrieval)")
+    # Context Configuration - Handle both int and percentage string
+    max_context_chunks: Union[int, str] = Field(default=4, description="Maximum context chunks for LLM (can be int or percentage like '5%')")
     llm_model: str = Field(default="openai/gpt-4o", description="Default LLM model")
     embedding_model: str = Field(default="models/text-embedding-004", description="Google embedding model")
     
@@ -93,6 +98,16 @@ class Settings(BaseSettings):
     ragas_evaluator_model: str = Field(default="gpt-4o", description="Model for RAGAS evaluation")
     ragas_test_dataset_path: str = Field(default="data/evaluation/test_dataset.csv", description="Path to test dataset")
     ragas_fallback_silent: bool = Field(default=True, description="Silent fallback on RAGAS errors")
+
+    @validator('max_context_chunks', pre=True)
+    def validate_max_context_chunks(cls, v):
+        """Handle both int and percentage string values for max_context_chunks"""
+        if isinstance(v, str) and v.endswith('%'):
+            return v  # Keep percentage strings as-is
+        try:
+            return int(v)  # Convert to int if possible
+        except (ValueError, TypeError):
+            return v  # Return as-is if conversion fails
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)

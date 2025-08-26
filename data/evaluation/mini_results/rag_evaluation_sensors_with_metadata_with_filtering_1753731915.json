@@ -1,0 +1,455 @@
+{
+  "metadata": {
+    "collection_name": "sensors_with_metadata",
+    "evaluator_model": "gpt-4o",
+    "top_k_chunks": 5,
+    "total_samples": 5,
+    "successful_evaluations": 5,
+    "failed_evaluations": 0,
+    "total_processing_time": 11.316111326217651,
+    "average_processing_time": 2.26322226524353,
+    "evaluation_timestamp": "2025-07-29 04:46:50",
+    "metadata_filtering_enabled": true,
+    "metadata_filter_statistics": {
+      "total_queries": 5,
+      "queries_with_detected_sensors": 5,
+      "total_sensors_detected": 5,
+      "unique_sensors_detected": [
+        "EVA-2311"
+      ]
+    },
+    "config": {
+      "chunk_size": 1000,
+      "chunk_overlap": 200,
+      "embedding_model": "Google Gemini"
+    }
+  },
+  "aggregate_metrics": {
+    "faithfulness": {
+      "mean": 0.7534,
+      "min": 0.5,
+      "max": 1.0,
+      "count": 5
+    },
+    "answer_relevancy": {
+      "mean": 0.9936,
+      "min": 0.97,
+      "max": 1.0,
+      "count": 5
+    },
+    "context_precision": {
+      "mean": 0.58,
+      "min": 0.0,
+      "max": 1.0,
+      "count": 5
+    },
+    "context_recall": {
+      "mean": 0.9,
+      "min": 0.5,
+      "max": 1.0,
+      "count": 5
+    }
+  },
+  "detailed_results": [
+    {
+      "sample_id": 1,
+      "question": "What is the battery life of the Advantech EVA-2311 sensor and under what conditions is this achieved?",
+      "generated_answer": "The battery life of the Advantech EVA-2311 sensor can last up to 5 years when operating at a temperature of 25°C with a 15-minute interval setting for data transmission.",
+      "ground_truth": "The Advantech EVA-2311 sensor has a battery life of up to 5 years, achieved with a 15-minute data transmission interval at 25°C.",
+      "expected_response": "The Advantech EVA-2311 sensor has a battery life of up to 5 years, which is based on a 15-minute data transmission interval at a temperature of 25°C.",
+      "expected_contexts": "Excerpt 1 : Battery life up till 5 years @25°C 15mins interval setting, Excerpt 2 : EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years basing on certain condition., Excerpt 3 : Power Input: 3.6V AA Battery * 2pcs (Not included), Excerpt 4 : Features: LoRaWAN wireless connectivity, Excerpt 5 : Introduction: EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+      "retrieved_contexts": [
+        "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ----------------------------------------------------- |---|---|\n| Accuracy (Host and Sensor are in same environment)       | ±0.8°C between 0°C and 55°C                           | | |\n| Accuracy (Host and Sensor are in different environments) | ±{(0.15 + 0.002\\* |T2|)+1}°C between -70°C and 0°C    |\n|                                                          | ±{(0.15 + 0.002\\* |T2|)+0.6}°C between 55°C and 200°C |\n\nAll product specifications are subject to change without notice. Last updated: 19-Apr-2024",
+        "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Sensor\n- Battery life up till 5 years@25°C, 15mins interval setting\n- Easy to deploy and maintain\n\nRoHS COMPLIANT 2002/95/EC\n\n# Introduction\n\nEVA-2311 is a LoRaWAN PT1000 round head probe sensor. The extended sensor itself has 2m length cable, IP67 rating design with -70°C to 200°C temperature detection range. It is capable to measure temperature at different kinds of applications, such as refrigerator, freezer, cooling pipe, etc. With its wide range, high penetration rate LoRa connectivity, the data transmission range can be up till hundred or thousand meters away. EVA-2311 can be installed directly on the walls, metal box or poles. EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years based on certain conditions.\n\n# Common Specification",
+        "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------------------------------------------------- | --------------- | ------------------- |\n| Frequency Band         | EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz) | IP Class        | IP67                |\n| Spreading Factor       | 7\\~12                                                                     | Wire Length     | 2000 mm             |\n| Transmit Power         | Up to 20dBm                                                               | Topology        | Star (LoRa/LoRaWAN) |\n| Sensitivity            | -148dB                                                                    |                 |                     |\n\n# Ordering Information",
+        "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| WISE-6610-TB    | LoRaWAN gateway with AS923 MHz              |\n| WISE-6610-JB    | LoRaWAN gateway with JP923 MHz              |\n| WISE-6610-EL-NB | LoRaWAN gateway with NA915 MHz and Edgelink |\n| WISE-6610-EL-EB | LoRaWAN gateway with EU868 MHz and Edgelink |\n| WISE-6610-EL-TB | LoRaWAN gateway with AS923 MHz and Edgelink |\n| WISE-6610-EL-JB | LoRaWAN gateway with JP923 MHz and Edgelink |\n\n# Environment\n\n| Operating Temperature | -20°C to 55°C |\n| --------------------- | ------------- |\n| Operating Humidity    | 0% \\~ 90% RH  |\n| Storage Temperature   | -40°C \\~ 85°C |\n| Storage Humidity      | 0% \\~ 90% RH  |\n\n# Temperature Sensor",
+        "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | --------------------------------------------------------------------- |\n| EVA-2311-NA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - US 902-928 (MHz) |\n| EVA-2311-EA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - EU 863-870 (MHz) |\n| EVA-2311-TA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AS 919-924 (MHz) |\n| EVA-2311-ZA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AU 915-928 (MHz) |\n\n# LoRaWAN Gateway"
+      ],
+      "contexts_count": 5,
+      "processing_time": 2.551370143890381,
+      "ragas_metrics": {
+        "faithfulness": 0.667,
+        "answer_relevancy": 0.97,
+        "context_precision": 0.5,
+        "context_recall": 1.0
+      },
+      "search_method": "multi_sensor_filtered",
+      "detected_sensors": [
+        "EVA-2311"
+      ],
+      "metadata_filtering_enabled": true,
+      "context_sources": [
+        {
+          "chunk_index": 0,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ------------------"
+        },
+        {
+          "chunk_index": 1,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Se"
+        },
+        {
+          "chunk_index": 2,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------"
+        },
+        {
+          "chunk_index": 3,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| "
+        },
+        {
+          "chunk_index": 4,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | ----------------------------------------"
+        }
+      ]
+    },
+    {
+      "sample_id": 2,
+      "question": "What is the IP rating of the Advantech EVA-2311's probe and its main body?",
+      "generated_answer": "The Advantech EVA-2311's probe has an IP67 rating, which means it is dust-tight and can withstand immersion in water up to 1 meter for a duration of up to 30 minutes. The main body of the sensor is also expected to have the same IP67 rating, as it is designed to be used in similar environments.",
+      "ground_truth": "The probe of the Advantech EVA-2311 is rated IP67, and the main unit is rated IP30.",
+      "expected_response": "For the Advantech EVA-2311, the PT1000 round head probe sensor has an IP67 rating, while the main body of the device has an IP30 rating.",
+      "expected_contexts": "Excerpt 1 : Features: IP67 for PT1000 Round Head Probe Sensor, Excerpt 2 : General: IP Class: IP30, Excerpt 3 : The extended sensor itself has 2m length cable, IP67 rating design., Excerpt 4 : Probe Dimension: 5 x 30 mm, Excerpt 5 : Mounting: Wall, Magnetic, Pole",
+      "retrieved_contexts": [
+        "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ----------------------------------------------------- |---|---|\n| Accuracy (Host and Sensor are in same environment)       | ±0.8°C between 0°C and 55°C                           | | |\n| Accuracy (Host and Sensor are in different environments) | ±{(0.15 + 0.002\\* |T2|)+1}°C between -70°C and 0°C    |\n|                                                          | ±{(0.15 + 0.002\\* |T2|)+0.6}°C between 55°C and 200°C |\n\nAll product specifications are subject to change without notice. Last updated: 19-Apr-2024",
+        "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------------------------------------------------- | --------------- | ------------------- |\n| Frequency Band         | EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz) | IP Class        | IP67                |\n| Spreading Factor       | 7\\~12                                                                     | Wire Length     | 2000 mm             |\n| Transmit Power         | Up to 20dBm                                                               | Topology        | Star (LoRa/LoRaWAN) |\n| Sensitivity            | -148dB                                                                    |                 |                     |\n\n# Ordering Information",
+        "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Sensor\n- Battery life up till 5 years@25°C, 15mins interval setting\n- Easy to deploy and maintain\n\nRoHS COMPLIANT 2002/95/EC\n\n# Introduction\n\nEVA-2311 is a LoRaWAN PT1000 round head probe sensor. The extended sensor itself has 2m length cable, IP67 rating design with -70°C to 200°C temperature detection range. It is capable to measure temperature at different kinds of applications, such as refrigerator, freezer, cooling pipe, etc. With its wide range, high penetration rate LoRa connectivity, the data transmission range can be up till hundred or thousand meters away. EVA-2311 can be installed directly on the walls, metal box or poles. EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years based on certain conditions.\n\n# Common Specification",
+        "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| WISE-6610-TB    | LoRaWAN gateway with AS923 MHz              |\n| WISE-6610-JB    | LoRaWAN gateway with JP923 MHz              |\n| WISE-6610-EL-NB | LoRaWAN gateway with NA915 MHz and Edgelink |\n| WISE-6610-EL-EB | LoRaWAN gateway with EU868 MHz and Edgelink |\n| WISE-6610-EL-TB | LoRaWAN gateway with AS923 MHz and Edgelink |\n| WISE-6610-EL-JB | LoRaWAN gateway with JP923 MHz and Edgelink |\n\n# Environment\n\n| Operating Temperature | -20°C to 55°C |\n| --------------------- | ------------- |\n| Operating Humidity    | 0% \\~ 90% RH  |\n| Storage Temperature   | -40°C \\~ 85°C |\n| Storage Humidity      | 0% \\~ 90% RH  |\n\n# Temperature Sensor",
+        "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | --------------------------------------------------------------------- |\n| EVA-2311-NA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - US 902-928 (MHz) |\n| EVA-2311-EA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - EU 863-870 (MHz) |\n| EVA-2311-TA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AS 919-924 (MHz) |\n| EVA-2311-ZA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AU 915-928 (MHz) |\n\n# LoRaWAN Gateway"
+      ],
+      "contexts_count": 5,
+      "processing_time": 2.865053415298462,
+      "ragas_metrics": {
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.998,
+        "context_precision": 0.0,
+        "context_recall": 0.5
+      },
+      "search_method": "multi_sensor_filtered",
+      "detected_sensors": [
+        "EVA-2311"
+      ],
+      "metadata_filtering_enabled": true,
+      "context_sources": [
+        {
+          "chunk_index": 0,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ------------------"
+        },
+        {
+          "chunk_index": 1,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------"
+        },
+        {
+          "chunk_index": 2,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Se"
+        },
+        {
+          "chunk_index": 3,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| "
+        },
+        {
+          "chunk_index": 4,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | ----------------------------------------"
+        }
+      ]
+    },
+    {
+      "sample_id": 3,
+      "question": "What is the full temperature detection range of the EVA-2311 sensor?",
+      "generated_answer": "The full temperature detection range of the EVA-2311 sensor is -70°C to 200°C.",
+      "ground_truth": "The temperature detection range for the Advantech EVA-2311 is -70°C to 200°C.",
+      "expected_response": "The Advantech EVA-2311 has a temperature detection range of -70°C to 200°C.",
+      "expected_contexts": "Excerpt 1 : Features: -70°C to 200°C temperature detection range, Excerpt 2 : Temperature Sensor Measurement Range: -70°C to 200°C, Excerpt 3 : Accuracy (Host and Sensor are in same environment): ±0.8°C between 0°C and 55°C, Excerpt 4 : It capable to measure temperature at different kinds of applications, such like refrigerator, freezer, cooling pipe, etc., Excerpt 5 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+      "retrieved_contexts": [
+        "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ----------------------------------------------------- |---|---|\n| Accuracy (Host and Sensor are in same environment)       | ±0.8°C between 0°C and 55°C                           | | |\n| Accuracy (Host and Sensor are in different environments) | ±{(0.15 + 0.002\\* |T2|)+1}°C between -70°C and 0°C    |\n|                                                          | ±{(0.15 + 0.002\\* |T2|)+0.6}°C between 55°C and 200°C |\n\nAll product specifications are subject to change without notice. Last updated: 19-Apr-2024",
+        "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------------------------------------------------- | --------------- | ------------------- |\n| Frequency Band         | EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz) | IP Class        | IP67                |\n| Spreading Factor       | 7\\~12                                                                     | Wire Length     | 2000 mm             |\n| Transmit Power         | Up to 20dBm                                                               | Topology        | Star (LoRa/LoRaWAN) |\n| Sensitivity            | -148dB                                                                    |                 |                     |\n\n# Ordering Information",
+        "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| WISE-6610-TB    | LoRaWAN gateway with AS923 MHz              |\n| WISE-6610-JB    | LoRaWAN gateway with JP923 MHz              |\n| WISE-6610-EL-NB | LoRaWAN gateway with NA915 MHz and Edgelink |\n| WISE-6610-EL-EB | LoRaWAN gateway with EU868 MHz and Edgelink |\n| WISE-6610-EL-TB | LoRaWAN gateway with AS923 MHz and Edgelink |\n| WISE-6610-EL-JB | LoRaWAN gateway with JP923 MHz and Edgelink |\n\n# Environment\n\n| Operating Temperature | -20°C to 55°C |\n| --------------------- | ------------- |\n| Operating Humidity    | 0% \\~ 90% RH  |\n| Storage Temperature   | -40°C \\~ 85°C |\n| Storage Humidity      | 0% \\~ 90% RH  |\n\n# Temperature Sensor",
+        "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | --------------------------------------------------------------------- |\n| EVA-2311-NA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - US 902-928 (MHz) |\n| EVA-2311-EA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - EU 863-870 (MHz) |\n| EVA-2311-TA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AS 919-924 (MHz) |\n| EVA-2311-ZA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AU 915-928 (MHz) |\n\n# LoRaWAN Gateway",
+        "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Sensor\n- Battery life up till 5 years@25°C, 15mins interval setting\n- Easy to deploy and maintain\n\nRoHS COMPLIANT 2002/95/EC\n\n# Introduction\n\nEVA-2311 is a LoRaWAN PT1000 round head probe sensor. The extended sensor itself has 2m length cable, IP67 rating design with -70°C to 200°C temperature detection range. It is capable to measure temperature at different kinds of applications, such as refrigerator, freezer, cooling pipe, etc. With its wide range, high penetration rate LoRa connectivity, the data transmission range can be up till hundred or thousand meters away. EVA-2311 can be installed directly on the walls, metal box or poles. EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years based on certain conditions.\n\n# Common Specification"
+      ],
+      "contexts_count": 5,
+      "processing_time": 1.8910579681396484,
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.7,
+        "context_recall": 1.0
+      },
+      "search_method": "multi_sensor_filtered",
+      "detected_sensors": [
+        "EVA-2311"
+      ],
+      "metadata_filtering_enabled": true,
+      "context_sources": [
+        {
+          "chunk_index": 0,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ------------------"
+        },
+        {
+          "chunk_index": 1,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------"
+        },
+        {
+          "chunk_index": 2,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| "
+        },
+        {
+          "chunk_index": 3,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | ----------------------------------------"
+        },
+        {
+          "chunk_index": 4,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Se"
+        }
+      ]
+    },
+    {
+      "sample_id": 4,
+      "question": "What wireless communication technology does the EVA-2311 use?",
+      "generated_answer": "The EVA-2311 uses LoRaWAN wireless communication technology.",
+      "ground_truth": "The EVA-2311 sensor uses LoRaWAN wireless communication technology.",
+      "expected_response": "The EVA-2311 uses LoRaWAN for its wireless communication.",
+      "expected_contexts": "Excerpt 1 : Features: LoRaWAN wireless connectivity, Excerpt 2 : Wireless Communication: Topology: Star (LoRa/LoRaWAN), Excerpt 3 : With it's wide range, high penetration rate LoRa connectivity, the data transmission range can up till hundred or thousand meters away., Excerpt 4 : Frequency Band: EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz), Excerpt 5 : LoRaWAN Gateway: WISE-6610-NB, WISE-6610-EB, etc.",
+      "retrieved_contexts": [
+        "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------------------------------------------------- | --------------- | ------------------- |\n| Frequency Band         | EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz) | IP Class        | IP67                |\n| Spreading Factor       | 7\\~12                                                                     | Wire Length     | 2000 mm             |\n| Transmit Power         | Up to 20dBm                                                               | Topology        | Star (LoRa/LoRaWAN) |\n| Sensitivity            | -148dB                                                                    |                 |                     |\n\n# Ordering Information",
+        "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| WISE-6610-TB    | LoRaWAN gateway with AS923 MHz              |\n| WISE-6610-JB    | LoRaWAN gateway with JP923 MHz              |\n| WISE-6610-EL-NB | LoRaWAN gateway with NA915 MHz and Edgelink |\n| WISE-6610-EL-EB | LoRaWAN gateway with EU868 MHz and Edgelink |\n| WISE-6610-EL-TB | LoRaWAN gateway with AS923 MHz and Edgelink |\n| WISE-6610-EL-JB | LoRaWAN gateway with JP923 MHz and Edgelink |\n\n# Environment\n\n| Operating Temperature | -20°C to 55°C |\n| --------------------- | ------------- |\n| Operating Humidity    | 0% \\~ 90% RH  |\n| Storage Temperature   | -40°C \\~ 85°C |\n| Storage Humidity      | 0% \\~ 90% RH  |\n\n# Temperature Sensor",
+        "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ----------------------------------------------------- |---|---|\n| Accuracy (Host and Sensor are in same environment)       | ±0.8°C between 0°C and 55°C                           | | |\n| Accuracy (Host and Sensor are in different environments) | ±{(0.15 + 0.002\\* |T2|)+1}°C between -70°C and 0°C    |\n|                                                          | ±{(0.15 + 0.002\\* |T2|)+0.6}°C between 55°C and 200°C |\n\nAll product specifications are subject to change without notice. Last updated: 19-Apr-2024",
+        "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | --------------------------------------------------------------------- |\n| EVA-2311-NA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - US 902-928 (MHz) |\n| EVA-2311-EA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - EU 863-870 (MHz) |\n| EVA-2311-TA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AS 919-924 (MHz) |\n| EVA-2311-ZA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AU 915-928 (MHz) |\n\n# LoRaWAN Gateway",
+        "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Sensor\n- Battery life up till 5 years@25°C, 15mins interval setting\n- Easy to deploy and maintain\n\nRoHS COMPLIANT 2002/95/EC\n\n# Introduction\n\nEVA-2311 is a LoRaWAN PT1000 round head probe sensor. The extended sensor itself has 2m length cable, IP67 rating design with -70°C to 200°C temperature detection range. It is capable to measure temperature at different kinds of applications, such as refrigerator, freezer, cooling pipe, etc. With its wide range, high penetration rate LoRa connectivity, the data transmission range can be up till hundred or thousand meters away. EVA-2311 can be installed directly on the walls, metal box or poles. EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years based on certain conditions.\n\n# Common Specification"
+      ],
+      "contexts_count": 5,
+      "processing_time": 1.9452457427978516,
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.7,
+        "context_recall": 1.0
+      },
+      "search_method": "multi_sensor_filtered",
+      "detected_sensors": [
+        "EVA-2311"
+      ],
+      "metadata_filtering_enabled": true,
+      "context_sources": [
+        {
+          "chunk_index": 0,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------"
+        },
+        {
+          "chunk_index": 1,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| "
+        },
+        {
+          "chunk_index": 2,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ------------------"
+        },
+        {
+          "chunk_index": 3,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | ----------------------------------------"
+        },
+        {
+          "chunk_index": 4,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Se"
+        }
+      ]
+    },
+    {
+      "sample_id": 5,
+      "question": "What is the accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment?",
+      "generated_answer": "The accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment is ±0.8°C between 0°C and 55°C.",
+      "ground_truth": "The accuracy of the Advantech EVA-2311 is ±0.8°C between 0°C and 55°C when the host and sensor are in the same environment.",
+      "expected_response": "When the host and sensor are in the same environment, the Advantech EVA-2311 has an accuracy of ±0.8°C between 0°C and 55°C.",
+      "expected_contexts": "Excerpt 1 : Accuracy (Host and Sensor are in same enlivenment) ±0.8°C between 0°C and 55°C, Excerpt 2 : Accuracy (Host and Sensor are in different enlivenment) ±{(0.15+0.002*|T2|)+1}°C between -70°C and 0°C, Excerpt 3 : Measurement Range: -70°C to 200°C, Excerpt 4 : The extended sensor itself has 2m length cable., Excerpt 5 : EVA-2311 is a LoRaWAN PT1000 round head probe sensor.",
+      "retrieved_contexts": [
+        "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ----------------------------------------------------- |---|---|\n| Accuracy (Host and Sensor are in same environment)       | ±0.8°C between 0°C and 55°C                           | | |\n| Accuracy (Host and Sensor are in different environments) | ±{(0.15 + 0.002\\* |T2|)+1}°C between -70°C and 0°C    |\n|                                                          | ±{(0.15 + 0.002\\* |T2|)+0.6}°C between 55°C and 200°C |\n\nAll product specifications are subject to change without notice. Last updated: 19-Apr-2024",
+        "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------------------------------------------------- | --------------- | ------------------- |\n| Frequency Band         | EU 863-870 (MHz) / US 902-928 (MHz) / AU 915-928 (MHz) / AS 919-924 (MHz) | IP Class        | IP67                |\n| Spreading Factor       | 7\\~12                                                                     | Wire Length     | 2000 mm             |\n| Transmit Power         | Up to 20dBm                                                               | Topology        | Star (LoRa/LoRaWAN) |\n| Sensitivity            | -148dB                                                                    |                 |                     |\n\n# Ordering Information",
+        "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| WISE-6610-TB    | LoRaWAN gateway with AS923 MHz              |\n| WISE-6610-JB    | LoRaWAN gateway with JP923 MHz              |\n| WISE-6610-EL-NB | LoRaWAN gateway with NA915 MHz and Edgelink |\n| WISE-6610-EL-EB | LoRaWAN gateway with EU868 MHz and Edgelink |\n| WISE-6610-EL-TB | LoRaWAN gateway with AS923 MHz and Edgelink |\n| WISE-6610-EL-JB | LoRaWAN gateway with JP923 MHz and Edgelink |\n\n# Environment\n\n| Operating Temperature | -20°C to 55°C |\n| --------------------- | ------------- |\n| Operating Humidity    | 0% \\~ 90% RH  |\n| Storage Temperature   | -40°C \\~ 85°C |\n| Storage Humidity      | 0% \\~ 90% RH  |\n\n# Temperature Sensor",
+        "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | --------------------------------------------------------------------- |\n| EVA-2311-NA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - US 902-928 (MHz) |\n| EVA-2311-EA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - EU 863-870 (MHz) |\n| EVA-2311-TA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AS 919-924 (MHz) |\n| EVA-2311-ZA                             | LoRaWAN Temperature PT1000 Round Head Probe Sensor - AU 915-928 (MHz) |\n\n# LoRaWAN Gateway",
+        "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Sensor\n- Battery life up till 5 years@25°C, 15mins interval setting\n- Easy to deploy and maintain\n\nRoHS COMPLIANT 2002/95/EC\n\n# Introduction\n\nEVA-2311 is a LoRaWAN PT1000 round head probe sensor. The extended sensor itself has 2m length cable, IP67 rating design with -70°C to 200°C temperature detection range. It is capable to measure temperature at different kinds of applications, such as refrigerator, freezer, cooling pipe, etc. With its wide range, high penetration rate LoRa connectivity, the data transmission range can be up till hundred or thousand meters away. EVA-2311 can be installed directly on the walls, metal box or poles. EVA-2311 is powered by 2 AA 3.6v Li-ion batteries, battery life can up till 5 years based on certain conditions.\n\n# Common Specification"
+      ],
+      "contexts_count": 5,
+      "processing_time": 2.0633840560913086,
+      "ragas_metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "search_method": "multi_sensor_filtered",
+      "detected_sensors": [
+        "EVA-2311"
+      ],
+      "metadata_filtering_enabled": true,
+      "context_sources": [
+        {
+          "chunk_index": 0,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "| Measurement Range                                        | -70°C to 200°C                                        | | |\n| -------------------------------------------------------- | ------------------"
+        },
+        {
+          "chunk_index": 1,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| Wireless Communication |                                                                           | Probe Dimension | 5 x 30 mm           |\n| ---------------------- | ------------------------------"
+        },
+        {
+          "chunk_index": 2,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| WISE-6610-NB    | LoRaWAN gateway with NA915 MHz              |\n| --------------- | ------------------------------------------- |\n| WISE-6610-EB    | LoRaWAN gateway with EU868 MHz              |\n| "
+        },
+        {
+          "chunk_index": 3,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "general",
+          "content_preview": "| LoRaWAN Temperature and Humidity Sensor |                                                                       |\n| --------------------------------------- | ----------------------------------------"
+        },
+        {
+          "chunk_index": 4,
+          "source": "data/uploads/ADVANTECH_EVA_2311.pdf",
+          "filename": "ADVANTECH_EVA_2311.pdf",
+          "sensor_model": "EVA-2311",
+          "manufacturer": "unknown",
+          "sensor_type": "Temperature",
+          "chunk_context": "specifications",
+          "content_preview": "EVA‐2311          LoRaWAN Temperature PT1000 Round Head Probe Sensor\n\n# NEW Features\n\n- LoRaWAN wireless connectivity\n- -70°C to 200°C temperature detection range\n- IP67 for PT1000 Round Head Probe Se"
+        }
+      ]
+    }
+  ]
+}

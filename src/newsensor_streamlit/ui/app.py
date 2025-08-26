@@ -332,7 +332,7 @@ def _render_chat_interface(chat_engine: ChatEngine, has_collection_docs: bool = 
             st.write(message["content"])
             
             if "metrics" in message:
-                _render_metrics(message["metrics"], message.get("ragas_metrics"), message.get("retrieval_metadata"))
+                _render_metrics(message["metrics"], None, message.get("retrieval_metadata"))
     
     # Chat input - only show if we have docs or a specific doc
     if has_collection_docs or doc_id:
@@ -371,7 +371,7 @@ def _render_chat_interface(chat_engine: ChatEngine, has_collection_docs: bool = 
                     st.write(response["answer"])
                     _render_metrics(
                         response["metrics"], 
-                        response.get("ragas_metrics"), 
+                        None, 
                         response.get("retrieval_metadata")
                     )
                     
@@ -383,7 +383,6 @@ def _render_chat_interface(chat_engine: ChatEngine, has_collection_docs: bool = 
                     "role": "assistant",
                     "content": response["answer"],
                     "metrics": response["metrics"],
-                    "ragas_metrics": response.get("ragas_metrics"),
                     "retrieval_metadata": response.get("retrieval_metadata")
                 })
                 
@@ -408,7 +407,7 @@ def _render_metrics(
     ragas_metrics: dict[str, float] = None,
     retrieval_metadata: dict = None
 ) -> None:
-    """Render both legacy and RAGAS metrics with retrieval info."""
+    """Render legacy metrics with retrieval info."""
     st.divider()
     
     # Show retrieval method used
@@ -440,30 +439,8 @@ def _render_metrics(
         processing_time = retrieval_metadata.get("processing_time", 0)
         st.caption(f"⏱️ Processing time: {processing_time:.2f}s")
     
-    # Show RAGAS metrics if available
-    if ragas_metrics:
-        st.markdown("**🎯 RAGAS Quality Metrics**")
-        cols = st.columns(4)
-        
-        for idx, (name, value) in enumerate(ragas_metrics.items()):
-            if idx < 4:  # Only show first 4 metrics
-                with cols[idx]:
-                    # Color-code the metrics
-                    if value >= 0.7:
-                        color = "green"
-                    elif value >= 0.5:
-                        color = "orange"
-                    else:
-                        color = "red"
-                    
-                    st.markdown(
-                        f"**{name.replace('_', ' ').title()}**<br>"
-                        f"<span style='color: {color}; font-weight: bold;'>{value:.3f}</span>", 
-                        unsafe_allow_html=True
-                    )
-    
-    # Show legacy metrics for backward compatibility
-    elif legacy_metrics:
+    # Show legacy metrics
+    if legacy_metrics:
         st.markdown("**📊 Quality Metrics**")
         cols = st.columns(len(legacy_metrics))
         

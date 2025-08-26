@@ -1,0 +1,86 @@
+sample_id,question,generated_answer,ground_truth,processing_time,contexts_count,search_method,detected_sensors,metadata_filtering_enabled,faithfulness,answer_relevancy,context_precision,context_recall
+1,What is the battery life of the Advantech EVA-2311 sensor and under what conditions is this achieved?,The battery life of the Advantech EVA-2311 sensor can last up to 5 years when operating at a temperature of 25°C with a 15-minute interval setting for data transmission.,"The Advantech EVA-2311 sensor has a battery life of up to 5 years, achieved with a 15-minute data transmission interval at 25°C.",3.045119285583496,5,multi_sensor_filtered,EVA-2311,True,1.0,0.97,0.5,1.0
+2,What is the full temperature detection range of the EVA-2311 sensor?,The full temperature detection range of the EVA-2311 sensor is -70°C to 200°C.,The temperature detection range for the Advantech EVA-2311 is -70°C to 200°C.,4.812011480331421,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,0.7,1.0
+3,What wireless communication technology does the EVA-2311 use?,The EVA-2311 uses LoRaWAN wireless communication technology.,The EVA-2311 sensor uses LoRaWAN wireless communication technology.,2.2571094036102295,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,0.7,1.0
+4,What is the accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment?,The accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment is ±0.8°C between 0°C and 55°C.,The accuracy of the Advantech EVA-2311 is ±0.8°C between 0°C and 55°C when the host and sensor are in the same environment.,3.2790005207061768,5,multi_sensor_filtered,EVA-2311,True,0.5,1.0,1.0,1.0
+5,What are the available LoRaWAN frequency bands for the EVA-2311?,"The available LoRaWAN frequency bands for the EVA-2311 are:
+
+- US 902-928 MHz
+- EU 863-870 MHz
+- AS 919-924 MHz
+- AU 915-928 MHz","The EVA-2311 supports EU 863-870, US 902-928, AU 915-928, and AS 919-924 MHz frequency bands.",2.8239920139312744,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,1.0,1.0
+6,What is the length of the probe cable for the EVA-2311?,The length of the probe cable for the EVA-2311 is 2 meters.,The Advantech EVA-2311 probe cable is 2000 mm long.,3.121396064758301,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,0.833,1.0
+7,What are the storage temperature and humidity limits for the EVA-2311?,"The storage temperature limits for the EVA-2311 are -40°C to 85°C, and the storage humidity limits are 0% to 90% RH.",The storage limits for the EVA-2311 are -40°C to 85°C and 0% to 90% RH.,2.8075101375579834,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,1.0,1.0
+8,What type of temperature probe does the EVA-2311 use?,The EVA-2311 uses a PT1000 round head probe for temperature measurement.,The Advantech EVA-2311 uses a PT1000 probe.,2.289750337600708,5,multi_sensor_filtered,EVA-2311,True,1.0,0.984,0.367,1.0
+9,What is the transmit power of the Advantech EVA-2311?,The transmit power of the Advantech EVA-2311 is up to 20dBm.,The transmit power of the Advantech EVA-2311 is up to 20dBm.,2.123284339904785,5,multi_sensor_filtered,EVA-2311,True,0.0,1.0,1.0,1.0
+10,What is the accuracy formula for different environments between -70°C and 0°C?,"The accuracy formula for different environments between -70°C and 0°C is given by:
+
+±{(0.15 + 0.002 * |T2|) + 1}°C
+
+where |T2| is the absolute value of the temperature being measured.",The accuracy of the EVA-2311 in different environments between -70°C and 0°C is ±{(0.15 + 0.002 * |T2|) + 1}°C.,2.653817653656006,5,metadata_filtered_legacy,none,True,0.5,1.0,1.0,1.0
+11,What are the key physical characteristics of the EVA-2311 sensor?,"The key physical characteristics of the EVA-2311 sensor are:
+
+1. **Probe Dimension**: The sensor has a round head probe with dimensions of 5 x 30 mm.
+2. **Cable Length**: The extended sensor comes with a 2-meter length cable.
+3. **IP Rating**: It has an IP67 rating, indicating it is dust-tight and can withstand immersion in water.
+4. **Operating Temperature Range**: The sensor can operate within a temperature range of -70°C to 200°C.
+5. **Battery**: It is powered by 2 AA 3.6v Li-ion batteries, with a battery life of up to 5 years under certain conditions.
+6. **Weight and Size**: Specific weight and size details are not provided in the excerpts, but the compact design allows for easy installation on walls, metal boxes, or poles. 
+
+These characteristics make the EVA-2311 suitable for various applications, including monitoring temperatures in refrigerators, freezers, and cooling pipes.",The dimensions of the Advantech EVA-2311 are 112 x 51 x 71.5 mm with IP30 rating and multiple mounting options.,6.439791679382324,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,0.0,0.0
+12,What wireless and safety certifications does the EVA-2311 have?,"The EVA-2311 has the following certifications:
+
+1. **Wireless Certification**: It features LoRaWAN wireless connectivity, which is a widely recognized standard for low-power wide-area networks (LPWAN).
+
+2. **Safety Certification**: The EVA-2311 is RoHS compliant, adhering to the directive 2002/95/EC, which restricts the use of certain hazardous substances in electrical and electronic equipment. 
+
+There are no additional specific wireless or safety certifications mentioned in the provided excerpts.","The Advantech EVA-2311 holds CE (RED), FCC, TELEC, RCM, and NCC certifications.",4.077585935592651,5,multi_sensor_filtered,EVA-2311,True,0.714,0.95,0.0,0.0
+13,How do you monitor the operational status of the EVA-2311?,"To monitor the operational status of the EVA-2311 LoRaWAN Temperature PT1000 Round Head Probe Sensor, you can follow these steps:
+
+1. **LoRaWAN Network Monitoring**: Ensure that the sensor is connected to a LoRaWAN gateway. You can use a network management tool or dashboard provided by your LoRaWAN service provider to monitor the connectivity status, signal strength, and data transmission from the sensor.
+
+2. **Data Transmission**: Regularly check the data being transmitted by the EVA-2311. The sensor sends temperature readings at specified intervals (e.g., every 15 minutes). Monitoring these readings can help you identify any anomalies or operational issues.
+
+3. **Battery Status**: Since the EVA-2311 is powered by batteries, it's important to monitor the battery life. Some LoRaWAN networks provide battery status information, allowing you to know when the batteries need to be replaced.
+
+4. **Environmental Conditions**: Keep an eye on the operating temperature and humidity conditions. The EVA-2311 operates within a temperature range of -70°C to 200°C and humidity levels of 0% to 90% RH. Monitoring these conditions ensures that the sensor is functioning within its specified limits.
+
+5. **Alerts and Notifications**: Set up alerts or notifications through your LoRaWAN network management system to inform you of any operational issues, such as loss of connectivity, abnormal temperature readings, or low battery levels.
+
+6. **Physical Inspection**: Periodically perform physical inspections of the sensor to ensure it is properly installed, free from obstructions, and that the probe is in the correct position for accurate temperature measurement.
+
+By implementing these monitoring strategies, you can effectively keep track of the operational status of the EVA-2311 sensor.","The LED on the EVA-2311 indicates power on, transmission (TX), and reset.",9.565123558044434,5,multi_sensor_filtered,EVA-2311,True,0.211,0.896,0.0,0.0
+14,What methods are used to configure the EVA-2311 sensor settings?,"The configuration methods for the EVA-2311 sensor settings are not explicitly detailed in the provided excerpts. However, typical methods for configuring such sensors may include:
+
+1. **Mobile Application**: Many modern sensors can be configured using a mobile app that connects via Bluetooth or Wi-Fi.
+2. **Web Interface**: Some sensors offer a web-based interface for configuration through a browser.
+3. **LoRaWAN Network Server**: Configuration settings can often be managed through the LoRaWAN network server that the sensor connects to.
+4. **Physical Interface**: Some sensors may have physical buttons or switches for basic configuration.
+5. **Firmware Updates**: Configuration settings may also be adjusted through firmware updates that can be uploaded to the device.
+
+For specific methods applicable to the EVA-2311, please refer to the manufacturer's documentation or user manual.",Configuration of the Advantech EVA-2311 is done via wireless downlink commands.,4.393289089202881,5,multi_sensor_filtered,EVA-2311,True,0.25,0.0,0.0,0.0
+15,How can the EVA-2311 be physically installed or mounted?,"The EVA-2311 can be installed directly on walls, metal boxes, or poles. This flexibility in mounting options allows for easy deployment in various environments and applications.","The EVA-2311 supports wall, magnetic, and pole mounting.",2.064446449279785,5,multi_sensor_filtered,EVA-2311,True,1.0,0.958,0.0,0.0
+16,What type of power source does the EVA-2311 require?,The EVA-2311 is powered by 2 AA 3.6v Li-ion batteries.,The EVA-2311 requires 2 AA 3.6V batteries (not included).,2.0058794021606445,5,multi_sensor_filtered,EVA-2311,True,1.0,0.926,0.25,1.0
+17,What environmental conditions can the EVA-2311 operate in?,"The EVA-2311 can operate in the following environmental conditions:
+
+- **Operating Temperature:** -20°C to 55°C
+- **Operating Humidity:** 0% to 90% RH
+- **Storage Temperature:** -40°C to 85°C
+- **Storage Humidity:** 0% to 90% RH
+
+Additionally, the sensor has an IP67 rating, which means it is dust-tight and can withstand immersion in water up to a certain depth.",The EVA-2311 operates in -20°C to 55°C and 0% to 90% RH conditions.,3.5409188270568848,5,multi_sensor_filtered,EVA-2311,True,1.0,0.97,0.0,1.0
+18,What is the communication range of the EVA-2311 LoRaWAN sensor?,"The EVA-2311 LoRaWAN sensor has a data transmission range that can be up to hundreds or thousands of meters away, depending on the conditions.",The EVA-2311 has a transmission range of hundreds to thousands of meters using LoRaWAN.,2.277700424194336,5,multi_sensor_filtered,EVA-2311,True,0.667,0.0,0.333,1.0
+19,What applications is the EVA-2311 specifically designed for?,"The EVA-2311 is specifically designed for applications such as monitoring temperature in refrigerators, freezers, and cooling pipes. Its wide temperature detection range and robust design make it suitable for various environments where temperature monitoring is critical.","Typical applications for the EVA-2311 include monitoring refrigerators, freezers, and cooling pipes.",2.9382200241088867,5,multi_sensor_filtered,EVA-2311,True,0.5,0.965,0.2,1.0
+20,What probe specifications does the EVA-2311 have?,"The EVA-2311 has the following probe specifications:
+
+- **Measurement Range**: -70°C to 200°C
+- **Accuracy**:
+  - ±0.8°C between 0°C and 55°C (when the host and sensor are in the same environment)
+  - ±{(0.15 + 0.002*|T2|)+1}°C between -70°C and 0°C (when in different environments)
+  - ±{(0.15 + 0.002*|T2|)+0.6}°C between 55°C and 200°C (when in different environments)
+- **Probe Dimension**: 5 x 30 mm
+- **Cable Length**: 2000 mm
+- **IP Class**: IP67 (water and dust resistant)
+- **Battery Life**: Up to 5 years at 25°C with a 15-minute interval setting
+
+The EVA-2311 is designed for various applications, including refrigerators, freezers, and cooling pipes.","The EVA-2311 probe is PT1000 type, 5x30mm, IP67 rated with 2000mm cable.",6.509479522705078,5,multi_sensor_filtered,EVA-2311,True,1.0,0.983,0.25,1.0

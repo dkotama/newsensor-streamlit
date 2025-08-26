@@ -14,14 +14,11 @@ from newsensor_streamlit.services.embedding_service import EmbeddingService
 from newsensor_streamlit.services.qdrant_service import QdrantService
 from newsensor_streamlit.services.rag_service import RagService
 
-# Import re-ranking services with fallback
 try:
     from newsensor_streamlit.services.reranking_service import ReRankingService
     RERANKING_AVAILABLE = True
 except ImportError:
     RERANKING_AVAILABLE = False
-
-from newsensor_streamlit.services.ragas_evaluator import RagasEvaluator
 
 if TYPE_CHECKING:
     from langchain.schema import BaseChatPromptTemplate
@@ -45,10 +42,6 @@ class ChatEngine:
                 logger.info("Re-ranking service initialized")
             except Exception as e:
                 logger.warning(f"Failed to initialize re-ranking service: {e}")
-        
-        # Initialize RAGAS evaluator
-        self.ragas_evaluator = RagasEvaluator()
-        logger.info("RAGAS evaluator initialized")
         
     def upload_document(self, file_path: str) -> str:
         """Process and upload a new document."""
@@ -151,18 +144,6 @@ class ChatEngine:
             context=context_chunks
         )
         
-        # Calculate RAGAS metrics if available
-        ragas_metrics = {}
-        if self.ragas_evaluator and self.ragas_evaluator.is_available():
-            ground_truth = self.ragas_evaluator.get_ground_truth(question)
-            contexts = [chunk.page_content for chunk in context_chunks]
-            ragas_metrics = self.ragas_evaluator.evaluate_answer(
-                question=question,
-                answer=answer["answer"],
-                contexts=contexts,
-                ground_truth=ground_truth
-            )
-        
         # Legacy metrics for backward compatibility
         legacy_metrics = self.rag_service.evaluate_quality(
             question=question,
@@ -189,10 +170,10 @@ class ChatEngine:
                 question=question,
                 answer=answer["answer"],
                 sources=sources,
-                metrics=legacy_metrics,
+                metrics={},  # Empty metrics dict to remove metrics from saved conversations
                 context=answer["context"],
-                ragas_metrics=ragas_metrics,
-                retrieval_metadata=retrieval_metadata
+                ragas_metrics={},  # Empty ragas_metrics dict to remove metrics from saved conversations
+                retrieval_metadata={}  # Empty retrieval_metadata dict to remove metadata from saved conversations
             )
         
         return {
@@ -200,7 +181,6 @@ class ChatEngine:
             "answer": answer["answer"],
             "context": answer["context"],
             "metrics": legacy_metrics,
-            "ragas_metrics": ragas_metrics,
             "sources": sources,
             "retrieval_metadata": retrieval_metadata
         }
@@ -360,18 +340,6 @@ class ChatEngine:
             context=context_chunks
         )
         
-        # Calculate RAGAS metrics if available
-        ragas_metrics = {}
-        if self.ragas_evaluator and self.ragas_evaluator.is_available():
-            ground_truth = self.ragas_evaluator.get_ground_truth(question)
-            contexts = [chunk.page_content for chunk in context_chunks]
-            ragas_metrics = self.ragas_evaluator.evaluate_answer(
-                question=question,
-                answer=answer["answer"],
-                contexts=contexts,
-                ground_truth=ground_truth
-            )
-        
         # Legacy metrics for backward compatibility
         legacy_metrics = self.rag_service.evaluate_quality(
             question=question,
@@ -393,10 +361,10 @@ class ChatEngine:
                 question=question,
                 answer=answer["answer"],
                 sources=sources,
-                metrics=legacy_metrics,
+                metrics={},  # Empty metrics dict to remove metrics from saved conversations
                 context=answer["context"],
-                ragas_metrics=ragas_metrics,
-                retrieval_metadata=retrieval_metadata
+                ragas_metrics={},  # Empty ragas_metrics dict to remove metrics from saved conversations
+                retrieval_metadata={}  # Empty retrieval_metadata dict to remove metadata from saved conversations
             )
         
         return {
@@ -404,7 +372,6 @@ class ChatEngine:
             "answer": answer["answer"],
             "context": answer["context"],
             "metrics": legacy_metrics,
-            "ragas_metrics": ragas_metrics,
             "sources": sources,
             "retrieval_metadata": retrieval_metadata
         }

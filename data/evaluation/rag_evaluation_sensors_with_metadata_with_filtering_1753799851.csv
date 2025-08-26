@@ -1,0 +1,42 @@
+sample_id,question,generated_answer,ground_truth,processing_time,contexts_count,search_method,detected_sensors,metadata_filtering_enabled,faithfulness,answer_relevancy,context_precision,context_recall
+1,What is the battery life of the Advantech EVA-2311 sensor and under what conditions is this achieved?,The battery life of the Advantech EVA-2311 sensor can last up to 5 years when operating at a temperature of 25°C with a 15-minute interval setting for data transmission.,"The Advantech EVA-2311 sensor has a battery life of up to 5 years, achieved with a 15-minute data transmission interval at 25°C.",3.0938332080841064,5,multi_sensor_filtered,EVA-2311,True,1.0,0.97,0.5,1.0
+2,What is the full temperature detection range of the EVA-2311 sensor?,The full temperature detection range of the EVA-2311 sensor is -70°C to 200°C.,The temperature detection range for the Advantech EVA-2311 is -70°C to 200°C.,1.8701465129852295,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,0.7,1.0
+3,What wireless communication technology does the EVA-2311 use?,The EVA-2311 uses LoRaWAN wireless communication technology.,The EVA-2311 sensor uses LoRaWAN wireless communication technology.,2.842777729034424,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,0.7,1.0
+4,What is the accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment?,The accuracy of the Advantech EVA-2311 when the host and sensor are in the same environment is ±0.8°C between 0°C and 55°C.,The accuracy of the Advantech EVA-2311 is ±0.8°C between 0°C and 55°C when the host and sensor are in the same environment.,2.406745195388794,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,1.0,1.0
+5,What are the available LoRaWAN frequency bands for the EVA-2311?,"The available LoRaWAN frequency bands for the EVA-2311 are:
+
+- US 902-928 MHz
+- EU 863-870 MHz
+- AS 919-924 MHz
+- AU 915-928 MHz","The EVA-2311 supports EU 863-870, US 902-928, AU 915-928, and AS 919-924 MHz frequency bands.",2.5468530654907227,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,1.0,1.0
+6,What is the length of the probe cable for the EVA-2311?,The length of the probe cable for the EVA-2311 is 2 meters.,The Advantech EVA-2311 probe cable is 2000 mm long.,2.2610268592834473,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,0.833,1.0
+7,What are the storage temperature and humidity limits for the EVA-2311?,"The storage temperature limits for the EVA-2311 are -40°C to 85°C, and the storage humidity limits are 0% to 90% RH.",The storage limits for the EVA-2311 are -40°C to 85°C and 0% to 90% RH.,1.9654016494750977,5,multi_sensor_filtered,EVA-2311,True,1.0,1.0,0.0,1.0
+8,What type of temperature probe does the EVA-2311 use?,The EVA-2311 uses a PT1000 round head probe for temperature measurement.,The Advantech EVA-2311 uses a PT1000 probe.,3.1192634105682373,5,multi_sensor_filtered,EVA-2311,True,1.0,0.985,0.367,1.0
+9,What is the transmit power of the Advantech EVA-2311?,The transmit power of the Advantech EVA-2311 is up to 20dBm.,The transmit power of the Advantech EVA-2311 is up to 20dBm.,2.0364162921905518,5,multi_sensor_filtered,EVA-2311,True,0.0,1.0,1.0,1.0
+10,What is the accuracy formula for different environments between -70°C and 0°C?,"The accuracy formula for different environments between -70°C and 0°C is given by:
+
+±{(0.15 + 0.002 * |T2|) + 1}°C
+
+where |T2| represents the absolute value of the temperature being measured in degrees Celsius.",The accuracy of the EVA-2311 in different environments between -70°C and 0°C is ±{(0.15 + 0.002 * |T2|) + 1}°C.,2.986630439758301,5,metadata_filtered_legacy,none,True,1.0,1.0,1.0,1.0
+11,What are the dimensions and IP rating of the EVA-2311 main unit?,"The dimensions of the EVA-2311 main unit are 5 x 30 mm, and it has an IP rating of IP67.",The dimensions of the Advantech EVA-2311 are 112 x 51 x 71.5 mm with IP30 rating.,2.1705126762390137,5,multi_sensor_filtered,EVA-2311,True,0.5,1.0,0.0,0.0
+12,Is the EVA-2311 CE and FCC certified for wireless operation?,"The provided excerpts do not specify whether the EVA-2311 is CE and FCC certified for wireless operation. To determine its certification status, you may need to refer to the product documentation or contact the manufacturer directly.","The Advantech EVA-2311 holds CE (RED), FCC, TELEC, RCM, and NCC certifications.",2.5373659133911133,5,multi_sensor_filtered,EVA-2311,True,1.0,0.0,0.0,0.0
+13,Does the EVA-2311 have LED indicators and what do they show?,"The provided excerpts do not mention any LED indicators for the EVA-2311 LoRaWAN Temperature PT1000 Round Head Probe Sensor. Therefore, it is unclear whether the EVA-2311 has LED indicators or what they would show. For specific details about LED indicators, it would be best to consult the product manual or manufacturer's specifications directly.","The LED on the EVA-2311 indicates power on, transmission (TX), and reset.",2.9981632232666016,5,multi_sensor_filtered,EVA-2311,True,1.0,0.0,0.0,0.0
+14,What is the configuration interface for the EVA-2311?,"The provided excerpts do not specify the configuration interface for the EVA-2311 LoRaWAN Temperature PT1000 Round Head Probe Sensor. For detailed information regarding the configuration interface, it may be necessary to refer to the product manual or technical documentation from the manufacturer.",Configuration of the Advantech EVA-2311 is done via wireless downlink commands.,2.8686587810516357,5,multi_sensor_filtered,EVA-2311,True,1.0,0.0,0.0,0.0
+15,What mounting options are available for the EVA-2311?,"The EVA-2311 can be installed directly on walls, metal boxes, or poles.","The EVA-2311 supports wall, magnetic, and pole mounting.",1.7274534702301025,5,multi_sensor_filtered,EVA-2311,True,1.0,0.926,0.0,0.0
+16,What type of power source does the EVA-2311 require?,The EVA-2311 is powered by 2 AA 3.6v Li-ion batteries.,The EVA-2311 requires 2 AA 3.6V batteries (not included).,2.501659393310547,5,multi_sensor_filtered,EVA-2311,True,1.0,0.926,0.25,1.0
+17,What is the operating temperature and humidity range for the EVA-2311?,"The operating temperature range for the EVA-2311 is -20°C to 55°C, and the operating humidity range is 0% to 90% RH.",The EVA-2311 operates in -20°C to 55°C and 0% to 90% RH conditions.,3.0394794940948486,5,multi_sensor_filtered,EVA-2311,True,0.0,1.0,0.0,1.0
+18,What is the communication range of the EVA-2311 LoRaWAN sensor?,"The EVA-2311 LoRaWAN sensor is capable of data transmission over a range of up to hundreds or thousands of meters, depending on the conditions.",The EVA-2311 has a transmission range of hundreds to thousands of meters using LoRaWAN.,3.3802523612976074,5,multi_sensor_filtered,EVA-2311,True,0.667,0.977,0.333,1.0
+19,What applications is the EVA-2311 specifically designed for?,"The EVA-2311 is specifically designed for applications such as monitoring temperature in refrigerators, freezers, and cooling pipes. Its wide temperature detection range and robust design make it suitable for various temperature-sensitive environments.","Typical applications for the EVA-2311 include monitoring refrigerators, freezers, and cooling pipes.",2.5095319747924805,5,multi_sensor_filtered,EVA-2311,True,0.5,0.965,0.2,1.0
+20,What probe specifications does the EVA-2311 have?,"The EVA-2311 has the following probe specifications:
+
+- **Measurement Range**: -70°C to 200°C
+- **Accuracy**:
+  - ±0.8°C between 0°C and 55°C (when host and sensor are in the same environment)
+  - ±{(0.15 + 0.002*|T2|)+1}°C between -70°C and 0°C (when host and sensor are in different environments)
+  - ±{(0.15 + 0.002*|T2|)+0.6}°C between 55°C and 200°C (when host and sensor are in different environments)
+- **Probe Dimension**: 5 x 30 mm
+- **IP Class**: IP67 (water and dust resistant)
+- **Wire Length**: 2000 mm (2 meters)
+- **Battery Life**: Up to 5 years at 25°C with a 15-minute interval setting
+
+The EVA-2311 is designed for various applications, including refrigerators, freezers, and cooling pipes, and features LoRaWAN wireless connectivity for data transmission.","The EVA-2311 probe is PT1000 type, 5x30mm, IP67 rated with 2000mm cable.",6.066924810409546,5,multi_sensor_filtered,EVA-2311,True,1.0,0.975,0.25,1.0
